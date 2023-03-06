@@ -5,13 +5,12 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import DonutSmallIcon from "@mui/icons-material/DonutSmall";
 import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import EventIcon from "@mui/icons-material/Event";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
+import Typography from "@mui/material/Typography";
 import logo from "./logo.png";
 
 export default function TemporaryDrawer() {
@@ -26,8 +25,14 @@ export default function TemporaryDrawer() {
       role="presentation"
     >
       <Box sx={{ display: { xs: "none", md: "flex", padding: "20px 10px" } }}>
-        <img src={logo} alt="logo" style={{ width: "160px", height: "40px" }} />
+        <img src={logo} alt="logo" style={{ width: "130px", height: "50px" }} />
       </Box>
+      <Typography
+        sx={{ fontSize: "10px", padding: "40px 0 16px 16px", color: "gray" }}
+      >
+        M E N U
+      </Typography>
+
       <List>
         <ListItem disablePadding>
           <ListItemButton>
@@ -55,7 +60,11 @@ export default function TemporaryDrawer() {
         </ListItem>
       </List>
 
-      <Divider />
+      <Typography
+        sx={{ fontSize: "10px", padding: "40px 0 16px 16px", color: "gray" }}
+      >
+        O P T I O N S
+      </Typography>
 
       <List>
         <ListItem disablePadding>

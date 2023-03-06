@@ -74,7 +74,9 @@ function NavBarLogined() {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Movies</Typography>
+                <Typography sx={{ color: "black" }} textAlign="center">
+                  Movies
+                </Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">Sports</Typography>
@@ -87,35 +89,29 @@ function NavBarLogined() {
               </MenuItem>
             </Menu>
           </Box>
-          {/* <Box sx={{ display: { xs: "flex", md: "none", flexGrow: 1 } }}>
-            <img
-              src={logo}
-              alt="logo"
-              style={{ width: "120px", height: "30px" }}
-            />
-          </Box> */}
+
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Button
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
+              sx={{ my: 2, color: "lightgray", display: "block" }}
             >
               Movies
             </Button>
             <Button
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
+              sx={{ my: 2, color: "lightgray", display: "block" }}
             >
               Sports
             </Button>
             <Button
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
+              sx={{ my: 2, color: "lightgray", display: "block" }}
             >
               TV series
             </Button>
             <Button
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
+              sx={{ my: 2, color: "lightgray", display: "block" }}
             >
               Kids
             </Button>
