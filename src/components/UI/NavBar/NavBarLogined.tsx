@@ -25,8 +25,11 @@ function NavBarLogined() {
 
   return (
     <AppBar
-      sx={{ background: "transparent", boxShadow: "none" }}
-      position="static"
+      sx={{
+        background: "transparent",
+        boxShadow: "none",
+      }}
+      position="absolute"
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>

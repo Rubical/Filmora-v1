@@ -13,14 +13,14 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import Typography from "@mui/material/Typography";
 import logo from "./logo.png";
 
-export default function TemporaryDrawer() {
+export default function SideBarLogined() {
   return (
     <Box
       sx={{
         width: 250,
         color: "lightgray",
         paddingLeft: "20px",
-        backgroundColor: "rgb(40, 40, 40)",
+        backgroundColor: "rgb(33, 33, 33)",
       }}
       role="presentation"
     >
