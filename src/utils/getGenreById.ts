@@ -1,4 +1,4 @@
-export const getGenre = (id: number[]) => {
+export const getGenreByID = (id: number[] | undefined) => {
   const genres = [
     {
       id: 28,
@@ -77,5 +77,11 @@ export const getGenre = (id: number[]) => {
       name: "Western",
     },
   ];
-  // genres.map((genre) => genre.)
+  if (id) {
+    const newId = id.map((el) => {
+      let genre = genres.find((item) => item.id === el);
+      return genre?.name;
+    });
+    return newId.length > 2 ? newId.slice(0, 2) : newId;
+  }
 };

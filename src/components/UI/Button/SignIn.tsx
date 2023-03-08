@@ -10,11 +10,14 @@ const SignInBtn: FC = () => {
         flexGrow: 0,
         color: "lightgray",
         justifySelf: "flex-end",
-        padding: "16px 32px 0 0 ",
+        padding: "0 15px 0 0 ",
       }}
     >
       <MenuItem>
-        <Typography sx={{ fontSize: "14px" }} textAlign="center">
+        <Typography
+          sx={{ fontSize: "14px", fontWeight: "600" }}
+          textAlign="center"
+        >
           SIGN IN
         </Typography>
       </MenuItem>

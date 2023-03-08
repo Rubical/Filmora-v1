@@ -5,6 +5,8 @@ import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import { IFilmsList } from "../../state/filmsSlice";
 import getPrettyDate from "../../utils/getPrettyDate";
+import { getGenreByID } from "../../utils/getGenreById";
+
 interface IFilm {
   film: IFilmsList;
 }
@@ -21,12 +23,11 @@ const FilmCard = ({ film }: IFilm) => {
     vote_count,
     genre_ids,
   } = film;
-  console.log(film);
   return (
     <Card
       sx={{
         minHeight: "250px",
-        width: 330,
+        width: { md: "calc(33.3% - 13px)", xs: "100%" },
       }}
     >
       <CardCover sx={{}}>
@@ -62,9 +63,23 @@ const FilmCard = ({ film }: IFilm) => {
           >
             {original_title}
           </Typography>
-          <Typography textColor="neutral.300">
-            {getPrettyDate(new Date(release_date))}
-          </Typography>
+          <Box sx={{ display: "flex", columnGap: "10px" }}>
+            <Typography
+              textColor="neutral.300"
+              sx={{ fontSize: "12px", marginRight: "10px" }}
+            >
+              {getPrettyDate(new Date(release_date))}
+            </Typography>
+            <Box sx={{ display: "flex", columnGap: "10px" }}>
+              {getGenreByID(genre_ids)?.map((el) => {
+                return (
+                  <Typography sx={{ color: "lightGray", fontSize: "14px" }}>
+                    {el}
+                  </Typography>
+                );
+              })}
+            </Box>
+          </Box>
         </Box>
       </CardContent>
     </Card>

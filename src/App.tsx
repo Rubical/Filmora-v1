@@ -1,28 +1,31 @@
-import { positions } from "@mui/system";
 import "./App.css";
-import SignInBtn from "./components/UI/Button/SignIn";
-import NavBarLogined from "./components/UI/NavBar/NavBarLogined";
-import SideBar from "./components/UI/SideBar/SideBar";
+import NavBar from "./components/UI/NavBar/NavBar";
+import SideBarLeft from "./components/UI/SideBar/SideBarLeft";
 import FilmPage from "./pages/FilmPage";
+import { Context } from "./context/context";
+import SideBarRightLogined from "./components/UI/SideBar/SideBarRightLogined";
 
 function App() {
+  let isAuth: string = "dsa";
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 5fr 1fr",
-        backgroundColor: "rgb(20, 20, 20)",
-        minHeight: "100vh",
-      }}
-      className="App"
-    >
-      <SideBar />
-      <div className="main" style={{ position: "relative" }}>
-        <NavBarLogined />
-        <FilmPage />
+    <Context.Provider value={isAuth}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: isAuth ? "1fr 4fr 1fr" : "1fr 5fr",
+          backgroundColor: "rgb(20, 20, 20)",
+          minHeight: "100vh",
+        }}
+        className="App"
+      >
+        <SideBarLeft />
+        <div className="main" style={{ position: "relative" }}>
+          <NavBar />
+          <FilmPage />
+        </div>
+        {isAuth ? <SideBarRightLogined /> : null}
       </div>
-      <SignInBtn />
-    </div>
+    </Context.Provider>
   );
 }
 
