@@ -27,7 +27,7 @@ const FilmCard: FC<IFilm> = ({ film }) => {
   return (
     <Card
       sx={{
-        height: { xs: "250px", sm: "400px", lg: "220px" },
+        height: { xs: "250px", sm: "300px", md: "400px", lg: "220px" },
         width: { md: "100%", lg: "calc(33.3% - 14px)", sm: "100%", xs: "100%" },
       }}
     >

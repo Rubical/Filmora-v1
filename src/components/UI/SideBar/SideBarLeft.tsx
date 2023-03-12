@@ -51,12 +51,13 @@ export const SideBarLeft: React.FC = () => {
         sx={{
           flexGrow: 1,
           display: { xs: "flex", lg: "none" },
-          paddingLeft: "3px",
+          paddingLeft: { xs: "0", sm: "3px" },
           paddingTop: "12px",
           marginBottom: "40px",
         }}
       >
         <IconButton
+          sx={{ padding: { xs: "12px 0", sm: "12px" } }}
           size="large"
           aria-label="account of current user"
           aria-controls="menu-appbar"
@@ -121,8 +122,18 @@ export const SideBarLeft: React.FC = () => {
 
       <List>
         <ListItem disablePadding>
-          <ListItemButton sx={{ marginBottom: "10px" }}>
-            <DonutSmallIcon sx={{ color: "lightgray", marginRight: "10px" }} />
+          <ListItemButton
+            sx={{
+              marginBottom: "10px",
+              padding: { xs: "8px 0", sm: "8px 16px" },
+            }}
+          >
+            <DonutSmallIcon
+              sx={{
+                color: "lightgray",
+                marginRight: { xs: "0", sm: "10px" },
+              }}
+            />
             <Typography
               sx={{
                 fontWeight: "600",
@@ -135,9 +146,17 @@ export const SideBarLeft: React.FC = () => {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton sx={{ marginBottom: "10px" }}>
+          <ListItemButton
+            sx={{
+              marginBottom: "10px",
+              padding: { xs: "8px 0", sm: "8px 16px" },
+            }}
+          >
             <VideoLibraryIcon
-              sx={{ color: "lightgray", marginRight: "10px" }}
+              sx={{
+                color: "lightgray",
+                marginRight: { xs: "8px 0", sm: "10px" },
+              }}
             />
             <Typography
               sx={{
@@ -151,8 +170,18 @@ export const SideBarLeft: React.FC = () => {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton sx={{ marginBottom: "10px" }}>
-            <EventIcon sx={{ color: "lightgray", marginRight: "10px" }} />
+          <ListItemButton
+            sx={{
+              marginBottom: "10px",
+              padding: { xs: "8px 0", sm: "8px 16px" },
+            }}
+          >
+            <EventIcon
+              sx={{
+                color: "lightgray",
+                marginRight: { xs: "8px 0", sm: "10px" },
+              }}
+            />
             <Typography
               sx={{
                 fontWeight: "600",
@@ -179,8 +208,18 @@ export const SideBarLeft: React.FC = () => {
 
       <List>
         <ListItem disablePadding>
-          <ListItemButton sx={{ marginBottom: "10px" }}>
-            <SettingsIcon sx={{ color: "lightgray", marginRight: "10px" }} />
+          <ListItemButton
+            sx={{
+              marginBottom: "10px",
+              padding: { xs: "8px 0", sm: "8px 16px" },
+            }}
+          >
+            <SettingsIcon
+              sx={{
+                color: "lightgray",
+                marginRight: { xs: "8px 0", sm: "10px" },
+              }}
+            />
             <Typography
               sx={{
                 fontWeight: "600",
@@ -194,8 +233,19 @@ export const SideBarLeft: React.FC = () => {
         </ListItem>
         <ListItem disablePadding>
           {isAuth ? (
-            <ListItemButton sx={{ marginBottom: "10px" }}>
-              <LogoutIcon sx={{ color: "lightgray", marginRight: "10px" }} />
+            <ListItemButton
+              sx={{
+                marginBottom: "10px",
+                padding: { xs: "0", sm: "8px 16px" },
+              }}
+            >
+              <LogoutIcon
+                sx={{
+                  color: "lightgray",
+                  marginRight: { xs: "0", sm: "10px" },
+                  marginLeft: "2px",
+                }}
+              />
               <Typography
                 sx={{
                   fontWeight: "600",

@@ -30,7 +30,7 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
     <Card
       sx={{
         position: "relative",
-        height: { lg: "600px", sm: "400px", xs: "250px" },
+        height: { lg: "600px", sm: "300px", md: "400px", xs: "250px" },
         width: "100%",
         marginTop: { xs: "100px", sm: "0" },
       }}
