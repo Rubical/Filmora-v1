@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Zenix_Film/static/css/main.52fbe055.css",
+    "main.js": "/Zenix_Film/static/js/main.e0334eb4.js",
+    "static/media/logo.png": "/Zenix_Film/static/media/logo.b34b6aadf00fb7497787.png",
+    "index.html": "/Zenix_Film/index.html",
+    "main.52fbe055.css.map": "/Zenix_Film/static/css/main.52fbe055.css.map",
+    "main.e0334eb4.js.map": "/Zenix_Film/static/js/main.e0334eb4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.52fbe055.css",
+    "static/js/main.e0334eb4.js"
+  ]
+}
