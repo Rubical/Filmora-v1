@@ -23,12 +23,12 @@ const Films = () => {
         justifyContent: "center",
         rowGap: "20px",
         columnGap: "20px",
-        padding: isAuth ? "0 0 0 0" : " 0 20px 0 20px",
+        padding: isAuth ? "0 0" : " 0 20px 0 20px",
       }}
     >
       {films.map((film, index) => {
         return index === 0 ? (
-          <MainFilmCard film={films[index]} />
+          <MainFilmCard key={film.id} film={films[index]} />
         ) : (
           <FilmCard key={film.id} film={film} />
         );

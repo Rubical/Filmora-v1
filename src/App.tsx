@@ -1,12 +1,12 @@
 import "./App.css";
 import NavBar from "./components/UI/NavBar/NavBar";
-import SideBarLeft from "./components/UI/SideBar/SideBarLeft";
+import { SideBarLeft } from "./components/UI/SideBar/SideBarLeft";
 import FilmPage from "./pages/FilmPage";
 import { Context } from "./context/context";
 import SideBarRightLogined from "./components/UI/SideBar/SideBarRightLogined";
 
 function App() {
-  let isAuth: string = "dsa";
+  let isAuth: string = "sad";
   return (
     <Context.Provider value={isAuth}>
       <div

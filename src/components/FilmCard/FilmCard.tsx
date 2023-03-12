@@ -6,12 +6,13 @@ import Typography from "@mui/joy/Typography";
 import { IFilmsList } from "../../state/filmsSlice";
 import getPrettyDate from "../../utils/getPrettyDate";
 import { getGenreByID } from "../../utils/getGenreById";
+import { FC } from "react";
 
 interface IFilm {
   film: IFilmsList;
 }
 
-const FilmCard = ({ film }: IFilm) => {
+const FilmCard: FC<IFilm> = ({ film }) => {
   const {
     id,
     adult,
@@ -26,8 +27,8 @@ const FilmCard = ({ film }: IFilm) => {
   return (
     <Card
       sx={{
-        minHeight: "250px",
-        width: { md: "calc(33.3% - 13px)", xs: "100%" },
+        height: { xs: "250px", sm: "400px", lg: "220px" },
+        width: { md: "100%", lg: "calc(33.3% - 14px)", sm: "100%", xs: "100%" },
       }}
     >
       <CardCover sx={{}}>
@@ -66,14 +67,17 @@ const FilmCard = ({ film }: IFilm) => {
           <Box sx={{ display: "flex", columnGap: "10px" }}>
             <Typography
               textColor="neutral.300"
-              sx={{ fontSize: "12px", marginRight: "10px" }}
+              sx={{ fontSize: "12px", marginRight: "10px", marginTop: "2px" }}
             >
               {getPrettyDate(new Date(release_date))}
             </Typography>
             <Box sx={{ display: "flex", columnGap: "10px" }}>
               {getGenreByID(genre_ids)?.map((el) => {
                 return (
-                  <Typography sx={{ color: "lightGray", fontSize: "14px" }}>
+                  <Typography
+                    key={el}
+                    sx={{ color: "lightGray", fontSize: "14px" }}
+                  >
                     {el}
                   </Typography>
                 );

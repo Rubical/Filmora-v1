@@ -8,7 +8,7 @@ const SignInBtn: FC = () => {
     <Box
       sx={{
         flexGrow: 0,
-        color: "lightgray",
+        color: "white",
         justifySelf: "flex-end",
         padding: "0 15px 0 0 ",
       }}

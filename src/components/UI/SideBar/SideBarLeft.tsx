@@ -19,7 +19,7 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-export default function SideBarLeft() {
+export const SideBarLeft: React.FC = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -37,19 +37,20 @@ export default function SideBarLeft() {
     <Box
       sx={{
         color: "lightgray",
+        margin: "0 auto",
         paddingLeft: "15px",
-        backgroundColor: "rgb(33, 33, 33)",
-        paddingRight: { md: "30px", sx: "10px" },
+        paddingRight: { md: "30px", xs: "10px" },
+        alignItems: { xs: "center", lg: "flex-start" },
       }}
       role="presentation"
     >
-      <Box sx={{ display: { xs: "none", md: "flex", padding: "20px 10px" } }}>
+      <Box sx={{ display: { xs: "none", lg: "flex", padding: "20px 10px" } }}>
         <img src={logo} alt="logo" style={{ width: "130px", height: "50px" }} />
       </Box>
       <Box
         sx={{
           flexGrow: 1,
-          display: { xs: "flex", md: "none" },
+          display: { xs: "flex", lg: "none" },
           paddingLeft: "3px",
           paddingTop: "12px",
           marginBottom: "40px",
@@ -79,22 +80,31 @@ export default function SideBarLeft() {
           open={Boolean(anchorElNav)}
           onClose={handleCloseNavMenu}
           sx={{
-            display: { xs: "block", md: "none" },
+            display: { xs: "block", lg: "none" },
+            "& .MuiPaper-root": {
+              backgroundColor: "rgb(20, 20, 20)",
+            },
           }}
         >
           <MenuItem onClick={handleCloseNavMenu}>
-            <Typography sx={{ color: "black" }} textAlign="center">
+            <Typography sx={{ color: "white" }} textAlign="center">
               Movies
             </Typography>
           </MenuItem>
           <MenuItem onClick={handleCloseNavMenu}>
-            <Typography textAlign="center">Sports</Typography>
+            <Typography sx={{ color: "white" }} textAlign="center">
+              Sports
+            </Typography>
           </MenuItem>
           <MenuItem onClick={handleCloseNavMenu}>
-            <Typography textAlign="center">TV series</Typography>
+            <Typography sx={{ color: "white" }} textAlign="center">
+              TV series
+            </Typography>
           </MenuItem>
           <MenuItem onClick={handleCloseNavMenu}>
-            <Typography textAlign="center">Kids</Typography>
+            <Typography sx={{ color: "white" }} textAlign="center">
+              Kids
+            </Typography>
           </MenuItem>
         </Menu>
       </Box>
@@ -103,7 +113,7 @@ export default function SideBarLeft() {
           fontSize: "10px",
           padding: "40px 0 16px 16px",
           color: "gray",
-          display: { xs: "none", md: "flex" },
+          display: { xs: "none", lg: "flex" },
         }}
       >
         M E N U
@@ -117,7 +127,7 @@ export default function SideBarLeft() {
               sx={{
                 fontWeight: "600",
                 fontSize: "14px",
-                display: { xs: "none", md: "flex" },
+                display: { xs: "none", lg: "flex" },
               }}
             >
               BROWSE
@@ -133,7 +143,7 @@ export default function SideBarLeft() {
               sx={{
                 fontWeight: "600",
                 fontSize: "14px",
-                display: { xs: "none", md: "flex" },
+                display: { xs: "none", lg: "flex" },
               }}
             >
               WATCHLIST
@@ -147,7 +157,7 @@ export default function SideBarLeft() {
               sx={{
                 fontWeight: "600",
                 fontSize: "14px",
-                display: { xs: "none", md: "flex" },
+                display: { xs: "none", lg: "flex" },
               }}
             >
               COMING SOON
@@ -161,7 +171,7 @@ export default function SideBarLeft() {
           fontSize: "10px",
           padding: "40px 0 16px 16px",
           color: "gray",
-          display: { xs: "none", md: "flex" },
+          display: { xs: "none", lg: "flex" },
         }}
       >
         O P T I O N S
@@ -175,7 +185,7 @@ export default function SideBarLeft() {
               sx={{
                 fontWeight: "600",
                 fontSize: "14px",
-                display: { xs: "none", md: "flex" },
+                display: { xs: "none", lg: "flex" },
               }}
             >
               SEETINGS
@@ -190,7 +200,7 @@ export default function SideBarLeft() {
                 sx={{
                   fontWeight: "600",
                   fontSize: "14px",
-                  display: { xs: "none", md: "flex" },
+                  display: { xs: "none", lg: "flex" },
                 }}
               >
                 LOG OUT
@@ -201,4 +211,4 @@ export default function SideBarLeft() {
       </List>
     </Box>
   );
-}
+};

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { FC, useContext } from "react";
 import { Context } from "../../../context/context";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -6,9 +6,11 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import SignInBtn from "../Button/SignIn";
 
-function NavBar() {
+import SignInBtn from "../Button/SignIn";
+import FilmInput from "../../FilmInput/FilmInput";
+
+const NavBar: FC = () => {
   const isAuth = useContext(Context);
 
   return (
@@ -24,25 +26,11 @@ function NavBar() {
           disableGutters
           sx={{
             display: "flex",
-            flexDirection: { xs: "row-reverse", md: "row" },
+            flexDirection: "row",
+            marginLeft: { xs: "15px" },
           }}
         >
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              textDecoration: "none",
-            }}
-          ></Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", lg: "flex" } }}>
             <Button
               sx={{
                 my: 2,
@@ -88,10 +76,11 @@ function NavBar() {
               Kids
             </Button>
           </Box>
+          <FilmInput />
           {!isAuth ? <SignInBtn /> : null}
         </Toolbar>
       </Container>
     </AppBar>
   );
-}
+};
 export default NavBar;

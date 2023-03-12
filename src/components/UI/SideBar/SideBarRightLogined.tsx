@@ -35,6 +35,11 @@ export default function SideBarRightLogined() {
 
   const renderMobileMenu = (
     <Menu
+      sx={{
+        "& .MuiPaper-root": {
+          backgroundColor: "rgb(20, 20, 20)",
+        },
+      }}
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
         vertical: "top",
@@ -49,17 +54,17 @@ export default function SideBarRightLogined() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+      <MenuItem sx={{ color: "white" }}>
+        <IconButton size="medium" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={0} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem sx={{ color: "white" }}>
         <IconButton
-          size="large"
+          size="medium"
           aria-label="show 17 new notifications"
           color="inherit"
         >
@@ -69,9 +74,9 @@ export default function SideBarRightLogined() {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem sx={{ color: "white" }}>
         <IconButton
-          size="large"
+          size="medium"
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
@@ -87,14 +92,22 @@ export default function SideBarRightLogined() {
   return (
     <Box
       sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
         color: "lightgray",
-        backgroundColor: "rgb(33, 33, 33)",
         padding: "10px 20px 0 20px",
       }}
       role="presentation"
     >
       <Box
-        sx={{ display: { xs: "none", md: "flex", justifyContent: "center" } }}
+        sx={{
+          display: {
+            xs: "none",
+            lg: "flex",
+            justifyContent: "center",
+          },
+        }}
       >
         <IconButton
           sx={{ color: "white" }}
@@ -127,9 +140,9 @@ export default function SideBarRightLogined() {
           <AccountCircle />
         </IconButton>
       </Box>
-      <Box sx={{ display: { xs: "flex", md: "none" } }}>
+      <Box sx={{ display: { md: "flex", lg: "none" } }}>
         <IconButton
-          sx={{ color: "white" }}
+          sx={{ color: "white", padding: " 15px 0" }}
           size="large"
           aria-label="show more"
           aria-controls={mobileMenuId}

@@ -1,8 +1,9 @@
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import { FC } from "react";
 
-const SideBarFilmCard = () => {
+const SideBarFilmCard: FC = () => {
   return (
     <>
       <Typography
