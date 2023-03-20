@@ -34,7 +34,7 @@ const NavBar: FC = () => {
             <Button
               sx={{
                 my: 2,
-                color: "lightGray",
+                color: "white",
                 display: "block",
                 fontSize: "14px",
                 fontWeight: "600",
@@ -45,7 +45,7 @@ const NavBar: FC = () => {
             <Button
               sx={{
                 my: 2,
-                color: "lightGray",
+                color: "white",
                 display: "block",
                 fontSize: "14px",
                 fontWeight: "600",
@@ -56,7 +56,7 @@ const NavBar: FC = () => {
             <Button
               sx={{
                 my: 2,
-                color: "lightGray",
+                color: "white",
                 fontSize: "14px",
                 fontWeight: "600",
                 display: "block",
@@ -67,7 +67,7 @@ const NavBar: FC = () => {
             <Button
               sx={{
                 my: 2,
-                color: "lightGray",
+                color: "white",
                 display: "block",
                 fontSize: "14px",
                 fontWeight: "600",

@@ -2,22 +2,21 @@ import * as React from "react";
 import { useContext } from "react";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import Typography from "@mui/material/Typography";
 import DonutSmallIcon from "@mui/icons-material/DonutSmall";
 import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import EventIcon from "@mui/icons-material/Event";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
-import logo from "./logo.png";
-import { Context } from "../../../context/context";
+import logo from "../logo.png";
+import { Context } from "../../../../context/context";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import cl from "./SideBarLeft.module.css";
 
 export const SideBarLeft: React.FC = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -57,7 +56,7 @@ export const SideBarLeft: React.FC = () => {
         }}
       >
         <IconButton
-          sx={{ padding: { xs: "12px 0", sm: "12px" } }}
+          sx={{ padding: { xs: "15px 0", sm: "15px" } }}
           size="large"
           aria-label="account of current user"
           aria-controls="menu-appbar"
@@ -115,9 +114,10 @@ export const SideBarLeft: React.FC = () => {
           padding: "40px 0 16px 16px",
           color: "gray",
           display: { xs: "none", lg: "flex" },
+          letterSpacing: "8px",
         }}
       >
-        M E N U
+        MENU
       </Typography>
 
       <List>
@@ -130,7 +130,7 @@ export const SideBarLeft: React.FC = () => {
           >
             <DonutSmallIcon
               sx={{
-                color: "lightgray",
+                color: "white",
                 marginRight: { xs: "0", sm: "10px" },
               }}
             />
@@ -139,7 +139,9 @@ export const SideBarLeft: React.FC = () => {
                 fontWeight: "600",
                 fontSize: "14px",
                 display: { xs: "none", lg: "flex" },
+                color: "white",
               }}
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
               BROWSE
             </Typography>
@@ -149,13 +151,13 @@ export const SideBarLeft: React.FC = () => {
           <ListItemButton
             sx={{
               marginBottom: "10px",
-              padding: { xs: "8px 0", sm: "8px 16px" },
+              padding: { xs: "18px 0", sm: "8px 16px" },
             }}
           >
             <VideoLibraryIcon
               sx={{
-                color: "lightgray",
-                marginRight: { xs: "8px 0", sm: "10px" },
+                color: "white",
+                marginRight: { xs: "18px 0", sm: "10px" },
               }}
             />
             <Typography
@@ -163,6 +165,7 @@ export const SideBarLeft: React.FC = () => {
                 fontWeight: "600",
                 fontSize: "14px",
                 display: { xs: "none", lg: "flex" },
+                color: "white",
               }}
             >
               WATCHLIST
@@ -178,7 +181,7 @@ export const SideBarLeft: React.FC = () => {
           >
             <EventIcon
               sx={{
-                color: "lightgray",
+                color: "white",
                 marginRight: { xs: "8px 0", sm: "10px" },
               }}
             />
@@ -187,6 +190,7 @@ export const SideBarLeft: React.FC = () => {
                 fontWeight: "600",
                 fontSize: "14px",
                 display: { xs: "none", lg: "flex" },
+                color: "white",
               }}
             >
               COMING SOON
@@ -201,9 +205,10 @@ export const SideBarLeft: React.FC = () => {
           padding: "40px 0 16px 16px",
           color: "gray",
           display: { xs: "none", lg: "flex" },
+          letterSpacing: "8px",
         }}
       >
-        O P T I O N S
+        OPTIONS
       </Typography>
 
       <List>
@@ -211,12 +216,12 @@ export const SideBarLeft: React.FC = () => {
           <ListItemButton
             sx={{
               marginBottom: "10px",
-              padding: { xs: "8px 0", sm: "8px 16px" },
+              padding: { xs: "18px 0", sm: "8px 16px" },
             }}
           >
             <SettingsIcon
               sx={{
-                color: "lightgray",
+                color: "white",
                 marginRight: { xs: "8px 0", sm: "10px" },
               }}
             />
@@ -225,6 +230,7 @@ export const SideBarLeft: React.FC = () => {
                 fontWeight: "600",
                 fontSize: "14px",
                 display: { xs: "none", lg: "flex" },
+                color: "white",
               }}
             >
               SEETINGS
@@ -241,7 +247,7 @@ export const SideBarLeft: React.FC = () => {
             >
               <LogoutIcon
                 sx={{
-                  color: "lightgray",
+                  color: "white",
                   marginRight: { xs: "0", sm: "10px" },
                   marginLeft: "2px",
                 }}
@@ -251,6 +257,7 @@ export const SideBarLeft: React.FC = () => {
                   fontWeight: "600",
                   fontSize: "14px",
                   display: { xs: "none", lg: "flex" },
+                  color: "white",
                 }}
               >
                 LOG OUT

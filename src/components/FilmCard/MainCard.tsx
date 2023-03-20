@@ -37,7 +37,11 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
     >
       <CardCover>
         <img
-          style={{ objectFit: "fill", borderRadius: "0px" }}
+          style={{
+            objectFit: "fill",
+            borderTopLeftRadius: "0px",
+            borderTopRightRadius: "0px",
+          }}
           src={`https://www.themoviedb.org/t/p/original/${backdrop_path}`}
           alt="image"
         />

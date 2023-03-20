@@ -1,10 +1,12 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 
 const FilmInput: FC = () => {
+  const [value, setValue] = useState("");
+
   return (
     <Box
       sx={{
@@ -25,6 +27,10 @@ const FilmInput: FC = () => {
           },
         }}
         placeholder="Search"
+        value={value}
+        onChange={(e) => {
+          setValue(e.target.value);
+        }}
       />
       <IconButton
         type="button"
