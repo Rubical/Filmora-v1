@@ -6,10 +6,10 @@
   content: "";
 
   position: absolute;
-  left: 10px;
+  left: 0px;
   top: 100%;
   display: block;
-  height: 2px;
+  height: 3px;
   width: 0px;
   background-color: rgb(172, 0, 0);
   animation: LineMove 1s linear forwards;
@@ -17,6 +17,6 @@
 
 @keyframes LineMove {
   100% {
-    width: 150px;
+    width: 100%;
   }
 }

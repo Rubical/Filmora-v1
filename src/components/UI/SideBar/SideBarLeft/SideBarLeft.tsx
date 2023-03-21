@@ -5,8 +5,8 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import Typography from "@mui/material/Typography";
-import DonutSmallIcon from "@mui/icons-material/DonutSmall";
-import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
+import WhatshotIcon from "@mui/icons-material/Whatshot";
+import StarRateIcon from "@mui/icons-material/StarRate";
 import EventIcon from "@mui/icons-material/Event";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -42,6 +42,7 @@ export const SideBarLeft: React.FC = () => {
         alignItems: { xs: "center", lg: "flex-start" },
       }}
       role="presentation"
+      className={cl.sideBarLeft}
     >
       <Box sx={{ display: { xs: "none", lg: "flex", padding: "20px 10px" } }}>
         <img src={logo} alt="logo" style={{ width: "130px", height: "50px" }} />
@@ -111,13 +112,13 @@ export const SideBarLeft: React.FC = () => {
       <Typography
         sx={{
           fontSize: "10px",
-          padding: "40px 0 16px 16px",
+          padding: "40px 0 16px 20px",
           color: "gray",
           display: { xs: "none", lg: "flex" },
           letterSpacing: "8px",
         }}
       >
-        MENU
+        MOVIES
       </Typography>
 
       <List>
@@ -128,7 +129,7 @@ export const SideBarLeft: React.FC = () => {
               padding: { xs: "8px 0", sm: "8px 16px" },
             }}
           >
-            <DonutSmallIcon
+            <WhatshotIcon
               sx={{
                 color: "white",
                 marginRight: { xs: "0", sm: "10px" },
@@ -141,9 +142,8 @@ export const SideBarLeft: React.FC = () => {
                 display: { xs: "none", lg: "flex" },
                 color: "white",
               }}
-              className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
-              BROWSE
+              TRENDING
             </Typography>
           </ListItemButton>
         </ListItem>
@@ -154,7 +154,7 @@ export const SideBarLeft: React.FC = () => {
               padding: { xs: "18px 0", sm: "8px 16px" },
             }}
           >
-            <VideoLibraryIcon
+            <StarRateIcon
               sx={{
                 color: "white",
                 marginRight: { xs: "18px 0", sm: "10px" },
@@ -168,7 +168,7 @@ export const SideBarLeft: React.FC = () => {
                 color: "white",
               }}
             >
-              WATCHLIST
+              TOP RATED
             </Typography>
           </ListItemButton>
         </ListItem>
@@ -202,7 +202,7 @@ export const SideBarLeft: React.FC = () => {
       <Typography
         sx={{
           fontSize: "10px",
-          padding: "40px 0 16px 16px",
+          padding: "40px 0 16px 20px",
           color: "gray",
           display: { xs: "none", lg: "flex" },
           letterSpacing: "8px",

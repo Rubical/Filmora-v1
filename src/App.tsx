@@ -1,9 +1,8 @@
 import "./App.css";
 import NavBar from "./components/UI/NavBar/NavBar";
 import { SideBarLeft } from "./components/UI/SideBar/SideBarLeft/SideBarLeft";
-import FilmPage from "./pages/FilmPage";
 import { Context } from "./context/context";
-import SideBarRightLogined from "./components/UI/SideBar/SideBarRightLogined";
+import MainPage from "./pages/MainPage";
 
 function App() {
   let isAuth: string = "sad";
@@ -12,8 +11,8 @@ function App() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: isAuth ? "1fr 4fr 1fr" : "1fr 5fr",
-          backgroundColor: "rgb(20, 20, 20)",
+          gridTemplateColumns: "1fr 5fr",
+          backgroundColor: "black",
           minHeight: "100vh",
         }}
         className="App"
@@ -21,9 +20,8 @@ function App() {
         <SideBarLeft />
         <div className="main" style={{ position: "relative" }}>
           <NavBar />
-          <FilmPage />
+          <MainPage />
         </div>
-        {isAuth ? <SideBarRightLogined /> : null}
       </div>
     </Context.Provider>
   );

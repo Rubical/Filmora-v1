@@ -1,7 +1,7 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export interface IFilmsList {
-  id: number;
+  id?: number;
   adult?: boolean;
   original_title: "string";
   backdrop_path: string;

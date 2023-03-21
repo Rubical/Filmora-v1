@@ -12,7 +12,7 @@ const FilmInput: FC = () => {
       sx={{
         border: "2px solid white",
         marginRight: { xs: "0", md: "100px" },
-        marginTop: { xs: "15px", sm: "0" },
+        marginTop: { xs: "15px", lg: "0px" },
       }}
     >
       <InputBase

@@ -3,12 +3,12 @@ import { Context } from "../../../context/context";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-
 import SignInBtn from "../Button/SignIn";
 import FilmInput from "../../FilmInput/FilmInput";
+import cl from "./NavBar.module.css";
+import SideBarRightLogined from "../SideBar/SideBarRightLogined";
 
 const NavBar: FC = () => {
   const isAuth = useContext(Context);
@@ -28,9 +28,16 @@ const NavBar: FC = () => {
             display: "flex",
             flexDirection: "row",
             marginLeft: { xs: "15px" },
+            justifyContent: { xs: "space-between" },
           }}
         >
-          <Box sx={{ flexGrow: 1, display: { xs: "none", lg: "flex" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", lg: "flex" },
+              paddingTop: "8px",
+            }}
+          >
             <Button
               sx={{
                 my: 2,
@@ -39,6 +46,7 @@ const NavBar: FC = () => {
                 fontSize: "14px",
                 fontWeight: "600",
               }}
+              className={cl.navLinkActive}
             >
               Movies
             </Button>
@@ -77,7 +85,7 @@ const NavBar: FC = () => {
             </Button>
           </Box>
           <FilmInput />
-          {!isAuth ? <SignInBtn /> : null}
+          {isAuth ? <SideBarRightLogined /> : <SignInBtn />}
         </Toolbar>
       </Container>
     </AppBar>

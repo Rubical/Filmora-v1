@@ -96,7 +96,7 @@ export default function SideBarRightLogined() {
         flexDirection: "column",
         alignItems: "center",
         color: "lightgray",
-        padding: "10px 20px 0 20px",
+        padding: "2px 20px 0 20px",
       }}
       role="presentation"
     >

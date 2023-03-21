@@ -27,23 +27,18 @@ const FilmCard: FC<IFilm> = ({ film }) => {
   return (
     <Card
       sx={{
-        height: { xs: "250px", sm: "300px", md: "400px", lg: "220px" },
-        width: { md: "100%", lg: "calc(33.3% - 14px)", sm: "100%", xs: "100%" },
+        height: { xs: "220px", sm: "180px", md: "250px", lg: "220px" },
+        width: { xs: "90%", sm: "40%", md: "40%", lg: "calc(33.3% - 40px)" },
+        margin: "10px 10px",
       }}
     >
-      <CardCover sx={{}}>
+      <CardCover>
         <img
           style={{ objectFit: "fill" }}
           src={`https://www.themoviedb.org/t/p/original/${backdrop_path}`}
           alt="image"
         />
       </CardCover>
-      <CardCover
-        sx={{
-          background:
-            "linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)",
-        }}
-      />
       <CardContent
         sx={{
           justifyContent: "flex-end",
@@ -51,7 +46,7 @@ const FilmCard: FC<IFilm> = ({ film }) => {
       >
         <Box
           sx={{
-            backgroundColor: "rgba(158, 158, 158 ,0.3)",
+            backgroundColor: "rgba(18, 18, 18 ,0.4)",
             padding: "13px 10px",
             borderRadius: "10px",
           }}
@@ -66,7 +61,7 @@ const FilmCard: FC<IFilm> = ({ film }) => {
           </Typography>
           <Box sx={{ display: "flex", columnGap: "10px" }}>
             <Typography
-              textColor="neutral.300"
+              textColor="white"
               sx={{ fontSize: "12px", marginRight: "10px", marginTop: "2px" }}
             >
               {getPrettyDate(new Date(release_date))}
@@ -76,7 +71,7 @@ const FilmCard: FC<IFilm> = ({ film }) => {
                 return (
                   <Typography
                     key={el}
-                    sx={{ color: "lightGray", fontSize: "14px" }}
+                    sx={{ color: "white", fontSize: "14px" }}
                   >
                     {el}
                   </Typography>

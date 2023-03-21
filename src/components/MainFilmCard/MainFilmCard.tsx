@@ -8,6 +8,7 @@ import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import { IFilmsList } from "../../state/filmsSlice";
 import { getGenreByID } from "../../utils/getGenreById";
 import { FC } from "react";
+import cl from "./MainFilmCard.module.css";
 
 interface IFilm {
   film: IFilmsList;
@@ -29,42 +30,69 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
   return (
     <Card
       sx={{
-        position: "relative",
-        height: { lg: "600px", sm: "300px", md: "400px", xs: "250px" },
+        height: { lg: "500px", sm: "300px", md: "400px", xs: "250px" },
         width: "100%",
-        marginTop: { xs: "100px", sm: "0" },
+        marginTop: "0",
+        background: "black",
+        borderRadius: "0px",
+        boxShadow: "none",
       }}
     >
-      <CardCover>
+      <CardCover
+        sx={{
+          right: "0px",
+          top: "0px",
+          left: "auto",
+          width: "90%",
+          height: { lg: "700px", sm: "350px", md: "500px", xs: "250px" },
+          display: "flex",
+          alignSelf: "flex-end",
+          borderRadius: "0px",
+        }}
+      >
         <img
           style={{
             objectFit: "fill",
-            borderTopLeftRadius: "0px",
-            borderTopRightRadius: "0px",
+            borderRadius: "0px",
           }}
           src={`https://www.themoviedb.org/t/p/original/${backdrop_path}`}
           alt="image"
         />
+        <div
+          className={`${cl.fromBlack} ${cl.bgGradientToRight}`}
+          style={{ borderRadius: "0px", width: "75%" }}
+        ></div>
+        <div
+          className={`${cl.fromBlack} ${cl.bgGradientToTop}`}
+          style={{
+            borderRadius: "0px",
+            width: "100%",
+            height: "30vh",
+            bottom: "0px",
+          }}
+        ></div>
+        <div
+          className={`${cl.fromBlack} ${cl.bgGradientToLeft}`}
+          style={{
+            borderRadius: "0px",
+            width: "40%",
+            right: "0px",
+          }}
+        ></div>
       </CardCover>
-      <CardCover
-        sx={{
-          background:
-            "linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)",
-        }}
-      />
       <CardContent
         sx={{
-          justifyContent: { xs: "space-between", sm: "center" },
+          justifyContent: "center",
           ml: "15px",
           flexDirection: "column",
-          marginTop: "0",
+          marginTop: { xs: "60px", sm: "0px" },
         }}
       >
         <Typography
           level="h2"
           sx={{
             fontSize: { md: "50px", xd: "30px", xs: "25px" },
-            maxWidth: { xs: "200px", sm: "95%" },
+            maxWidth: { xs: "200px", sm: "60%" },
           }}
           textColor="#fff"
           mb={1}
