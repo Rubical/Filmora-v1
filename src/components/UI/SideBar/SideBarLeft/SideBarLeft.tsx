@@ -52,7 +52,7 @@ export const SideBarLeft: React.FC = () => {
           flexGrow: 1,
           display: { xs: "flex", lg: "none" },
           paddingLeft: { xs: "0", sm: "3px" },
-          paddingTop: "12px",
+          paddingTop: "9px",
           marginBottom: "40px",
         }}
       >
