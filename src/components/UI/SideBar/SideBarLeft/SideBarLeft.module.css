@@ -4,19 +4,12 @@
 
 .navLinkActive::before {
   content: "";
-
-  position: absolute;
-  left: 10px;
-  top: 100%;
   display: block;
-  height: 2px;
-  width: 0px;
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  left: 0;
+  top: calc(50% - 3px);
   background-color: rgb(172, 0, 0);
-  animation: LineMove 1s linear forwards;
-}
-
-@keyframes LineMove {
-  100% {
-    width: 150px;
-  }
+  border-radius: 50%;
 }

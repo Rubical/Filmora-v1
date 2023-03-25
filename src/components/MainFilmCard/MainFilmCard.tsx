@@ -5,12 +5,13 @@ import CardCover from "@mui/joy/CardCover";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
-import { IFilmsList } from "../../state/filmsSlice";
+import { IFilmsList } from "../../state/filmListSlice";
 import { getGenreByID } from "../../utils/getGenreById";
 import { FC } from "react";
 import cl from "./MainFilmCard.module.css";
+import { NavLink } from "react-router-dom";
 
-interface IFilm {
+export interface IFilm {
   film: IFilmsList;
 }
 
@@ -30,7 +31,7 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
   return (
     <Card
       sx={{
-        height: { lg: "500px", sm: "300px", md: "400px", xs: "250px" },
+        height: { lg: "400px", sm: "300px", md: "350px", xs: "250px" },
         width: "100%",
         marginTop: "0",
         background: "black",
@@ -44,6 +45,7 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
           top: "0px",
           left: "auto",
           width: "90%",
+          maxWidth: "1200px",
           height: { lg: "700px", sm: "350px", md: "500px", xs: "250px" },
           display: "flex",
           alignSelf: "flex-end",
@@ -60,7 +62,7 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
         />
         <div
           className={`${cl.fromBlack} ${cl.bgGradientToRight}`}
-          style={{ borderRadius: "0px", width: "75%" }}
+          style={{ borderRadius: "0px", width: "50%" }}
         ></div>
         <div
           className={`${cl.fromBlack} ${cl.bgGradientToTop}`}
@@ -75,7 +77,7 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
           className={`${cl.fromBlack} ${cl.bgGradientToLeft}`}
           style={{
             borderRadius: "0px",
-            width: "40%",
+            width: "75%",
             right: "0px",
           }}
         ></div>
@@ -118,25 +120,30 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
             );
           })}
         </Box>
-        <Button
-          sx={{
-            width: "160px",
-            padding: "9px 0",
-            backgroundColor: "rgb(172,0,0)",
-            borderRadius: "25px",
-            marginTop: "20px",
-            textTransform: "none",
-            fontWeight: "600",
-            "&:hover": {
-              backgroundColor: "rgb(152,0,0)",
-            },
-            marginBottom: { xs: "10px", sm: "0" },
-          }}
-          variant="contained"
-          endIcon={<PlayCircleIcon />}
+        <NavLink
+          style={{ width: "160px", marginTop: "20px" }}
+          to={`/Zenix_Film/view/film/${id}`}
         >
-          Watch
-        </Button>
+          <Button
+            sx={{
+              width: "160px",
+              padding: "9px 0",
+              backgroundColor: "rgb(172,0,0)",
+              borderRadius: "25px",
+
+              textTransform: "none",
+              fontWeight: "600",
+              "&:hover": {
+                backgroundColor: "rgb(152,0,0)",
+              },
+              marginBottom: { xs: "10px", sm: "0" },
+            }}
+            variant="contained"
+            endIcon={<PlayCircleIcon />}
+          >
+            Watch
+          </Button>
+        </NavLink>
       </CardContent>
     </Card>
   );

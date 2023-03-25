@@ -45,6 +45,7 @@ const NavBar: FC = () => {
                 display: "block",
                 fontSize: "14px",
                 fontWeight: "600",
+                letterSpacing: "1px",
               }}
               className={cl.navLinkActive}
             >
@@ -57,6 +58,7 @@ const NavBar: FC = () => {
                 display: "block",
                 fontSize: "14px",
                 fontWeight: "600",
+                letterSpacing: "1px",
               }}
             >
               Sports
@@ -68,6 +70,7 @@ const NavBar: FC = () => {
                 fontSize: "14px",
                 fontWeight: "600",
                 display: "block",
+                letterSpacing: "1px",
               }}
             >
               TV series
@@ -79,13 +82,13 @@ const NavBar: FC = () => {
                 display: "block",
                 fontSize: "14px",
                 fontWeight: "600",
+                letterSpacing: "1px",
               }}
             >
               Kids
             </Button>
           </Box>
           <FilmInput />
-          {isAuth ? <SideBarRightLogined /> : <SignInBtn />}
         </Toolbar>
       </Container>
     </AppBar>

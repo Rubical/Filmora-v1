@@ -96,7 +96,6 @@ export default function SideBarRightLogined() {
         flexDirection: "column",
         alignItems: "center",
         color: "lightgray",
-        padding: "2px 20px 0 20px",
       }}
       role="presentation"
     >
@@ -106,6 +105,7 @@ export default function SideBarRightLogined() {
             xs: "none",
             lg: "flex",
             justifyContent: "center",
+            paddingTop: "10px",
           },
         }}
       >
@@ -153,10 +153,7 @@ export default function SideBarRightLogined() {
         </IconButton>
       </Box>
       {renderMobileMenu}
-      <Box>
-        {watchedFilms ? <SideBarFilmCard /> : null}
-        {watchListFilms ? <SideBarFilmCard /> : null}
-      </Box>
+      <Box></Box>
     </Box>
   );
 }

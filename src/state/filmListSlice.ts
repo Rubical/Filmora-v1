@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export interface IFilmsList {
-  id?: number;
+  id: number;
   adult?: boolean;
   original_title: "string";
   backdrop_path: string;
@@ -38,7 +38,7 @@ export const fetchPopularFilms = createAsyncThunk<IFilmsList[]>(
   }
 );
 
-export const filmsSlice = createSlice({
+export const filmListSlice = createSlice({
   name: "films",
   initialState,
   reducers: {},
@@ -49,4 +49,4 @@ export const filmsSlice = createSlice({
   },
 });
 
-export default filmsSlice.reducer;
+export default filmListSlice.reducer;

@@ -8,9 +8,9 @@ const SignInBtn: FC = () => {
     <Box
       sx={{
         flexGrow: 0,
-        color: "lightgray",
+        color: "white",
         justifySelf: "flex-end",
-        padding: "8px 15px 0 0 ",
+        padding: "6px 15px 0 0 ",
       }}
     >
       <MenuItem>

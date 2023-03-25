@@ -10,15 +10,18 @@ const FilmInput: FC = () => {
   return (
     <Box
       sx={{
+        maxWidth: "222px",
         border: "2px solid white",
         marginRight: { xs: "0", md: "100px" },
         marginTop: { xs: "15px", lg: "0px" },
+        display: "flex",
+        justifyContent: "space-between",
       }}
     >
       <InputBase
         sx={{
           ml: 1,
-          maxWidth: "170px",
+          maxWidth: "70%",
           color: "white",
           input: {
             "&::placeholder": {

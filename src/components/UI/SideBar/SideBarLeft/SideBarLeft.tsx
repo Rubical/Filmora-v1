@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
+import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import StarRateIcon from "@mui/icons-material/StarRate";
@@ -17,6 +18,7 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import cl from "./SideBarLeft.module.css";
+import { NavLink } from "react-router-dom";
 
 export const SideBarLeft: React.FC = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -37,16 +39,20 @@ export const SideBarLeft: React.FC = () => {
       sx={{
         color: "lightgray",
         margin: "0 auto",
-        paddingLeft: "15px",
-        paddingRight: { md: "30px", xs: "10px" },
         alignItems: { xs: "center", lg: "flex-start" },
       }}
       role="presentation"
       className={cl.sideBarLeft}
     >
-      <Box sx={{ display: { xs: "none", lg: "flex", padding: "20px 10px" } }}>
-        <img src={logo} alt="logo" style={{ width: "130px", height: "50px" }} />
-      </Box>
+      <NavLink to="/Zenix_Film/movies/trending">
+        <Box sx={{ display: { xs: "none", lg: "flex", padding: "20px 10px" } }}>
+          <img
+            src={logo}
+            alt="logo"
+            style={{ width: "130px", height: "50px" }}
+          />
+        </Box>
+      </NavLink>
       <Box
         sx={{
           flexGrow: 1,
@@ -122,31 +128,34 @@ export const SideBarLeft: React.FC = () => {
       </Typography>
 
       <List>
-        <ListItem disablePadding>
-          <ListItemButton
-            sx={{
-              marginBottom: "10px",
-              padding: { xs: "8px 0", sm: "8px 16px" },
-            }}
-          >
-            <WhatshotIcon
+        <Link sx={{ marginLeft: "-12px" }} className={cl.navLinkActive}>
+          <ListItem disablePadding>
+            <ListItemButton
               sx={{
-                color: "white",
-                marginRight: { xs: "0", sm: "10px" },
-              }}
-            />
-            <Typography
-              sx={{
-                fontWeight: "600",
-                fontSize: "14px",
-                display: { xs: "none", lg: "flex" },
-                color: "white",
+                marginBottom: "10px",
+                padding: { xs: "8px 0", sm: "8px 16px" },
               }}
             >
-              TRENDING
-            </Typography>
-          </ListItemButton>
-        </ListItem>
+              <WhatshotIcon
+                sx={{
+                  color: "white",
+                  marginRight: { xs: "0", sm: "10px" },
+                }}
+              />
+              <Typography
+                sx={{
+                  fontWeight: "600",
+                  fontSize: "14px",
+                  display: { xs: "none", lg: "flex" },
+                  color: "white",
+                  letterSpacing: "1px",
+                }}
+              >
+                TRENDING
+              </Typography>
+            </ListItemButton>
+          </ListItem>
+        </Link>
         <ListItem disablePadding>
           <ListItemButton
             sx={{
@@ -166,6 +175,7 @@ export const SideBarLeft: React.FC = () => {
                 fontSize: "14px",
                 display: { xs: "none", lg: "flex" },
                 color: "white",
+                letterSpacing: "1px",
               }}
             >
               TOP RATED
@@ -191,6 +201,7 @@ export const SideBarLeft: React.FC = () => {
                 fontSize: "14px",
                 display: { xs: "none", lg: "flex" },
                 color: "white",
+                letterSpacing: "1px",
               }}
             >
               COMING SOON
@@ -231,6 +242,7 @@ export const SideBarLeft: React.FC = () => {
                 fontSize: "14px",
                 display: { xs: "none", lg: "flex" },
                 color: "white",
+                letterSpacing: "1px",
               }}
             >
               SEETINGS
@@ -258,6 +270,7 @@ export const SideBarLeft: React.FC = () => {
                   fontSize: "14px",
                   display: { xs: "none", lg: "flex" },
                   color: "white",
+                  letterSpacing: "1px",
                 }}
               >
                 LOG OUT

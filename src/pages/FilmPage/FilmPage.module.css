@@ -1,0 +1,20 @@
+.fromBlack {
+  --tw-gradient-from: black;
+  --tw-gradient-to: transparent;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  height: 100%;
+  width: 75%;
+  position: absolute;
+}
+
+.bgGradientToRight {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.bgGradientToTop {
+  background-image: linear-gradient(to top, var(--tw-gradient-stops));
+}
+
+.bgGradientToLeft {
+  background-image: linear-gradient(to left, var(--tw-gradient-stops));
+}

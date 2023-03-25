@@ -112,3 +112,14 @@ legend {
 }
 
 /* App styles */
+
+.app {
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr;
+  background-color: black;
+  min-height: 100vh;
+}
+
+.main {
+  position: relative;
+}
