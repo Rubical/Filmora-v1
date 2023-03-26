@@ -1,9 +1,10 @@
 import { useContext, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { fetchPopularFilms } from "../../state/filmListSlice";
-import FilmCard from "../../components/FilmCard/FilmCard";
-import MainFilmCard from "../../components/MainFilmCard/MainFilmCard";
+import FilmCard from "../../components/UI/Cards/FilmCard/FilmCard";
+import MainFilmCard from "../../components/UI/Cards/MainFilmCard/MainFilmCard";
 import { Context } from "../../context/context";
+import Loader from "../../components/UI/Loader/Loader";
 
 const Movies = () => {
   const isAuth = useContext(Context);
@@ -15,8 +16,11 @@ const Movies = () => {
   }, []);
 
   const films = useAppSelector((state) => state.films.filmsList);
+  const loading = useAppSelector((state) => state.films.loading);
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <div
       style={{
         display: "flex",

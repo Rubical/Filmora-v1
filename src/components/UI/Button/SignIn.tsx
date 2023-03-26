@@ -10,7 +10,7 @@ const SignInBtn: FC = () => {
         flexGrow: 0,
         color: "white",
         justifySelf: "flex-end",
-        padding: "6px 15px 0 0 ",
+        padding: "24px 15px 0 0 ",
       }}
     >
       <MenuItem>

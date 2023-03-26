@@ -9,8 +9,12 @@ interface Routes {
 
 export const privateRoutes = [
   {
-    path: "",
-    element: "",
+    path: "/Zenix_Film/movies/trending",
+    element: Movies,
+  },
+  {
+    path: "/Zenix_Film/view/film/:id",
+    element: FilmPage,
   },
 ];
 export const publicRoutes: Routes[] = [

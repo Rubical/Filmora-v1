@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import SignInBtn from "../Button/SignIn";
 import FilmInput from "../../FilmInput/FilmInput";
 import cl from "./NavBar.module.css";
-import SideBarRightLogined from "../SideBar/SideBarRightLogined";
+import SideBarRightLogined from "../SideBar/SideBarRight/SideBarRightLogined";
 
 const NavBar: FC = () => {
   const isAuth = useContext(Context);

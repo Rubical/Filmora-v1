@@ -40,6 +40,8 @@ export const SideBarLeft: React.FC = () => {
         color: "lightgray",
         margin: "0 auto",
         alignItems: { xs: "center", lg: "flex-start" },
+        position: "relative",
+        zIndex: "5",
       }}
       role="presentation"
       className={cl.sideBarLeft}

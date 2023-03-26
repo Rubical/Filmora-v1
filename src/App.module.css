@@ -1,4 +1,8 @@
 /* Reset and base styles  */
+html {
+  overflow-y: scroll;
+}
+
 * {
   padding: 0px;
   margin: 0px;
@@ -122,4 +126,6 @@ legend {
 
 .main {
   position: relative;
+  display: flex;
+  justify-content: center;
 }
