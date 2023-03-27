@@ -30,7 +30,7 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
   return (
     <Card
       sx={{
-        height: { lg: "400px", sm: "300px", md: "350px", xs: "250px" },
+        height: { lg: "500px", sm: "400px", md: "450px", xs: "350px" },
         width: "100%",
         marginTop: "0",
         background: "black",
@@ -45,10 +45,11 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
           left: "auto",
           width: "90%",
           maxWidth: "1200px",
-          height: { lg: "700px", sm: "350px", md: "500px", xs: "250px" },
+          height: { lg: "600px", sm: "320px", md: "450px", xs: "220px" },
           display: "flex",
           alignSelf: "flex-end",
           borderRadius: "0px",
+          position: "absolute",
         }}
       >
         <img

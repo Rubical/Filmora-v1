@@ -11,7 +11,7 @@ const YoutubeFrame: FC<IYoutubeFrame> = ({ embedId }) => {
       sx={{
         position: "relative",
         backgroundColor: "transparent",
-        width: "100%",
+        width: "753px",
         marginBottom: "150px",
         boxShadow: "none",
       }}

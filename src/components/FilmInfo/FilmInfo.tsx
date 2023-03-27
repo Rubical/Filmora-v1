@@ -17,7 +17,7 @@ interface IFilmInfo extends IFilmsList {
 }
 
 interface IFilmInfoCard {
-    film : IFilmInfo
+  film: IFilmInfo;
 }
 
 const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
@@ -40,7 +40,9 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
       sx={{
         position: "relative",
         color: "lightgray",
-          margin: '170px 0 0 20px'
+        margin: "170px 0 0 20px",
+        overflow: "auto",
+        marginBottom: "150px",
       }}
     >
       <img
@@ -50,7 +52,6 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
           float: "left",
           marginRight: "30px",
           background: "white",
-            marginBottom: '150px'
         }}
         src={
           poster_path
@@ -118,9 +119,7 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
       >
         Overview
       </Typography>
-      <Typography sx={{ maxWidth: "95%" }}>
-        {overview}
-      </Typography>
+      <Typography sx={{ maxWidth: "95%" }}>{overview}</Typography>
     </Box>
   );
 };

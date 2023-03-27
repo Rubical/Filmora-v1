@@ -13,6 +13,18 @@ import FilmInfo from "../../components/FilmInfo/FilmInfo";
 import Typography from "@mui/material/Typography";
 import YoutubeFrame from "../../components/YoutubeFrame/YoutubeFrame";
 import { fetchVideo } from "../../state/filmVideoSlice";
+import { toHoursAndMinutes } from "../../utils/convertToHoursAndMinutes";
+import { fetchPosters } from "../../state/postersSlice";
+import PosterCard from "../../components/UI/Cards/PosterCard/PosterCard";
+
+interface IFilm {
+  backdrop_path: string;
+  release_date: string;
+  status: string;
+  budget: number;
+  revenue: number;
+  runtime: number;
+}
 
 const FilmPage: FC = () => {
   const { id } = useParams();
@@ -22,18 +34,20 @@ const FilmPage: FC = () => {
     dispatch(fetchFilm(id));
     dispatch(fetchActors(id));
     dispatch(fetchVideo(id));
+    dispatch(fetchPosters(id));
   }, []);
 
   const film: any = useAppSelector((state) => state.film.film);
   const filmIsLoading = useAppSelector((state) => state.film.loading);
-  console.log(film);
 
-  const { backdrop_path } = film as any;
+  const { backdrop_path, release_date, status, budget, revenue, runtime } =
+    film as IFilm;
 
   const actors = useAppSelector((state) => state.actors.actors);
 
   const video: any = useAppSelector((state) => state.filmVideo.filmVideo);
-
+  const posters = useAppSelector((state) => state.posters.posters);
+  console.log(posters);
   return filmIsLoading ? (
     <Loader />
   ) : (
@@ -79,13 +93,86 @@ const FilmPage: FC = () => {
       </CardCover>
 
       <FilmInfo film={film} />
-
-      <YoutubeFrame
-        embedId={
-          video.find((el: any) => el.type === "Trailer")?.key ||
-          video.find((el: any) => el.key)
-        }
-      />
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <YoutubeFrame
+          embedId={
+            video.find((el: any) => el.type === "Trailer")?.key ||
+            video.find((el: any) => el.key)
+          }
+        />
+        <Box sx={{ marginTop: "40px" }}>
+          <Box
+            sx={{ position: "relative", color: "white", marginBottom: "25px" }}
+          >
+            <Typography
+              sx={{ fontSize: "14px", fontWeight: "600", marginBottom: "5px" }}
+            >
+              Release Date
+            </Typography>
+            <Typography sx={{ fontSize: "14px", color: "lightgray" }}>
+              {release_date ? release_date : "No info"}
+            </Typography>
+          </Box>
+          <Box
+            sx={{ position: "relative", color: "white", marginBottom: "25px" }}
+          >
+            <Typography
+              sx={{ fontSize: "14px", fontWeight: "600", marginBottom: "5px" }}
+            >
+              Status
+            </Typography>
+            <Typography sx={{ fontSize: "14px", color: "lightgray" }}>
+              {status ? status : "No info"}
+            </Typography>
+          </Box>
+          <Box
+            sx={{ position: "relative", color: "white", marginBottom: "25px" }}
+          >
+            <Typography
+              sx={{ fontSize: "14px", fontWeight: "600", marginBottom: "5px" }}
+            >
+              Budget
+            </Typography>
+            <Typography sx={{ fontSize: "14px", color: "lightgray" }}>
+              {budget
+                ? budget.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  })
+                : "No info"}
+            </Typography>
+          </Box>
+          <Box
+            sx={{ position: "relative", color: "white", marginBottom: "25px" }}
+          >
+            <Typography
+              sx={{ fontSize: "14px", fontWeight: "600", marginBottom: "5px" }}
+            >
+              Revenue
+            </Typography>
+            <Typography sx={{ fontSize: "14px", color: "lightgray" }}>
+              {revenue
+                ? revenue.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  })
+                : "No info"}
+            </Typography>
+          </Box>
+          <Box
+            sx={{ position: "relative", color: "white", marginBottom: "25px" }}
+          >
+            <Typography
+              sx={{ fontSize: "14px", fontWeight: "600", marginBottom: "5px" }}
+            >
+              Runtime
+            </Typography>
+            <Typography sx={{ fontSize: "14px", color: "lightgray" }}>
+              {runtime ? runtime + " min" : "No info"}
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
 
       <Typography
         sx={{
@@ -101,14 +188,40 @@ const FilmPage: FC = () => {
         sx={{
           display: "flex",
           flexWrap: "wrap",
-          columnGap: "110px",
+          columnGap: "35px",
           justifyContent: "center",
+          rowGap: "30px",
+          marginBottom: "150px",
         }}
       >
-        {actors.slice(0, 8).map((actor: any) => {
+        {actors.slice(0, 10).map((actor: any) => {
           return actor.known_for_department === "Acting" ? (
             <ActorCard key={actor.id} actor={actor} />
           ) : null;
+        })}
+      </Box>
+
+      <Typography
+        sx={{
+          color: "white",
+          position: "relative",
+          fontSize: "34px",
+          marginBottom: "40px",
+        }}
+      >
+        Movie posters
+      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          columnGap: "35px",
+          justifyContent: "center",
+          rowGap: "30px",
+        }}
+      >
+        {posters.slice(0, 20).map((poster: any) => {
+          return <PosterCard key={poster.file_path} poster={poster} />;
         })}
       </Box>
     </Container>

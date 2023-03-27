@@ -25,7 +25,7 @@ const initialState: IFilmsState = {
 };
 
 export const fetchPopularFilms = createAsyncThunk<IFilmsList[]>(
-  "films/fetchfPopularFilms",
+  "filmsList/fetchfPopularFilms",
   async () => {
     const response = await fetch(
       "https://api.themoviedb.org/3/movie/popular?api_key=b053e4b701c01a664de1a144e1ab9f7f&language=en-US&page=2"

@@ -1,35 +1,35 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  actors: [],
+  posters: [],
   loading: true,
   error: null,
 };
 
-export const fetchActors = createAsyncThunk(
-  "actors/fetchActors",
+export const fetchPosters = createAsyncThunk(
+  "posters/fetchPosters",
   async (movie_id: string | undefined) => {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=b053e4b701c01a664de1a144e1ab9f7f&language=en-US`
+      `https://api.themoviedb.org/3/movie/${movie_id}/images?api_key=b053e4b701c01a664de1a144e1ab9f7f`
     );
     if (!response.ok) {
       console.log("Server Error!");
     }
     const data = await response.json();
-    return data.cast;
+    return data.posters;
   }
 );
 
-export const actorsSlice = createSlice({
-  name: "actors",
+export const postersSlice = createSlice({
+  name: "posters",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchActors.fulfilled, (state, action) => {
-      state.actors = action.payload;
+    builder.addCase(fetchPosters.fulfilled, (state, action) => {
+      state.posters = action.payload;
       state.loading = false;
     });
   },
 });
 
-export default actorsSlice.reducer;
+export default postersSlice.reducer;

@@ -26,6 +26,7 @@ const ActorCard: FC<IActorCard> = ({ actor }) => {
         color: "white",
         position: "relative",
         backgroundColor: "transparent",
+        boxShadow: "none",
       }}
     >
       {actor.profile_path ? (
@@ -35,7 +36,7 @@ const ActorCard: FC<IActorCard> = ({ actor }) => {
         />
       ) : null}
       <CardContent>
-        <Typography sx={{ fontSize: "16px", fontWeight: "600" }}>
+        <Typography sx={{ fontSize: "15px", fontWeight: "600" }}>
           {name}
         </Typography>
         <Typography sx={{ fontSize: "12px", color: "lightgray" }}>
