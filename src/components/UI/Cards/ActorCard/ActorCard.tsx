@@ -18,33 +18,31 @@ interface IActorCard {
 }
 
 const ActorCard: FC<IActorCard> = ({ actor }) => {
-  const {
-    name, character, profile_path
-  } = actor
+  const { name, character, profile_path } = actor;
   return (
-        <Card
-          sx={{
-            maxWidth: "185px",
-            color: "white",
-            position: "relative",
-            backgroundColor: "transparent",
-          }}
-        >
-          {actor.profile_path ? (
-            <img
-              src={`https://image.tmdb.org/t/p/w185_and_h278_face${actor.profile_path}`}
-              alt="actor"
-            />
-          ) : null}
-          <CardContent>
-            <Typography sx={{fontSize: '16px', fontWeight: '600'}}>
-              {name}
-            </Typography>
-            <Typography sx={{fontSize: '12px', color: 'lightgray'}}>
-              {character}
-            </Typography>
-          </CardContent>
-        </Card>
+    <Card
+      sx={{
+        maxWidth: "185px",
+        color: "white",
+        position: "relative",
+        backgroundColor: "transparent",
+      }}
+    >
+      {actor.profile_path ? (
+        <img
+          src={`https://image.tmdb.org/t/p/w185_and_h278_face${actor.profile_path}`}
+          alt="actor"
+        />
+      ) : null}
+      <CardContent>
+        <Typography sx={{ fontSize: "16px", fontWeight: "600" }}>
+          {name}
+        </Typography>
+        <Typography sx={{ fontSize: "12px", color: "lightgray" }}>
+          {character}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 };
 

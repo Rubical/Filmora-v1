@@ -10,28 +10,29 @@ import Loader from "../../components/UI/Loader/Loader";
 import { fetchActors } from "../../state/actorsSlice";
 import ActorCard from "../../components/UI/Cards/ActorCard/ActorCard";
 import FilmInfo from "../../components/FilmInfo/FilmInfo";
-import {IFilmsList} from "../../state/filmListSlice";
 import Typography from "@mui/material/Typography";
-
-
+import YoutubeFrame from "../../components/YoutubeFrame/YoutubeFrame";
+import { fetchVideo } from "../../state/filmVideoSlice";
 
 const FilmPage: FC = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
-  console.log(id)
-
   useEffect(() => {
     dispatch(fetchFilm(id));
     dispatch(fetchActors(id));
+    dispatch(fetchVideo(id));
   }, []);
 
   const film: any = useAppSelector((state) => state.film.film);
   const filmIsLoading = useAppSelector((state) => state.film.loading);
+  console.log(film);
 
   const { backdrop_path } = film as any;
 
   const actors = useAppSelector((state) => state.actors.actors);
+
+  const video: any = useAppSelector((state) => state.filmVideo.filmVideo);
 
   return filmIsLoading ? (
     <Loader />
@@ -79,9 +80,32 @@ const FilmPage: FC = () => {
 
       <FilmInfo film={film} />
 
-        <Typography sx={{color: 'white', position: 'relative', fontSize: '34px', marginBottom: '40px'}}>Top billed casts</Typography>
-      <Box sx={{ display: "flex", flexWrap: "wrap", columnGap: '110px', justifyContent: 'center' }}>
-        {actors.slice(0,8).map((actor: any) => {
+      <YoutubeFrame
+        embedId={
+          video.find((el: any) => el.type === "Trailer")?.key ||
+          video.find((el: any) => el.key)
+        }
+      />
+
+      <Typography
+        sx={{
+          color: "white",
+          position: "relative",
+          fontSize: "34px",
+          marginBottom: "40px",
+        }}
+      >
+        Top billed casts
+      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          columnGap: "110px",
+          justifyContent: "center",
+        }}
+      >
+        {actors.slice(0, 8).map((actor: any) => {
           return actor.known_for_department === "Acting" ? (
             <ActorCard key={actor.id} actor={actor} />
           ) : null;

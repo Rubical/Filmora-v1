@@ -39,9 +39,8 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
     <Box
       sx={{
         position: "relative",
-        marginTop: "170px",
-        marginLeft: "20px",
         color: "lightgray",
+          margin: '170px 0 0 20px'
       }}
     >
       <img
@@ -51,6 +50,7 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
           float: "left",
           marginRight: "30px",
           background: "white",
+            marginBottom: '150px'
         }}
         src={
           poster_path
@@ -118,7 +118,7 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
       >
         Overview
       </Typography>
-      <Typography sx={{ maxWidth: "95%", marginBottom: "250px" }}>
+      <Typography sx={{ maxWidth: "95%" }}>
         {overview}
       </Typography>
     </Box>
