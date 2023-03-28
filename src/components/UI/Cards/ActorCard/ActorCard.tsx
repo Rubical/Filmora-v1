@@ -23,6 +23,7 @@ const ActorCard: FC<IActorCard> = ({ actor }) => {
     <Card
       sx={{
         maxWidth: "185px",
+        height: "358px",
         color: "white",
         position: "relative",
         backgroundColor: "transparent",

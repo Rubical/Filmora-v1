@@ -38,10 +38,17 @@ const FilmCard: FC<IFilm> = ({ film }) => {
       }}
       href={`/Zenix_Film/view/film/${id}`}
     >
-      <Card sx={{ height: "100%", width: "100%" }}>
+      <Card
+        sx={{
+          height: "100%",
+          width: "100%",
+          boxShadow: "none",
+          borderRadius: "5px",
+        }}
+      >
         <CardCover sx={{ position: "absolute" }}>
           <img
-            style={{ objectFit: "fill" }}
+            style={{ borderRadius: "5px" }}
             src={`https://www.themoviedb.org/t/p/original/${backdrop_path}`}
             alt="image"
           />
@@ -53,7 +60,7 @@ const FilmCard: FC<IFilm> = ({ film }) => {
         >
           <Box
             sx={{
-              backgroundColor: "rgba(18, 18, 18 ,0.4)",
+              backgroundColor: "rgba(18, 18, 18 ,0.5)",
               padding: "13px 10px",
               borderRadius: "10px",
             }}

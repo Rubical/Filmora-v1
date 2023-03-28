@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
 import getPrettyDate from "../../utils/getPrettyDate";
 import { IFilmsList } from "../../state/filmListSlice";
+import imgNotFound from "../../images/imgNotFound.jpg";
 
 interface IFilmInfo {
   film: IFilmInfo;
@@ -56,7 +57,7 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
         src={
           poster_path
             ? `https://www.themoviedb.org/t/p/original/${poster_path}`
-            : ""
+            : imgNotFound
         }
         alt="poster"
       />
@@ -64,43 +65,51 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
         <Typography
           sx={{ fontSize: "35px", fontWeight: "600", maxWidth: "700px" }}
         >
-          {original_title}
+          {original_title ? original_title : "No title"}
         </Typography>
-        <Typography
-          sx={{
-            fontSize: "35px",
-            fontWeight: "600",
-            maxWidth: "700px",
-            whiteSpace: "nowrap",
-          }}
-        >
-          {"("}
-          {getPrettyDate(new Date(release_date))}
-          {" )"}
-        </Typography>
+        {release_date ? (
+          <Typography
+            sx={{
+              fontSize: "35px",
+              fontWeight: "600",
+              maxWidth: "700px",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {"("}
+            {getPrettyDate(new Date(release_date))}
+            {" )"}
+          </Typography>
+        ) : (
+          ""
+        )}
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          marginTop: "20px",
-          color: "lightgray",
-          marginBottom: "5px",
-        }}
-      >
-        <StarIcon sx={{ color: "rgb(230, 230, 0)" }}></StarIcon>
+      {vote_average ? (
         <Box
           sx={{
-            marginLeft: "5px",
             display: "flex",
-            columnGap: "7px",
+            marginTop: "20px",
+            color: "lightgray",
+            marginBottom: "5px",
           }}
         >
-          <Typography sx={{ fontSize: "16px" }}>
-            {vote_average?.toFixed(1)}
-          </Typography>
-          <Typography sx={{ fontSize: "16px" }}>Rating</Typography>
+          <StarIcon sx={{ color: "rgb(230, 230, 0)" }}></StarIcon>
+          <Box
+            sx={{
+              marginLeft: "5px",
+              display: "flex",
+              columnGap: "7px",
+            }}
+          >
+            <Typography sx={{ fontSize: "16px" }}>
+              {vote_average?.toFixed(1)}
+            </Typography>
+            <Typography sx={{ fontSize: "16px" }}>Rating</Typography>
+          </Box>
         </Box>
-      </Box>
+      ) : (
+        ""
+      )}
       <Box sx={{ display: "flex", columnGap: "7px" }}>
         {genres.map((el: any, index: number) => {
           return index === genres.length - 1 ? (

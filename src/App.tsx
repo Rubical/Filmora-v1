@@ -6,6 +6,7 @@ import { Context } from "./context/context";
 import SideBarRightLogined from "./components/UI/SideBar/SideBarRight/SideBarRightLogined";
 import SignInBtn from "./components/UI/Button/SignIn";
 import AppRouter from "./router/AppRouter";
+import Footer from "./components/UI/Footer/Footer";
 
 function App() {
   let isAuth: string = "sad";
@@ -13,12 +14,15 @@ function App() {
     <Context.Provider value={isAuth}>
       <Router>
         <div className={cl.app}>
-          <SideBarLeft />
-          <div className={cl.main}>
-            <NavBar />
-            <AppRouter />
+          <div className={cl.grid}>
+            <SideBarLeft />
+            <div className={cl.main}>
+              <NavBar />
+              <AppRouter />
+            </div>
+            {isAuth ? <SideBarRightLogined /> : <SignInBtn />}
           </div>
-          {isAuth ? <SideBarRightLogined /> : <SignInBtn />}
+          <Footer />
         </div>
       </Router>
     </Context.Provider>

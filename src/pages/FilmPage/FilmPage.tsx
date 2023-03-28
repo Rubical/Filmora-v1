@@ -16,6 +16,8 @@ import { fetchVideo } from "../../state/filmVideoSlice";
 import { toHoursAndMinutes } from "../../utils/convertToHoursAndMinutes";
 import { fetchPosters } from "../../state/postersSlice";
 import PosterCard from "../../components/UI/Cards/PosterCard/PosterCard";
+import { fetchSimilarMovies } from "../../state/similarMoviesSlice";
+import FilmCard from "../../components/UI/Cards/FilmCard/FilmCard";
 
 interface IFilm {
   backdrop_path: string;
@@ -35,6 +37,7 @@ const FilmPage: FC = () => {
     dispatch(fetchActors(id));
     dispatch(fetchVideo(id));
     dispatch(fetchPosters(id));
+    dispatch(fetchSimilarMovies(id));
   }, []);
 
   const film: any = useAppSelector((state) => state.film.film);
@@ -47,7 +50,9 @@ const FilmPage: FC = () => {
 
   const video: any = useAppSelector((state) => state.filmVideo.filmVideo);
   const posters = useAppSelector((state) => state.posters.posters);
-  console.log(posters);
+  const similarMovies = useAppSelector(
+    (state) => state.similarMovies.similarMovies
+  );
   return filmIsLoading ? (
     <Loader />
   ) : (
@@ -168,7 +173,7 @@ const FilmPage: FC = () => {
               Runtime
             </Typography>
             <Typography sx={{ fontSize: "14px", color: "lightgray" }}>
-              {runtime ? runtime + " min" : "No info"}
+              {runtime ? toHoursAndMinutes(runtime) : "No info"}
             </Typography>
           </Box>
         </Box>
@@ -218,10 +223,36 @@ const FilmPage: FC = () => {
           columnGap: "35px",
           justifyContent: "center",
           rowGap: "30px",
+          marginBottom: "150px",
         }}
       >
-        {posters.slice(0, 20).map((poster: any) => {
+        {posters.slice(0, 18).map((poster: any) => {
           return <PosterCard key={poster.file_path} poster={poster} />;
+        })}
+      </Box>
+
+      <Typography
+        sx={{
+          color: "white",
+          position: "relative",
+          fontSize: "34px",
+          marginBottom: "40px",
+        }}
+      >
+        Similar movies
+      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          rowGap: "20px",
+          columnGap: "20px",
+          padding: "0",
+        }}
+      >
+        {similarMovies.slice(0, 15).map((film: any) => {
+          return <FilmCard key={film.id} film={film} />;
         })}
       </Box>
     </Container>

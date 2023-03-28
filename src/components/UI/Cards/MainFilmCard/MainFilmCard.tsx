@@ -54,7 +54,6 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
       >
         <img
           style={{
-            objectFit: "fill",
             borderRadius: "0px",
           }}
           src={`https://www.themoviedb.org/t/p/original/${backdrop_path}`}
