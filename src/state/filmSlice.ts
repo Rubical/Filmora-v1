@@ -29,10 +29,14 @@ export const filmSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchFilm.fulfilled, (state, action) => {
-      state.film = action.payload;
-      state.loading = false;
-    });
+    builder
+      .addCase(fetchFilm.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchFilm.fulfilled, (state, action) => {
+        state.film = action.payload;
+        state.loading = false;
+      });
   },
 });
 

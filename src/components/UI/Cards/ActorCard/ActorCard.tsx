@@ -1,10 +1,8 @@
 import { FC } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
-
+import noImg from "./no-img.jpg";
 interface IActor {
   id: number;
   known_for_department: string;
@@ -22,7 +20,7 @@ const ActorCard: FC<IActorCard> = ({ actor }) => {
   return (
     <Card
       sx={{
-        maxWidth: "185px",
+        maxWidth: "180px",
         height: "358px",
         color: "white",
         position: "relative",
@@ -30,18 +28,27 @@ const ActorCard: FC<IActorCard> = ({ actor }) => {
         boxShadow: "none",
       }}
     >
-      {actor.profile_path ? (
-        <img
-          src={`https://image.tmdb.org/t/p/w185_and_h278_face${actor.profile_path}`}
-          alt="actor"
-        />
-      ) : null}
+      <img
+        style={{
+          width: "180px",
+          height: "270px",
+          objectFit: "cover",
+          backgroundColor: "white",
+        }}
+        src={
+          actor.profile_path
+            ? `https://image.tmdb.org/t/p/w185_and_h278_face${actor.profile_path}`
+            : noImg
+        }
+        alt="actor"
+      />
+
       <CardContent>
         <Typography sx={{ fontSize: "15px", fontWeight: "600" }}>
-          {name}
+          {name ? name : "No info"}
         </Typography>
         <Typography sx={{ fontSize: "12px", color: "lightgray" }}>
-          {character}
+          {character ? character : "No info"}
         </Typography>
       </CardContent>
     </Card>

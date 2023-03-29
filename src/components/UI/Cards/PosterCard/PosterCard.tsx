@@ -29,7 +29,7 @@ const ActorCard: FC<IPosterCard> = ({ poster }) => {
   return (
     <Card
       sx={{
-        maxWidth: "150px",
+        maxWidth: "145px",
         color: "white",
         position: "relative",
         backgroundColor: "transparent",
@@ -38,6 +38,7 @@ const ActorCard: FC<IPosterCard> = ({ poster }) => {
     >
       {poster.file_path ? (
         <img
+          style={{ width: "145px", height: "218px", backgroundColor: "white" }}
           src={`https://image.tmdb.org/t/p/w185_and_h278_face${file_path}`}
           alt="actor"
         />

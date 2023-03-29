@@ -2,9 +2,11 @@ import { FC } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
+import Skeleton from "@mui/material/Skeleton";
 import getPrettyDate from "../../utils/getPrettyDate";
 import { IFilmsList } from "../../state/filmListSlice";
-import imgNotFound from "../../images/imgNotFound.jpg";
+import noImg from "./no-img.jpg";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
 interface IFilmInfo {
   film: IFilmInfo;
@@ -41,7 +43,7 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
       sx={{
         position: "relative",
         color: "lightgray",
-        margin: "170px 0 0 20px",
+        marginTop: "170px",
         overflow: "auto",
         marginBottom: "150px",
       }}
@@ -57,7 +59,7 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
         src={
           poster_path
             ? `https://www.themoviedb.org/t/p/original/${poster_path}`
-            : imgNotFound
+            : noImg
         }
         alt="poster"
       />
@@ -110,25 +112,35 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
       ) : (
         ""
       )}
-      <Box sx={{ display: "flex", columnGap: "7px" }}>
-        {genres.map((el: any, index: number) => {
-          return index === genres.length - 1 ? (
-            <Typography key={el.id} sx={{ fontSize: "14px" }}>
-              {el.name}
-            </Typography>
-          ) : (
-            <Typography key={el.id} sx={{ fontSize: "14px" }}>
-              {el.name} {"/"}
-            </Typography>
-          );
-        })}
-      </Box>
-      <Typography
-        sx={{ marginTop: "40px", fontWeight: "600", marginBottom: "10px" }}
-      >
-        Overview
-      </Typography>
-      <Typography sx={{ maxWidth: "95%" }}>{overview}</Typography>
+      {genres ? (
+        <Box sx={{ display: "flex", columnGap: "7px" }}>
+          {genres.map((el: any, index: number) => {
+            return index === genres.length - 1 ? (
+              <Typography key={el.id} sx={{ fontSize: "14px" }}>
+                {el.name}
+              </Typography>
+            ) : (
+              <Typography key={el.id} sx={{ fontSize: "14px" }}>
+                {el.name} {"/"}
+              </Typography>
+            );
+          })}
+        </Box>
+      ) : (
+        ""
+      )}
+      {overview ? (
+        <Box>
+          <Typography
+            sx={{ marginTop: "40px", fontWeight: "600", marginBottom: "10px" }}
+          >
+            Overview
+          </Typography>
+          <Typography sx={{ maxWidth: "95%" }}>{overview}</Typography>
+        </Box>
+      ) : (
+        ""
+      )}
     </Box>
   );
 };

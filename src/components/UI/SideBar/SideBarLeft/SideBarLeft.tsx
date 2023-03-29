@@ -50,7 +50,7 @@ export const SideBarLeft: React.FC = () => {
         role="presentation"
         className={cl.sideBarLeft}
       >
-        <NavLink to="/Zenix_Film/movies/trending">
+        <NavLink to="/Zenix_Film">
           <Box
             sx={{ display: { xs: "none", lg: "flex", padding: "20px 10px" } }}
           >

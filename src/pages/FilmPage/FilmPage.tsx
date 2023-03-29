@@ -18,6 +18,7 @@ import { fetchPosters } from "../../state/postersSlice";
 import PosterCard from "../../components/UI/Cards/PosterCard/PosterCard";
 import { fetchSimilarMovies } from "../../state/similarMoviesSlice";
 import FilmCard from "../../components/UI/Cards/FilmCard/FilmCard";
+import backgroundImg from "./background.jpg";
 
 interface IFilm {
   backdrop_path: string;
@@ -32,14 +33,6 @@ const FilmPage: FC = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(fetchFilm(id));
-    dispatch(fetchActors(id));
-    dispatch(fetchVideo(id));
-    dispatch(fetchPosters(id));
-    dispatch(fetchSimilarMovies(id));
-  }, []);
-
   const film: any = useAppSelector((state) => state.film.film);
   const filmIsLoading = useAppSelector((state) => state.film.loading);
 
@@ -53,6 +46,16 @@ const FilmPage: FC = () => {
   const similarMovies = useAppSelector(
     (state) => state.similarMovies.similarMovies
   );
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    dispatch(fetchFilm(id));
+    dispatch(fetchActors(id));
+    dispatch(fetchVideo(id));
+    dispatch(fetchPosters(id));
+    dispatch(fetchSimilarMovies(id));
+  }, [id]);
+
   return filmIsLoading ? (
     <Loader />
   ) : (
@@ -78,7 +81,7 @@ const FilmPage: FC = () => {
           src={
             backdrop_path
               ? `https://www.themoviedb.org/t/p/original/${backdrop_path}`
-              : ""
+              : backgroundImg
           }
           alt="image"
         />
@@ -178,83 +181,95 @@ const FilmPage: FC = () => {
           </Box>
         </Box>
       </Box>
-
-      <Typography
-        sx={{
-          color: "white",
-          position: "relative",
-          fontSize: "34px",
-          marginBottom: "40px",
-        }}
-      >
-        Top billed casts
-      </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          columnGap: "35px",
-          justifyContent: "center",
-          rowGap: "30px",
-          marginBottom: "150px",
-        }}
-      >
-        {actors.slice(0, 10).map((actor: any) => {
-          return actor.known_for_department === "Acting" ? (
-            <ActorCard key={actor.id} actor={actor} />
-          ) : null;
-        })}
-      </Box>
-
-      <Typography
-        sx={{
-          color: "white",
-          position: "relative",
-          fontSize: "34px",
-          marginBottom: "40px",
-        }}
-      >
-        Movie posters
-      </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          columnGap: "35px",
-          justifyContent: "center",
-          rowGap: "30px",
-          marginBottom: "150px",
-        }}
-      >
-        {posters.slice(0, 18).map((poster: any) => {
-          return <PosterCard key={poster.file_path} poster={poster} />;
-        })}
-      </Box>
-
-      <Typography
-        sx={{
-          color: "white",
-          position: "relative",
-          fontSize: "34px",
-          marginBottom: "40px",
-        }}
-      >
-        Similar movies
-      </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          rowGap: "20px",
-          columnGap: "20px",
-          padding: "0",
-        }}
-      >
-        {similarMovies.slice(0, 15).map((film: any) => {
-          return <FilmCard key={film.id} film={film} />;
-        })}
-      </Box>
+      {actors ? (
+        <>
+          <Typography
+            sx={{
+              color: "white",
+              position: "relative",
+              fontSize: "34px",
+              marginBottom: "40px",
+            }}
+          >
+            Top billed casts
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              columnGap: "35px",
+              rowGap: "30px",
+              marginBottom: "150px",
+            }}
+          >
+            {actors.slice(0, 10).map((actor: any) => {
+              return actor.known_for_department === "Acting" ? (
+                <ActorCard key={actor.id} actor={actor} />
+              ) : null;
+            })}
+          </Box>
+        </>
+      ) : (
+        ""
+      )}
+      {posters ? (
+        <>
+          <Typography
+            sx={{
+              color: "white",
+              position: "relative",
+              fontSize: "34px",
+              marginBottom: "40px",
+            }}
+          >
+            Movie posters
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              columnGap: "35px",
+              rowGap: "30px",
+              marginBottom: "150px",
+            }}
+          >
+            {posters.slice(0, 18).map((poster: any) => {
+              return <PosterCard key={poster.file_path} poster={poster} />;
+            })}
+          </Box>
+        </>
+      ) : (
+        ""
+      )}
+      {similarMovies ? (
+        <>
+          <Typography
+            sx={{
+              color: "white",
+              position: "relative",
+              fontSize: "34px",
+              marginBottom: "40px",
+            }}
+          >
+            Similar movies
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              rowGap: "20px",
+              columnGap: "20px",
+              padding: "0",
+            }}
+          >
+            {similarMovies.slice(0, 15).map((film: any) => {
+              return <FilmCard key={film.id} film={film} />;
+            })}
+          </Box>
+        </>
+      ) : (
+        ""
+      )}
     </Container>
   );
 };

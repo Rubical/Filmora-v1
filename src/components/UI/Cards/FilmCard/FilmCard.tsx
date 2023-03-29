@@ -9,6 +9,8 @@ import getPrettyDate from "../../../../utils/getPrettyDate";
 import { getGenreByID } from "../../../../utils/getGenreById";
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
+import cl from "./FilmCard.module.css";
+import imgNotFound from "./../../../../images/imgNotFound.jpg";
 
 interface IFilm {
   film: IFilmsList;
@@ -27,16 +29,15 @@ const FilmCard: FC<IFilm> = ({ film }) => {
     genre_ids,
   } = film;
   return (
-    <Link
-      sx={{
+    <NavLink
+      style={{
         display: "flex",
-        height: { xs: "220px", sm: "180px", md: "250px", lg: "220px" },
-        width: { xs: "90%", sm: "40%", md: "40%", lg: "calc(33.3% - 40px)" },
         maxWidth: "380px",
         margin: "10px 10px",
         backgroundColor: "relevant",
       }}
-      href={`/Zenix_Film/view/film/${id}`}
+      className={cl.card}
+      to={`/Zenix_Film/view/film/${id}`}
     >
       <Card
         sx={{
@@ -48,8 +49,12 @@ const FilmCard: FC<IFilm> = ({ film }) => {
       >
         <CardCover sx={{ position: "absolute" }}>
           <img
-            style={{ borderRadius: "5px" }}
-            src={`https://www.themoviedb.org/t/p/original/${backdrop_path}`}
+            style={{ borderRadius: "5px", objectFit: "fill" }}
+            src={
+              backdrop_path
+                ? `https://www.themoviedb.org/t/p/original/${backdrop_path}`
+                : imgNotFound
+            }
             alt="image"
           />
         </CardCover>
@@ -96,7 +101,7 @@ const FilmCard: FC<IFilm> = ({ film }) => {
           </Box>
         </CardContent>
       </Card>
-    </Link>
+    </NavLink>
   );
 };
 

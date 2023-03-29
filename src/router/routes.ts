@@ -9,7 +9,7 @@ interface Routes {
 
 export const privateRoutes = [
   {
-    path: "/Zenix_Film/movies/trending",
+    path: "/Zenix_Film",
     element: Movies,
   },
   {
@@ -19,7 +19,7 @@ export const privateRoutes = [
 ];
 export const publicRoutes: Routes[] = [
   {
-    path: "/Zenix_Film/movies/trending",
+    path: "/Zenix_Film",
     element: Movies,
   },
   {
