@@ -5,16 +5,18 @@ import FilmCard from "../../components/UI/Cards/FilmCard/FilmCard";
 import MainFilmCard from "../../components/UI/Cards/MainFilmCard/MainFilmCard";
 import { Context } from "../../context/context";
 import Loader from "../../components/UI/Loader/Loader";
+import PagePagination from "../../components/UI/Pagination/Paginaton";
 
 const Movies = () => {
   const isAuth = useContext(Context);
-
   const dispatch = useAppDispatch();
+
+  const page = useAppSelector((state) => state.pagination);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchPopularFilms());
-  }, []);
+  }, [page]);
 
   const films = useAppSelector((state) => state.films.filmsList);
   const loading = useAppSelector((state) => state.films.loading);
@@ -22,21 +24,24 @@ const Movies = () => {
   return loading ? (
     <Loader />
   ) : (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        rowGap: "20px",
-        columnGap: "20px",
-        padding: "0",
-      }}
-    >
-      {films[0] ? <MainFilmCard film={films[0]} /> : null}
-      {films.slice(1, films.length).map((film) => {
-        return <FilmCard key={film.id} film={film} />;
-      })}
-    </div>
+    <>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          rowGap: "20px",
+          columnGap: "20px",
+          padding: "0",
+        }}
+      >
+        {films[0] ? <MainFilmCard film={films[0]} /> : null}
+        {films.slice(1, films.length - 1).map((film) => {
+          return <FilmCard key={film.id} film={film} />;
+        })}
+        <PagePagination />
+      </div>
+    </>
   );
 };
 

@@ -7,7 +7,7 @@ interface Routes {
   element: React.FC;
 }
 
-export const privateRoutes = [
+export const privateRoutes: Routes[] = [
   {
     path: "/Zenix_Film",
     element: Movies,

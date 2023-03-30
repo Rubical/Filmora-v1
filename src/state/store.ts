@@ -5,6 +5,7 @@ import filmReducer from "./filmSlice";
 import filmVideoReducer from "./filmVideoSlice";
 import postersReducer from "./postersSlice";
 import similarMoviesReducer from "./similarMoviesSlice";
+import paginationReducer from "./paginationSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     filmVideo: filmVideoReducer,
     posters: postersReducer,
     similarMovies: similarMoviesReducer,
+    pagination: paginationReducer,
   },
 });
 

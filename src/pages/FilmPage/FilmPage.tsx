@@ -197,7 +197,7 @@ const FilmPage: FC = () => {
           </Box>
         </Box>
       </Box>
-      {actors ? (
+      {actors?.length ? (
         <>
           <Typography
             sx={{
@@ -228,7 +228,7 @@ const FilmPage: FC = () => {
       ) : (
         ""
       )}
-      {posters ? (
+      {posters?.length ? (
         <>
           <Typography
             sx={{
@@ -257,7 +257,7 @@ const FilmPage: FC = () => {
       ) : (
         ""
       )}
-      {similarMovies ? (
+      {similarMovies?.length ? (
         <>
           <Typography
             sx={{
