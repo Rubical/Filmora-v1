@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { fetchFilm } from "./filmSlice";
 
 export interface IFilmsList {
   id: number;
@@ -43,10 +44,14 @@ export const filmListSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchPopularFilms.fulfilled, (state, action) => {
-      state.filmsList = action.payload;
-      state.loading = false;
-    });
+    builder
+      .addCase(fetchPopularFilms.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchPopularFilms.fulfilled, (state, action) => {
+        state.filmsList = action.payload;
+        state.loading = false;
+      });
   },
 });
 

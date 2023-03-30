@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { fetchFilm } from "./filmSlice";
 
 const initialState = {
   actors: [],
@@ -25,10 +26,14 @@ export const actorsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchActors.fulfilled, (state, action) => {
-      state.actors = action.payload;
-      state.loading = false;
-    });
+    builder
+      .addCase(fetchActors.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchActors.fulfilled, (state, action) => {
+        state.actors = action.payload;
+        state.loading = false;
+      });
   },
 });
 

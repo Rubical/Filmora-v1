@@ -19,6 +19,7 @@ import PosterCard from "../../components/UI/Cards/PosterCard/PosterCard";
 import { fetchSimilarMovies } from "../../state/similarMoviesSlice";
 import FilmCard from "../../components/UI/Cards/FilmCard/FilmCard";
 import backgroundImg from "./background.jpg";
+import Skeleton from "@mui/material/Skeleton";
 
 interface IFilm {
   backdrop_path: string;
@@ -46,6 +47,7 @@ const FilmPage: FC = () => {
   const similarMovies = useAppSelector(
     (state) => state.similarMovies.similarMovies
   );
+  const videoIsLoading = useAppSelector((state) => state.filmVideo.loading);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -102,12 +104,26 @@ const FilmPage: FC = () => {
 
       <FilmInfo film={film} />
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <YoutubeFrame
-          embedId={
-            video.find((el: any) => el.type === "Trailer")?.key ||
-            video.find((el: any) => el.key)
-          }
-        />
+        {videoIsLoading ? (
+          <Skeleton
+            animation="wave"
+            sx={{
+              position: "relative",
+              backgroundColor: "rgba(0, 0, 0, 0.71)",
+            }}
+            variant="rectangular"
+            width={750}
+            height={420}
+          />
+        ) : (
+          <YoutubeFrame
+            embedId={
+              video.find((el: any) => el.type === "Trailer")?.key ||
+              video.find((el: any) => el.key)
+            }
+          />
+        )}
+
         <Box sx={{ marginTop: "40px" }}>
           <Box
             sx={{ position: "relative", color: "white", marginBottom: "25px" }}

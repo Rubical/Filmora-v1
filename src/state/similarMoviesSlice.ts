@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { fetchFilm } from "./filmSlice";
 
 const initialState = {
   similarMovies: [],
@@ -25,10 +26,14 @@ export const similarMoviesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchSimilarMovies.fulfilled, (state, action) => {
-      state.similarMovies = action.payload;
-      state.loading = false;
-    });
+    builder
+      .addCase(fetchSimilarMovies.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchSimilarMovies.fulfilled, (state, action) => {
+        state.similarMovies = action.payload;
+        state.loading = false;
+      });
   },
 });
 

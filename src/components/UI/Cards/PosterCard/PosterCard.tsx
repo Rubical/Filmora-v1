@@ -17,19 +17,17 @@ interface IPosterCard {
 }
 
 const ActorCard: FC<IPosterCard> = ({ poster }) => {
-  const [isDownloading, setIfDownloading] = useState(false);
+  const { file_path } = poster;
 
   const download = () => {
-    downloadFileUrl(
-      `https://image.tmdb.org/t/p/w185_and_h278_face${file_path}`
-    );
+    downloadFileUrl(`https://image.tmdb.org/t/p/original/${file_path}`);
   };
 
-  const { file_path } = poster;
   return (
     <Card
       sx={{
-        maxWidth: "145px",
+        width: "145px",
+        height: "218px",
         color: "white",
         position: "relative",
         backgroundColor: "transparent",
@@ -38,7 +36,7 @@ const ActorCard: FC<IPosterCard> = ({ poster }) => {
     >
       {poster.file_path ? (
         <img
-          style={{ width: "145px", height: "218px", backgroundColor: "white" }}
+          style={{ width: "100%", height: "100%", backgroundColor: "white" }}
           src={`https://image.tmdb.org/t/p/w185_and_h278_face${file_path}`}
           alt="actor"
         />
