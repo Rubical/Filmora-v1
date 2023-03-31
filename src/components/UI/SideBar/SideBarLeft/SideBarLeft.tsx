@@ -18,13 +18,17 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import cl from "./SideBarLeft.module.css";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../../../hooks/reduxHooks";
+import { setPage } from "../../../../state/paginationSlice";
 
 export const SideBarLeft: React.FC = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
   const isAuth = useContext(Context);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -46,21 +50,23 @@ export const SideBarLeft: React.FC = () => {
           width: "100%",
           height: "100%",
           paddingLeft: "20px",
+          cursor: "pointer",
         }}
         role="presentation"
         className={cl.sideBarLeft}
+        onClick={() => {
+          dispatch(setPage(1));
+          navigate("/Zenix_Film");
+        }}
       >
-        <NavLink to="/Zenix_Film">
-          <Box
-            sx={{ display: { xs: "none", lg: "flex", padding: "20px 10px" } }}
-          >
-            <img
-              src={logo}
-              alt="logo"
-              style={{ width: "130px", height: "50px" }}
-            />
-          </Box>
-        </NavLink>
+        <Box sx={{ display: { xs: "none", lg: "flex", padding: "20px 10px" } }}>
+          <img
+            src={logo}
+            alt="logo"
+            style={{ width: "130px", height: "50px" }}
+          />
+        </Box>
+
         <Box
           sx={{
             flexGrow: 1,

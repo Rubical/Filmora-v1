@@ -9,7 +9,7 @@ interface Routes {
 
 export const privateRoutes: Routes[] = [
   {
-    path: "/Zenix_Film",
+    path: "/Zenix_Film/:page?/:num?",
     element: Movies,
   },
   {

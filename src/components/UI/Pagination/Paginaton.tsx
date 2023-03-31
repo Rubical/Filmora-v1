@@ -4,6 +4,7 @@ import Stack from "@mui/material/Stack";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import { setPage } from "../../../state/paginationSlice";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -32,6 +33,7 @@ declare module "@mui/material/Button" {
 
 const PagePagination = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   return (
     <ThemeProvider theme={theme}>
       <Stack
@@ -43,11 +45,18 @@ const PagePagination = () => {
       >
         <Pagination
           sx={{
+            color: "white",
             button: {
               color: "#ffffff",
             },
+            div: {
+              color: "#ffffff",
+            },
           }}
-          onChange={(e, page) => dispatch(setPage(page))}
+          onChange={(e, page) => {
+            dispatch(setPage(page));
+            navigate(`/Zenix_Film/page/${page}`);
+          }}
           count={99}
           shape="rounded"
           page={useAppSelector((state) => state.pagination)}
