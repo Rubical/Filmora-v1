@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -20,12 +20,14 @@ import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
 import { setPage } from "../../../../state/paginationSlice";
-import { setType } from "../../../../state/categorySlice";
+import { setCategory } from "../../../../state/categorySlice";
 
 export const SideBarLeft: React.FC = () => {
+  const [activeBtn, setActiveBtn] = useState(1);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
+
   const isAuth = useContext(Context);
   const type = useAppSelector((state) => state.category.type);
   const navigate = useNavigate();
@@ -83,7 +85,7 @@ export const SideBarLeft: React.FC = () => {
           aria-haspopup="true"
           onClick={handleOpenNavMenu}
         >
-          <MenuIcon sx={{ color: "white" }} />
+          <MenuIcon sx={{ color: "lightgray" }} />
         </IconButton>
         <Menu
           id="menu-appbar"
@@ -106,14 +108,33 @@ export const SideBarLeft: React.FC = () => {
             },
           }}
         >
-          <MenuItem onClick={handleCloseNavMenu}>
-            <Typography sx={{ color: "white" }} textAlign="center">
+          <MenuItem
+            sx={{
+              "&:hover": {
+                backgroundColor: "rgb(15,15,15)",
+              },
+            }}
+            onClick={handleCloseNavMenu}
+          >
+            <Typography
+              sx={{
+                color: "lightgray",
+              }}
+              textAlign="center"
+            >
               Movies
             </Typography>
           </MenuItem>
 
-          <MenuItem onClick={handleCloseNavMenu}>
-            <Typography sx={{ color: "white" }} textAlign="center">
+          <MenuItem
+            sx={{
+              "&:hover": {
+                backgroundColor: "rgb(15,15,15)",
+              },
+            }}
+            onClick={handleCloseNavMenu}
+          >
+            <Typography sx={{ color: "lightgray" }} textAlign="center">
               TV series
             </Typography>
           </MenuItem>
@@ -132,36 +153,44 @@ export const SideBarLeft: React.FC = () => {
       </Typography>
 
       <List>
-        <Link sx={{ marginLeft: "-12px" }}>
-          <ListItem disablePadding>
-            <ListItemButton
-              sx={{
-                marginBottom: "10px",
-                padding: { xs: "8px 0", sm: "8px 16px" },
-              }}
-            >
-              <WhatshotIcon
-                sx={{
-                  color: "white",
-                  marginRight: { xs: "0", sm: "10px" },
-                }}
-              />
-              <Typography
-                sx={{
-                  fontWeight: "600",
-                  fontSize: "14px",
-                  display: { xs: "none", lg: "flex" },
-                  color: "white",
-                  letterSpacing: "1px",
-                }}
-              >
-                TRENDING
-              </Typography>
-            </ListItemButton>
-          </ListItem>
-        </Link>
         <ListItem disablePadding>
           <ListItemButton
+            disableRipple={true}
+            onClick={() => {
+              setActiveBtn(1);
+              dispatch(setCategory("popular"));
+            }}
+            sx={{
+              marginBottom: "10px",
+              padding: { xs: "8px 0", sm: "8px 16px" },
+            }}
+          >
+            <WhatshotIcon
+              sx={{
+                color: activeBtn === 1 ? "white" : "lightgray",
+                marginRight: { xs: "0", sm: "10px" },
+              }}
+            />
+            <Typography
+              sx={{
+                fontWeight: "600",
+                fontSize: "14px",
+                display: { xs: "none", lg: "flex" },
+                color: activeBtn === 1 ? "white" : "lightgray",
+                letterSpacing: "1px",
+              }}
+            >
+              TRENDING
+            </Typography>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton
+            disableRipple={true}
+            onClick={() => {
+              setActiveBtn(2);
+              dispatch(setCategory("top_rated"));
+            }}
             sx={{
               marginBottom: "10px",
               padding: { xs: "18px 0", sm: "8px 16px" },
@@ -169,7 +198,7 @@ export const SideBarLeft: React.FC = () => {
           >
             <StarRateIcon
               sx={{
-                color: "white",
+                color: activeBtn === 2 ? "white" : "lightgray",
                 marginRight: { xs: "18px 0", sm: "10px" },
               }}
             />
@@ -178,7 +207,7 @@ export const SideBarLeft: React.FC = () => {
                 fontWeight: "600",
                 fontSize: "14px",
                 display: { xs: "none", lg: "flex" },
-                color: "white",
+                color: activeBtn === 2 ? "white" : "lightgray",
                 letterSpacing: "1px",
               }}
             >
@@ -188,6 +217,11 @@ export const SideBarLeft: React.FC = () => {
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton
+            disableRipple={true}
+            onClick={() => {
+              setActiveBtn(3);
+              dispatch(setCategory("coming"));
+            }}
             sx={{
               marginBottom: "10px",
               padding: { xs: "8px 0", sm: "8px 16px" },
@@ -195,7 +229,7 @@ export const SideBarLeft: React.FC = () => {
           >
             <EventIcon
               sx={{
-                color: "white",
+                color: activeBtn === 3 ? "white" : "lightgray",
                 marginRight: { xs: "8px 0", sm: "10px" },
               }}
             />
@@ -204,7 +238,7 @@ export const SideBarLeft: React.FC = () => {
                 fontWeight: "600",
                 fontSize: "14px",
                 display: { xs: "none", lg: "flex" },
-                color: "white",
+                color: activeBtn === 3 ? "white" : "lightgray",
                 letterSpacing: "1px",
               }}
             >
@@ -236,7 +270,7 @@ export const SideBarLeft: React.FC = () => {
           >
             <SettingsIcon
               sx={{
-                color: "white",
+                color: "lightgray",
                 marginRight: { xs: "8px 0", sm: "10px" },
               }}
             />
@@ -245,7 +279,7 @@ export const SideBarLeft: React.FC = () => {
                 fontWeight: "600",
                 fontSize: "14px",
                 display: { xs: "none", lg: "flex" },
-                color: "white",
+                color: "lightgray",
                 letterSpacing: "1px",
               }}
             >
@@ -263,7 +297,7 @@ export const SideBarLeft: React.FC = () => {
             >
               <LogoutIcon
                 sx={{
-                  color: "white",
+                  color: "lightgray",
                   marginRight: { xs: "0", sm: "10px" },
                   marginLeft: "2px",
                 }}
@@ -273,7 +307,7 @@ export const SideBarLeft: React.FC = () => {
                   fontWeight: "600",
                   fontSize: "14px",
                   display: { xs: "none", lg: "flex" },
-                  color: "white",
+                  color: "lightgray",
                   letterSpacing: "1px",
                 }}
               >

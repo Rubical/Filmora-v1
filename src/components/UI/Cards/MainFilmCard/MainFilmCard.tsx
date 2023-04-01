@@ -97,25 +97,30 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
         >
           {original_title || name || "No name"}
         </Typography>
-        <Box sx={{ display: "flex", columnGap: "15px" }}>
-          {getGenreByID(genre_ids)?.map((el) => {
-            return (
-              <Typography
-                key={el}
-                sx={{
-                  justifyContent: "center",
-                  color: "white",
-                  backgroundColor: "rgba(53, 51, 56, 0.7)",
-                  padding: "5px 10px",
-                  borderRadius: "15px",
-                  fontSize: { xs: "14px", sm: "16px" },
-                }}
-              >
-                {el}
-              </Typography>
-            );
-          })}
-        </Box>
+        {genre_ids ? (
+          <Box sx={{ display: "flex", columnGap: "15px" }}>
+            {getGenreByID(genre_ids)?.map((el) => {
+              return (
+                <Typography
+                  key={el}
+                  sx={{
+                    justifyContent: "center",
+                    color: "white",
+                    backgroundColor: "rgba(53, 51, 56, 0.7)",
+                    padding: "5px 10px",
+                    borderRadius: "15px",
+                    fontSize: { xs: "14px", sm: "16px" },
+                  }}
+                >
+                  {el}
+                </Typography>
+              );
+            })}
+          </Box>
+        ) : (
+          ""
+        )}
+
         <NavLink
           style={{ width: "160px", marginTop: "20px" }}
           to={`/Zenix_Film/view/film/${id}`}

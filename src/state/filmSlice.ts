@@ -15,7 +15,6 @@ export const fetchFilm = createAsyncThunk(
   async (id: string | undefined, thunkAPI) => {
     const state: any = thunkAPI.getState();
     const type = state.category.type;
-    console.log(type);
     const response = await fetch(
       `https://api.themoviedb.org/3/${type}/${id}?api_key=b053e4b701c01a664de1a144e1ab9f7f&language=en-US`
     );

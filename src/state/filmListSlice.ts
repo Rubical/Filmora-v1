@@ -34,7 +34,12 @@ export const fetchFilms = createAsyncThunk<IFilmsList[]>(
     const state: any = thunkAPI.getState();
     const page = state.pagination;
     const type = state.category.type;
-    const category = state.category.category;
+    const category =
+      state.category.category !== "coming"
+        ? state.category.category
+        : type === "tv"
+        ? "on_the_air"
+        : "upcoming";
     const response = await fetch(
       `https://api.themoviedb.org/3/${type}/${category}?api_key=b053e4b701c01a664de1a144e1ab9f7f&language=en-US&page=${page}`
     );

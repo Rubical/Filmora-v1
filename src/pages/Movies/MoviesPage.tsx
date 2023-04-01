@@ -13,11 +13,12 @@ const MoviesPage = () => {
 
   const page = useAppSelector((state) => state.pagination);
   const type = useAppSelector((state) => state.category.type);
+  const category = useAppSelector((state) => state.category.category);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchFilms());
-  }, [page, type]);
+  }, [page, type, category]);
 
   const films = useAppSelector((state) => state.films.filmsList);
   const loading = useAppSelector((state) => state.films.loading);
