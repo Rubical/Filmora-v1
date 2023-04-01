@@ -20,6 +20,7 @@ import { fetchSimilarMovies } from "../../state/similarMoviesSlice";
 import FilmCard from "../../components/UI/Cards/FilmCard/FilmCard";
 import backgroundImg from "./background.jpg";
 import Skeleton from "@mui/material/Skeleton";
+import { firstLetterToUpperCase } from "../../utils/firstLetterToUpperCase";
 
 interface IFilm {
   backdrop_path: string;
@@ -28,6 +29,15 @@ interface IFilm {
   budget: number;
   revenue: number;
   runtime: number;
+  first_air_date: "string";
+  last_episode_to_air: IEpisode;
+  next_episode_to_air: IEpisode;
+}
+
+interface IEpisode {
+  air_date: string;
+  episode_number: number;
+  name: string;
 }
 
 const FilmPage: FC = () => {
@@ -37,8 +47,17 @@ const FilmPage: FC = () => {
   const film: any = useAppSelector((state) => state.film.film);
   const filmIsLoading = useAppSelector((state) => state.film.loading);
 
-  const { backdrop_path, release_date, status, budget, revenue, runtime } =
-    film as IFilm;
+  const {
+    backdrop_path,
+    release_date,
+    status,
+    budget,
+    revenue,
+    runtime,
+    first_air_date,
+    last_episode_to_air,
+    next_episode_to_air,
+  } = film as IFilm;
 
   const actors = useAppSelector((state) => state.actors.actors);
 
@@ -48,6 +67,9 @@ const FilmPage: FC = () => {
     (state) => state.similarMovies.similarMovies
   );
   const videoIsLoading = useAppSelector((state) => state.filmVideo.loading);
+
+  const type = useAppSelector((state) => state.category.type);
+  const date = type === " movie" ? release_date : first_air_date;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -118,25 +140,34 @@ const FilmPage: FC = () => {
         ) : (
           <YoutubeFrame
             embedId={
-              video.find((el: any) => el.type === "Trailer")?.key ||
-              video.find((el: any) => el.key)
+              video?.find((el: any) => el.type === "Trailer")?.key ||
+              video?.find((el: any) => el.key)
             }
           />
         )}
 
         <Box sx={{ marginTop: "40px" }}>
           <Box
-            sx={{ position: "relative", color: "white", marginBottom: "25px" }}
+            sx={{
+              position: "relative",
+              color: "white",
+              marginBottom: "25px",
+            }}
           >
             <Typography
-              sx={{ fontSize: "14px", fontWeight: "600", marginBottom: "5px" }}
+              sx={{
+                fontSize: "14px",
+                fontWeight: "600",
+                marginBottom: "5px",
+              }}
             >
               Release Date
             </Typography>
             <Typography sx={{ fontSize: "14px", color: "lightgray" }}>
-              {release_date ? release_date : "No info"}
+              {date ? date : "No info"}
             </Typography>
           </Box>
+
           <Box
             sx={{ position: "relative", color: "white", marginBottom: "25px" }}
           >
@@ -155,16 +186,27 @@ const FilmPage: FC = () => {
             <Typography
               sx={{ fontSize: "14px", fontWeight: "600", marginBottom: "5px" }}
             >
-              Budget
+              {type === "movie" ? "Budget" : "Last episode"}
             </Typography>
-            <Typography sx={{ fontSize: "14px", color: "lightgray" }}>
-              {budget
-                ? budget.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  })
-                : "No info"}
-            </Typography>
+            {type === "movie" ? (
+              <Typography sx={{ fontSize: "14px", color: "lightgray" }}>
+                {budget
+                  ? budget.toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    })
+                  : "No info"}
+              </Typography>
+            ) : (
+              <>
+                <Typography sx={{ fontSize: "14px", color: "lightgray" }}>
+                  {last_episode_to_air?.air_date}
+                </Typography>
+                <Typography sx={{ fontSize: "14px", color: "lightgray" }}>
+                  {last_episode_to_air?.episode_number}
+                </Typography>
+              </>
+            )}
           </Box>
           <Box
             sx={{ position: "relative", color: "white", marginBottom: "25px" }}
@@ -172,29 +214,56 @@ const FilmPage: FC = () => {
             <Typography
               sx={{ fontSize: "14px", fontWeight: "600", marginBottom: "5px" }}
             >
-              Revenue
+              {type === "movie" ? "Revenue" : "Next episode"}
             </Typography>
-            <Typography sx={{ fontSize: "14px", color: "lightgray" }}>
-              {revenue
-                ? revenue.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  })
-                : "No info"}
-            </Typography>
+            {type === "movie" ? (
+              <Typography sx={{ fontSize: "14px", color: "lightgray" }}>
+                {revenue
+                  ? revenue.toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    })
+                  : "No info"}
+              </Typography>
+            ) : (
+              <>
+                <Typography sx={{ fontSize: "14px", color: "lightgray" }}>
+                  {next_episode_to_air?.air_date
+                    ? next_episode_to_air?.air_date
+                    : "Ended"}
+                </Typography>
+                <Typography sx={{ fontSize: "14px", color: "lightgray" }}>
+                  {next_episode_to_air?.episode_number
+                    ? `${next_episode_to_air?.episode_number} episode`
+                    : ""}
+                </Typography>
+              </>
+            )}
           </Box>
-          <Box
-            sx={{ position: "relative", color: "white", marginBottom: "25px" }}
-          >
-            <Typography
-              sx={{ fontSize: "14px", fontWeight: "600", marginBottom: "5px" }}
+          {type === "movie" ? (
+            <Box
+              sx={{
+                position: "relative",
+                color: "white",
+                marginBottom: "25px",
+              }}
             >
-              Runtime
-            </Typography>
-            <Typography sx={{ fontSize: "14px", color: "lightgray" }}>
-              {runtime ? toHoursAndMinutes(runtime) : "No info"}
-            </Typography>
-          </Box>
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  fontWeight: "600",
+                  marginBottom: "5px",
+                }}
+              >
+                Runtime
+              </Typography>
+              <Typography sx={{ fontSize: "14px", color: "lightgray" }}>
+                {runtime ? toHoursAndMinutes(runtime) : "No info"}
+              </Typography>
+            </Box>
+          ) : (
+            ""
+          )}
         </Box>
       </Box>
       {actors?.length ? (
@@ -213,7 +282,7 @@ const FilmPage: FC = () => {
             sx={{
               display: "flex",
               flexWrap: "wrap",
-              columnGap: "35px",
+              columnGap: "30px",
               rowGap: "30px",
               marginBottom: "150px",
             }}
@@ -238,13 +307,13 @@ const FilmPage: FC = () => {
               marginBottom: "40px",
             }}
           >
-            Movie posters
+            {`${firstLetterToUpperCase(type)} posters`}
           </Typography>
           <Box
             sx={{
               display: "flex",
               flexWrap: "wrap",
-              columnGap: "35px",
+              columnGap: "30px",
               rowGap: "30px",
               marginBottom: "150px",
             }}
@@ -267,7 +336,7 @@ const FilmPage: FC = () => {
               marginBottom: "40px",
             }}
           >
-            Similar movies
+            {`Similar ${type === "movie" ? "movies" : "tv series"}`}
           </Typography>
           <Box
             sx={{

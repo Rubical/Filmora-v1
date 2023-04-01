@@ -9,23 +9,17 @@ import { FC } from "react";
 import cl from "./MainFilmCard.module.css";
 import { NavLink } from "react-router-dom";
 import WatchFilmBtn from "../../Button/WatchFilmBtn";
+import { useAppSelector } from "../../../../hooks/reduxHooks";
+import img from "./img.jpg";
 
 export interface IFilm {
   film: IFilmsList;
 }
 
 const MainFilmCard: FC<IFilm> = ({ film }) => {
-  const {
-    id,
-    adult,
-    original_title,
-    backdrop_path,
-    release_date,
-    overview,
-    vote_average,
-    vote_count,
-    genre_ids,
-  } = film;
+  const type = useAppSelector((state) => state.category.type);
+  const { id, original_title, backdrop_path, genre_ids, first_air_date, name } =
+    film;
 
   return (
     <Card
@@ -56,7 +50,11 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
           style={{
             borderRadius: "0px",
           }}
-          src={`https://www.themoviedb.org/t/p/original/${backdrop_path}`}
+          src={
+            backdrop_path
+              ? `https://www.themoviedb.org/t/p/original/${backdrop_path}`
+              : img
+          }
           alt="image"
         />
         <div
@@ -75,7 +73,6 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
         <div
           className={`${cl.fromBlack} ${cl.bgGradientToLeft}`}
           style={{
-            borderRadius: "0px",
             width: "75%",
             right: "0px",
           }}
@@ -98,7 +95,7 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
           textColor="#fff"
           mb={1}
         >
-          {original_title}
+          {original_title || name || "No name"}
         </Typography>
         <Box sx={{ display: "flex", columnGap: "15px" }}>
           {getGenreByID(genre_ids)?.map((el) => {

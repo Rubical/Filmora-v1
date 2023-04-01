@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -31,9 +31,10 @@ declare module "@mui/material/Button" {
   }
 }
 
-const PagePagination = () => {
+const PagePagination: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const type = useAppSelector((state) => state.category.type);
   return (
     <ThemeProvider theme={theme}>
       <Stack
@@ -55,7 +56,7 @@ const PagePagination = () => {
           }}
           onChange={(e, page) => {
             dispatch(setPage(page));
-            navigate(`/Zenix_Film/page/${page}`);
+            navigate(`/Zenix_Film/${type}/page/${page}`);
           }}
           count={99}
           shape="rounded"

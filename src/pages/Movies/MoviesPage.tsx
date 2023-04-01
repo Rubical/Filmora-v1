@@ -1,22 +1,23 @@
 import { useContext, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { fetchPopularFilms } from "../../state/filmListSlice";
+import { fetchFilms } from "../../state/filmListSlice";
 import FilmCard from "../../components/UI/Cards/FilmCard/FilmCard";
 import MainFilmCard from "../../components/UI/Cards/MainFilmCard/MainFilmCard";
 import { Context } from "../../context/context";
 import Loader from "../../components/UI/Loader/Loader";
 import PagePagination from "../../components/UI/Pagination/Paginaton";
 
-const Movies = () => {
+const MoviesPage = () => {
   const isAuth = useContext(Context);
   const dispatch = useAppDispatch();
 
   const page = useAppSelector((state) => state.pagination);
+  const type = useAppSelector((state) => state.category.type);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(fetchPopularFilms());
-  }, [page]);
+    dispatch(fetchFilms());
+  }, [page, type]);
 
   const films = useAppSelector((state) => state.films.filmsList);
   const loading = useAppSelector((state) => state.films.loading);
@@ -45,4 +46,4 @@ const Movies = () => {
   );
 };
 
-export default Movies;
+export default MoviesPage;

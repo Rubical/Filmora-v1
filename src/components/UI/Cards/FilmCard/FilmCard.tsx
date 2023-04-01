@@ -2,7 +2,6 @@ import Card from "@mui/joy/Card";
 import Box from "@mui/joy/Box";
 import CardCover from "@mui/joy/CardCover";
 import CardContent from "@mui/joy/CardContent";
-import Link from "@mui/material/Link";
 import Typography from "@mui/joy/Typography";
 import { IFilmsList } from "../../../../state/filmListSlice";
 import getPrettyDate from "../../../../utils/getPrettyDate";
@@ -11,12 +10,14 @@ import { FC } from "react";
 import { NavLink } from "react-router-dom";
 import cl from "./FilmCard.module.css";
 import imgNotFound from "./../../../../images/imgNotFound.jpg";
+import { useAppSelector } from "../../../../hooks/reduxHooks";
 
 interface IFilm {
   film: IFilmsList;
 }
 
 const FilmCard: FC<IFilm> = ({ film }) => {
+  const type = useAppSelector((state) => state.category.type);
   const {
     id,
     adult,
@@ -27,17 +28,22 @@ const FilmCard: FC<IFilm> = ({ film }) => {
     vote_average,
     vote_count,
     genre_ids,
+    name,
+    first_air_date,
   } = film;
+
+  const date = release_date ? release_date : first_air_date;
   return (
     <NavLink
       style={{
         display: "flex",
         maxWidth: "380px",
+        maxHeight: "200px",
         margin: "10px 10px",
         backgroundColor: "relevant",
       }}
       className={cl.card}
-      to={`/Zenix_Film/view/film/${id}`}
+      to={`/Zenix_Film/view/${type}/${id}`}
     >
       <Card
         sx={{
@@ -45,6 +51,8 @@ const FilmCard: FC<IFilm> = ({ film }) => {
           width: "100%",
           boxShadow: "none",
           borderRadius: "5px",
+          transition: "transform 0.2s ease-in",
+          "&:hover": { transform: "scale(1.1)" },
         }}
       >
         <CardCover sx={{ position: "absolute" }}>
@@ -76,14 +84,14 @@ const FilmCard: FC<IFilm> = ({ film }) => {
               textColor="#fff"
               marginBottom="5px"
             >
-              {original_title}
+              {original_title || name || "No name"}
             </Typography>
             <Box sx={{ display: "flex", columnGap: "10px" }}>
               <Typography
                 textColor="white"
                 sx={{ fontSize: "12px", marginRight: "10px", marginTop: "2px" }}
               >
-                {getPrettyDate(new Date(release_date))}
+                {date ? getPrettyDate(new Date(date)) : ""}
               </Typography>
               <Box sx={{ display: "flex", columnGap: "10px" }}>
                 {getGenreByID(genre_ids)?.map((el) => {

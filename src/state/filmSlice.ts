@@ -12,9 +12,12 @@ const initialState = {
 
 export const fetchFilm = createAsyncThunk(
   "film/fetchFilm",
-  async (id: string | undefined) => {
+  async (id: string | undefined, thunkAPI) => {
+    const state: any = thunkAPI.getState();
+    const type = state.category.type;
+    console.log(type);
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=b053e4b701c01a664de1a144e1ab9f7f&language=en-US`
+      `https://api.themoviedb.org/3/${type}/${id}?api_key=b053e4b701c01a664de1a144e1ab9f7f&language=en-US`
     );
     if (!response.ok) {
       console.log("Server Error!");

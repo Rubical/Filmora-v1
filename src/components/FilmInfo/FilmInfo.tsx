@@ -25,18 +25,18 @@ interface IFilmInfoCard {
 
 const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
   const {
-    adult,
-    budget,
-    homepage,
+    name,
     original_title,
-    backdrop_path,
     release_date,
     overview,
     vote_average,
-    vote_count,
     genres,
     poster_path,
+    first_air_date,
   } = film;
+
+  const movieName = original_title ? original_title : name;
+  const releaseDate = release_date ? release_date : first_air_date;
 
   return (
     <Box
@@ -67,9 +67,9 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
         <Typography
           sx={{ fontSize: "35px", fontWeight: "600", maxWidth: "700px" }}
         >
-          {original_title ? original_title : "No title"}
+          {movieName ? movieName : "No title"}
         </Typography>
-        {release_date ? (
+        {releaseDate ? (
           <Typography
             sx={{
               fontSize: "35px",
@@ -79,7 +79,7 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
             }}
           >
             {"("}
-            {getPrettyDate(new Date(release_date))}
+            {getPrettyDate(new Date(releaseDate))}
             {" )"}
           </Typography>
         ) : (
