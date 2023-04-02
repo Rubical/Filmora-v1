@@ -6,19 +6,27 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import FilmInput from "../../FilmInput/FilmInput";
 import cl from "./NavBar.module.css";
-import { useAppDispatch } from "../../../hooks/reduxHooks";
-import { setType } from "../../../state/categorySlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
+import { setCategory, setType } from "../../../state/categorySlice";
 import { useNavigate } from "react-router-dom";
 import { setPage } from "../../../state/paginationSlice";
+import {
+  setActiveCategoryBtn,
+  setActiveTypeBtn,
+} from "../../../state/activeBtnsSlice";
 
 const NavBar: FC = () => {
-  const [activeBtn, setActiveBtn] = useState(1);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const changeType = (type: string) => {
-    dispatch(setType(type));
-  };
+  const type = useAppSelector((state) => state.category.type);
+  const category = useAppSelector((state) => state.category.category);
+  const activeTypeBtn = useAppSelector(
+    (state) => state.activeBtns.activeTypeBtn
+  );
+  const activeCategoryBtn = useAppSelector(
+    (state) => state.activeBtns.activeCategoryBtn
+  );
 
   return (
     <AppBar
@@ -48,14 +56,16 @@ const NavBar: FC = () => {
             <Button
               onClick={() => {
                 dispatch(setPage(1));
-                changeType("movie");
-                setActiveBtn(1);
-                navigate("/Zenix_Film/movie/page/1");
+                dispatch(setType("movie"));
+                dispatch(setCategory("popular"));
+                dispatch(setActiveTypeBtn(1));
+                dispatch(setActiveCategoryBtn(1));
+                navigate(`/Zenix_Film/movie/popular/page/1`);
               }}
               disableRipple={true}
               sx={{
                 my: 2,
-                color: activeBtn === 1 ? "white" : "lightgray",
+                color: activeTypeBtn === 1 ? "white" : "lightgray",
                 display: "block",
                 fontSize: "14px",
                 fontWeight: "600",
@@ -66,7 +76,7 @@ const NavBar: FC = () => {
                   backgroundColor: "transparent",
                 },
               }}
-              className={activeBtn === 1 ? cl.navLinkActive : null}
+              className={activeTypeBtn === 1 ? cl.navLinkActive : null}
             >
               Movies
             </Button>
@@ -74,14 +84,16 @@ const NavBar: FC = () => {
             <Button
               onClick={() => {
                 dispatch(setPage(1));
-                changeType("tv");
-                setActiveBtn(2);
-                navigate("/Zenix_Film/tv/page/1");
+                dispatch(setType("tv"));
+                dispatch(setActiveTypeBtn(1));
+                dispatch(setActiveTypeBtn(2));
+                dispatch(setActiveCategoryBtn(1));
+                navigate(`/Zenix_Film/tv/popular/page/1`);
               }}
               disableRipple={true}
               sx={{
                 my: 2,
-                color: activeBtn === 2 ? "white" : "lightgray",
+                color: activeTypeBtn === 2 ? "white" : "lightgray",
                 fontSize: "14px",
                 fontWeight: "600",
                 display: "block",
@@ -89,10 +101,9 @@ const NavBar: FC = () => {
                 transition: "color 0.1s ease-in",
                 "&:hover": {
                   color: "white",
-                  backgroundColor: " transparent",
                 },
               }}
-              className={activeBtn === 2 ? cl.navLinkActive : null}
+              className={activeTypeBtn === 2 ? cl.navLinkActive : null}
             >
               TV series
             </Button>

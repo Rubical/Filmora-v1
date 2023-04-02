@@ -153,7 +153,7 @@ export default function SideBarRightLogined() {
         </IconButton>
       </Box>
       {renderMobileMenu}
-      <Box></Box>
+      <Box>{/*<SideBarFilmCard />*/}</Box>
     </Box>
   );
 }

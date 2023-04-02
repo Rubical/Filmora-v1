@@ -35,6 +35,7 @@ const PagePagination: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const type = useAppSelector((state) => state.category.type);
+  const category = useAppSelector((state) => state.category.category);
   return (
     <ThemeProvider theme={theme}>
       <Stack
@@ -56,7 +57,7 @@ const PagePagination: FC = () => {
           }}
           onChange={(e, page) => {
             dispatch(setPage(page));
-            navigate(`/Zenix_Film/${type}/page/${page}`);
+            navigate(`/Zenix_Film/${type}/${category}/page/${page}`);
           }}
           count={99}
           shape="rounded"

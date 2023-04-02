@@ -11,6 +11,7 @@ import { NavLink } from "react-router-dom";
 import WatchFilmBtn from "../../Button/WatchFilmBtn";
 import { useAppSelector } from "../../../../hooks/reduxHooks";
 import img from "./img.jpg";
+import StarIcon from "@mui/icons-material/Star";
 
 export interface IFilm {
   film: IFilmsList;
@@ -18,7 +19,7 @@ export interface IFilm {
 
 const MainFilmCard: FC<IFilm> = ({ film }) => {
   const type = useAppSelector((state) => state.category.type);
-  const { id, original_title, backdrop_path, genre_ids, first_air_date, name } =
+  const { id, original_title, backdrop_path, genre_ids, name, vote_average } =
     film;
 
   return (
@@ -97,6 +98,31 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
         >
           {original_title || name || "No name"}
         </Typography>
+        {vote_average ? (
+          <Box
+            sx={{
+              display: "flex",
+              marginBottom: "15px",
+            }}
+          >
+            <StarIcon sx={{ color: "rgb(230, 230, 0)" }}></StarIcon>
+            <Box
+              sx={{
+                marginLeft: "5px",
+                display: "flex",
+                columnGap: "7px",
+              }}
+            >
+              <Typography
+                sx={{ fontSize: "16px", color: "white", fontWeight: "600" }}
+              >
+                {`${vote_average?.toFixed(1)} `}
+              </Typography>
+            </Box>
+          </Box>
+        ) : (
+          ""
+        )}
         {genre_ids ? (
           <Box sx={{ display: "flex", columnGap: "15px" }}>
             {getGenreByID(genre_ids)?.map((el) => {

@@ -11,6 +11,7 @@ import { NavLink } from "react-router-dom";
 import cl from "./FilmCard.module.css";
 import imgNotFound from "./../../../../images/imgNotFound.jpg";
 import { useAppSelector } from "../../../../hooks/reduxHooks";
+import StarIcon from "@mui/icons-material/Star";
 
 interface IFilm {
   film: IFilmsList;
@@ -20,13 +21,12 @@ const FilmCard: FC<IFilm> = ({ film }) => {
   const type = useAppSelector((state) => state.category.type);
   const {
     id,
-    adult,
+
     original_title,
     backdrop_path,
     release_date,
-    overview,
     vote_average,
-    vote_count,
+
     genre_ids,
     name,
     first_air_date,
@@ -66,6 +66,24 @@ const FilmCard: FC<IFilm> = ({ film }) => {
             alt="image"
           />
         </CardCover>
+        <Box
+          sx={{
+            position: "absolute",
+            left: "0px",
+            top: "0px",
+            backgroundColor: "rgb(172, 0, 0)",
+            display: "flex",
+            alignItems: "center",
+            padding: "6px 6px 8px 1px",
+          }}
+        >
+          <StarIcon sx={{ color: "white", transform: "scale(0.7)" }} />
+          <Typography
+            sx={{ color: "white", fontSize: "15px", fontWeight: "600" }}
+          >
+            {vote_average}
+          </Typography>
+        </Box>
         <CardContent
           sx={{
             justifyContent: "flex-end",

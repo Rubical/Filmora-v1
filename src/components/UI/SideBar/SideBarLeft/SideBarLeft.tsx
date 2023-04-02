@@ -20,10 +20,13 @@ import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
 import { setPage } from "../../../../state/paginationSlice";
-import { setCategory } from "../../../../state/categorySlice";
+import { setCategory, setType } from "../../../../state/categorySlice";
+import {
+  setActiveCategoryBtn,
+  setActiveTypeBtn,
+} from "../../../../state/activeBtnsSlice";
 
 export const SideBarLeft: React.FC = () => {
-  const [activeBtn, setActiveBtn] = useState(1);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -32,6 +35,10 @@ export const SideBarLeft: React.FC = () => {
   const type = useAppSelector((state) => state.category.type);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const activeCategoryBtn = useAppSelector(
+    (state) => state.activeBtns.activeCategoryBtn
+  );
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -54,15 +61,20 @@ export const SideBarLeft: React.FC = () => {
         paddingLeft: "20px",
       }}
       role="presentation"
-      onClick={() => {
-        dispatch(setPage(1));
-        navigate(`/Zenix_Film/${type}/page/1`);
-      }}
     >
       <Box
         sx={{
           display: { xs: "none", lg: "flex", padding: "20px 10px" },
           cursor: "pointer",
+        }}
+        onClick={(e) => {
+          e.stopPropagation();
+          navigate("/Zenix_Film/movie/popular/page/1");
+          dispatch(setType("movie"));
+          dispatch(setCategory("popular"));
+          dispatch(setPage(1));
+          dispatch(setActiveTypeBtn(1));
+          dispatch(setActiveCategoryBtn(1));
         }}
       >
         <img src={logo} alt="logo" style={{ width: "130px", height: "50px" }} />
@@ -114,7 +126,13 @@ export const SideBarLeft: React.FC = () => {
                 backgroundColor: "rgb(15,15,15)",
               },
             }}
-            onClick={handleCloseNavMenu}
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate("/Zenix_Film/movie/popular/page/1");
+              dispatch(setType("movie"));
+              dispatch(setPage(1));
+              handleCloseNavMenu();
+            }}
           >
             <Typography
               sx={{
@@ -132,7 +150,13 @@ export const SideBarLeft: React.FC = () => {
                 backgroundColor: "rgb(15,15,15)",
               },
             }}
-            onClick={handleCloseNavMenu}
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate("/Zenix_Film/tv/popular/page/1");
+              dispatch(setType("tv"));
+              dispatch(setPage(1));
+              handleCloseNavMenu();
+            }}
           >
             <Typography sx={{ color: "lightgray" }} textAlign="center">
               TV series
@@ -157,8 +181,10 @@ export const SideBarLeft: React.FC = () => {
           <ListItemButton
             disableRipple={true}
             onClick={() => {
-              setActiveBtn(1);
+              dispatch(setActiveCategoryBtn(1));
               dispatch(setCategory("popular"));
+              dispatch(setPage(1));
+              navigate(`/Zenix_Film/${type}/popular/page/1`);
             }}
             sx={{
               marginBottom: "10px",
@@ -167,7 +193,7 @@ export const SideBarLeft: React.FC = () => {
           >
             <WhatshotIcon
               sx={{
-                color: activeBtn === 1 ? "white" : "lightgray",
+                color: activeCategoryBtn === 1 ? "rgb(172, 0, 0)" : "lightgray",
                 marginRight: { xs: "0", sm: "10px" },
               }}
             />
@@ -176,7 +202,11 @@ export const SideBarLeft: React.FC = () => {
                 fontWeight: "600",
                 fontSize: "14px",
                 display: { xs: "none", lg: "flex" },
-                color: activeBtn === 1 ? "white" : "lightgray",
+                transition: "color 0.1s ease-in",
+                "&:hover": {
+                  color: "white",
+                },
+                color: activeCategoryBtn === 1 ? "white" : "lightgray",
                 letterSpacing: "1px",
               }}
             >
@@ -188,8 +218,10 @@ export const SideBarLeft: React.FC = () => {
           <ListItemButton
             disableRipple={true}
             onClick={() => {
-              setActiveBtn(2);
+              dispatch(setActiveCategoryBtn(2));
               dispatch(setCategory("top_rated"));
+              dispatch(setPage(1));
+              navigate(`/Zenix_Film/${type}/top_rated/page/1`);
             }}
             sx={{
               marginBottom: "10px",
@@ -198,7 +230,7 @@ export const SideBarLeft: React.FC = () => {
           >
             <StarRateIcon
               sx={{
-                color: activeBtn === 2 ? "white" : "lightgray",
+                color: activeCategoryBtn === 2 ? "rgb(172, 0, 0)" : "lightgray",
                 marginRight: { xs: "18px 0", sm: "10px" },
               }}
             />
@@ -207,7 +239,12 @@ export const SideBarLeft: React.FC = () => {
                 fontWeight: "600",
                 fontSize: "14px",
                 display: { xs: "none", lg: "flex" },
-                color: activeBtn === 2 ? "white" : "lightgray",
+                transition: "color 0.1s ease-in",
+                "&:hover": {
+                  color: "white",
+                },
+                color: activeCategoryBtn === 2 ? "white" : "lightgray",
+
                 letterSpacing: "1px",
               }}
             >
@@ -219,8 +256,10 @@ export const SideBarLeft: React.FC = () => {
           <ListItemButton
             disableRipple={true}
             onClick={() => {
-              setActiveBtn(3);
+              dispatch(setActiveCategoryBtn(3));
               dispatch(setCategory("coming"));
+              dispatch(setPage(1));
+              navigate(`/Zenix_Film/${type}/coming/page/1`);
             }}
             sx={{
               marginBottom: "10px",
@@ -229,7 +268,7 @@ export const SideBarLeft: React.FC = () => {
           >
             <EventIcon
               sx={{
-                color: activeBtn === 3 ? "white" : "lightgray",
+                color: activeCategoryBtn === 3 ? "rgb(172, 0, 0)" : "lightgray",
                 marginRight: { xs: "8px 0", sm: "10px" },
               }}
             />
@@ -238,7 +277,12 @@ export const SideBarLeft: React.FC = () => {
                 fontWeight: "600",
                 fontSize: "14px",
                 display: { xs: "none", lg: "flex" },
-                color: activeBtn === 3 ? "white" : "lightgray",
+                transition: "color 0.1s ease-in",
+                "&:hover": {
+                  color: "white",
+                },
+                color: activeCategoryBtn === 3 ? "white" : "lightgray",
+
                 letterSpacing: "1px",
               }}
             >
@@ -279,6 +323,10 @@ export const SideBarLeft: React.FC = () => {
                 fontWeight: "600",
                 fontSize: "14px",
                 display: { xs: "none", lg: "flex" },
+                transition: "color 0.1s ease-in",
+                "&:hover": {
+                  color: "white",
+                },
                 color: "lightgray",
                 letterSpacing: "1px",
               }}
@@ -307,6 +355,10 @@ export const SideBarLeft: React.FC = () => {
                   fontWeight: "600",
                   fontSize: "14px",
                   display: { xs: "none", lg: "flex" },
+                  transition: "color 0.1s ease-in",
+                  "&:hover": {
+                    color: "white",
+                  },
                   color: "lightgray",
                   letterSpacing: "1px",
                 }}
