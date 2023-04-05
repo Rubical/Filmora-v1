@@ -85,7 +85,7 @@ const NavBar: FC = () => {
               onClick={() => {
                 dispatch(setPage(1));
                 dispatch(setType("tv"));
-                dispatch(setActiveTypeBtn(1));
+                dispatch(setCategory("popular"));
                 dispatch(setActiveTypeBtn(2));
                 dispatch(setActiveCategoryBtn(1));
                 navigate(`/Zenix_Film/tv/popular/page/1`);

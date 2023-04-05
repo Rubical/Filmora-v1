@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import StarRateIcon from "@mui/icons-material/StarRate";
@@ -59,6 +58,7 @@ export const SideBarLeft: React.FC = () => {
         width: "100%",
         height: "100%",
         paddingLeft: "20px",
+        backgroundColor: "rgb(20,20,20)",
       }}
       role="presentation"
     >

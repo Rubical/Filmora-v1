@@ -10,11 +10,11 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import SideBarFilmCard from "../../Cards/SideBarFilmCard";
+import SideBarFilmCard from "../../Cards/FavouriteFilmCard";
+import { useAppSelector } from "../../../../hooks/reduxHooks";
 
 export default function SideBarRightLogined() {
-  let watchedFilms = "";
-  let watchListFilms = "";
+  const favouriteFilms = useAppSelector((state) => state.favouriteFilms);
 
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -96,6 +96,7 @@ export default function SideBarRightLogined() {
         flexDirection: "column",
         alignItems: "center",
         color: "lightgray",
+        backgroundColor: "rgb(20,20,20)",
       }}
       role="presentation"
     >
@@ -153,7 +154,11 @@ export default function SideBarRightLogined() {
         </IconButton>
       </Box>
       {renderMobileMenu}
-      <Box>{/*<SideBarFilmCard />*/}</Box>
+      <Box>
+        {favouriteFilms
+          ? favouriteFilms.map((el) => <SideBarFilmCard id={el} />)
+          : ""}
+      </Box>
     </Box>
   );
 }

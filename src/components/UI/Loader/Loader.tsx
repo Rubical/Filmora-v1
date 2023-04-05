@@ -8,7 +8,9 @@ export default function Loader() {
       sx={{
         alignSelf: "center",
         transform: "scale(1.5)",
-        marginTop: "100px",
+        display: "flex",
+        alignItems: "center",
+        height: "100vh",
       }}
     >
       <CircularProgress sx={{ color: "rgb(172,0,0)" }} />

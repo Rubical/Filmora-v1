@@ -8,6 +8,7 @@ import similarMoviesReducer from "./similarMoviesSlice";
 import paginationReducer from "./paginationSlice";
 import categoryReducer from "./categorySlice";
 import activeBtnsReducer from "./activeBtnsSlice";
+import favouriteFilmsReducer from "./favouriteFilmsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     pagination: paginationReducer,
     category: categoryReducer,
     activeBtns: activeBtnsReducer,
+    favouriteFilms: favouriteFilmsReducer,
   },
 });
 

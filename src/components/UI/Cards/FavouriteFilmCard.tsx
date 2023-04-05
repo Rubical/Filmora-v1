@@ -2,8 +2,16 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { FC } from "react";
+import { fetchFilm } from "../../../state/filmSlice";
+import { useAppDispatch } from "../../../hooks/reduxHooks";
 
-const SideBarFilmCard: FC = () => {
+interface IFavouriteFilmCard {
+  id: number;
+}
+
+const FavouriteFilmCard: FC<IFavouriteFilmCard> = ({ id }) => {
+  const dispatch = useAppDispatch();
+
   return (
     <>
       <Typography
@@ -34,4 +42,4 @@ const SideBarFilmCard: FC = () => {
   );
 };
 
-export default SideBarFilmCard;
+export default FavouriteFilmCard;

@@ -131,7 +131,7 @@ const FilmPage: FC = () => {
             animation="wave"
             sx={{
               position: "relative",
-              backgroundColor: "rgba(0, 0, 0, 0.71)",
+              backgroundColor: "#fff",
             }}
             variant="rectangular"
             width={750}
