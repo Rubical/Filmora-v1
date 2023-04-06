@@ -19,10 +19,10 @@ function App() {
             <div className={cl.main}>
               <NavBar />
               <AppRouter />
-              <Footer />
             </div>
             {isAuth ? <SideBarRightLogined /> : <SignInBtn />}
           </div>
+          <Footer />
         </div>
       </Router>
     </Context.Provider>

@@ -95,7 +95,7 @@ const FilmPage: FC = () => {
           alignSelf: "flex-end",
           borderRadius: "0px",
           position: "fixed",
-          zIndex: "0",
+          zIndex: "1",
         }}
       >
         <img
@@ -146,7 +146,7 @@ const FilmPage: FC = () => {
           />
         )}
 
-        <Box sx={{ marginTop: "40px" }}>
+        <Box sx={{ position: "relative", zIndex: "2", marginTop: "40px" }}>
           <Box
             sx={{
               position: "relative",
@@ -267,7 +267,7 @@ const FilmPage: FC = () => {
         </Box>
       </Box>
       {actors?.length ? (
-        <>
+        <Box sx={{ position: "relative", zIndex: "2" }}>
           <Typography
             sx={{
               color: "white",
@@ -293,12 +293,12 @@ const FilmPage: FC = () => {
               ) : null;
             })}
           </Box>
-        </>
+        </Box>
       ) : (
         ""
       )}
       {posters?.length ? (
-        <>
+        <Box sx={{ position: "relative", zIndex: "2" }}>
           <Typography
             sx={{
               color: "white",
@@ -322,12 +322,12 @@ const FilmPage: FC = () => {
               return <PosterCard key={poster.file_path} poster={poster} />;
             })}
           </Box>
-        </>
+        </Box>
       ) : (
         ""
       )}
       {similarMovies?.length ? (
-        <>
+        <Box sx={{ position: "relative", zIndex: "2" }}>
           <Typography
             sx={{
               color: "white",
@@ -351,7 +351,7 @@ const FilmPage: FC = () => {
               return <FilmCard key={film.id} film={film} />;
             })}
           </Box>
-        </>
+        </Box>
       ) : (
         ""
       )}

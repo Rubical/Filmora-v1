@@ -1,18 +1,19 @@
-import Card from "@mui/joy/Card";
+import { FC, useContext } from "react";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
+import { Context } from "./../../../../context/context";
+import { useNavigate } from "react-router-dom";
+import { IFilmsList } from "../../../../state/filmListSlice";
+import { hideFavFilmsCards } from "../../../../state/favFilmsCardsShow";
+import { getGenreByID } from "../../../../utils/getGenreById";
+import getPrettyDate from "../../../../utils/getPrettyDate";
+import AddToFavBtn from "../../Button/AddToFavBtn";
+import imgNotFound from "./../../../../images/imgNotFound.jpg";
 import Box from "@mui/joy/Box";
+import Card from "@mui/joy/Card";
 import CardCover from "@mui/joy/CardCover";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
-import { IFilmsList } from "../../../../state/filmListSlice";
-import getPrettyDate from "../../../../utils/getPrettyDate";
-import { getGenreByID } from "../../../../utils/getGenreById";
-import { FC, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import imgNotFound from "./../../../../images/imgNotFound.jpg";
-import { useAppSelector } from "../../../../hooks/reduxHooks";
 import StarIcon from "@mui/icons-material/Star";
-import AddToFavBtn from "../../Button/AddToFavBtn";
-import { Context } from "./../../../../context/context";
 
 interface IFilm {
   film: IFilmsList;
@@ -22,9 +23,9 @@ const FilmCard: FC<IFilm> = ({ film }) => {
   const isAuth = useContext(Context);
   const type = useAppSelector((state) => state.category.type);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const {
     id,
-
     original_title,
     backdrop_path,
     release_date,
@@ -50,6 +51,7 @@ const FilmCard: FC<IFilm> = ({ film }) => {
         "&:hover": { transform: "scale(1.1)" },
       }}
       onClick={() => {
+        dispatch(hideFavFilmsCards());
         navigate(`/Zenix_Film/view/${type}/${id}`);
       }}
     >
@@ -72,8 +74,9 @@ const FilmCard: FC<IFilm> = ({ film }) => {
           backgroundColor: "transparent",
           display: "flex",
           alignItems: "center",
-          padding: "6px 6px 8px 1px",
+          padding: "6px 6px 8px 7px",
           borderTopLeftRadius: "5px",
+          columnGap: "2px",
         }}
       >
         <StarIcon sx={{ color: "rgb(230, 230, 0)", transform: "scale(0.9)" }} />
@@ -91,7 +94,7 @@ const FilmCard: FC<IFilm> = ({ film }) => {
       >
         {isAuth ? (
           <Box sx={{ position: "absolute", right: "0px", top: "0px" }}>
-            <AddToFavBtn id={id} />
+            <AddToFavBtn film={film} />
           </Box>
         ) : (
           ""

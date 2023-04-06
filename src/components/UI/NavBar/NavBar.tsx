@@ -14,6 +14,7 @@ import {
   setActiveCategoryBtn,
   setActiveTypeBtn,
 } from "../../../state/activeBtnsSlice";
+import { showFavFilmsCards } from "../../../state/favFilmsCardsShow";
 
 const NavBar: FC = () => {
   const dispatch = useAppDispatch();
@@ -60,6 +61,7 @@ const NavBar: FC = () => {
                 dispatch(setCategory("popular"));
                 dispatch(setActiveTypeBtn(1));
                 dispatch(setActiveCategoryBtn(1));
+                dispatch(showFavFilmsCards());
                 navigate(`/Zenix_Film/movie/popular/page/1`);
               }}
               disableRipple={true}
@@ -88,6 +90,7 @@ const NavBar: FC = () => {
                 dispatch(setCategory("popular"));
                 dispatch(setActiveTypeBtn(2));
                 dispatch(setActiveCategoryBtn(1));
+                dispatch(showFavFilmsCards());
                 navigate(`/Zenix_Film/tv/popular/page/1`);
               }}
               disableRipple={true}

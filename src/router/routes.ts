@@ -2,6 +2,7 @@ import React from "react";
 import FilmPage from "../pages/Film/FilmPage";
 import MoviesPage from "../pages/Movies/MoviesPage";
 import ErrorPage from "../pages/Error/ErrorPage";
+import Favourite from "../pages/Favourite/Favourite";
 
 interface Routes {
   path: string;
@@ -18,6 +19,7 @@ export const privateRoutes: Routes[] = [
     element: FilmPage,
   },
   { path: "/*", element: ErrorPage },
+  { path: "/Zenix_Film/favourite", element: Favourite },
 ];
 export const publicRoutes: Routes[] = [
   {

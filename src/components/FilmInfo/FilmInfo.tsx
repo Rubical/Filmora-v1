@@ -46,6 +46,7 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
         marginTop: "170px",
         overflow: "auto",
         marginBottom: "150px",
+        zIndex: "2",
       }}
     >
       <img

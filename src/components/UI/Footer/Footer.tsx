@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import cl from "../Cards/MainFilmCard/MainFilmCard.module.css";
 const Footer = () => {
   return (
-    <Box>
+    <Box sx={{ position: "relative", zIndex: "2" }}>
       <Box
         className={`${cl.fromBlack} ${cl.bgGradientToTop}`}
         style={{

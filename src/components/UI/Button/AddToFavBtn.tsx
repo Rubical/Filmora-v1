@@ -1,18 +1,21 @@
 import React, { FC } from "react";
-import Button from "@mui/material/Button";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import {
   addfavouriteFilm,
   removeFavouriteFilm,
 } from "../../../state/favouriteFilmsSlice";
-import { fetchFilm } from "../../../state/filmSlice";
+import { IFilmsList } from "../../../state/filmListSlice";
+import Button from "@mui/material/Button";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+
 interface IAddBtn {
-  id: number;
+  film: IFilmsList;
 }
-const AddToFavBtn: FC<IAddBtn> = ({ id }) => {
+
+const AddToFavBtn: FC<IAddBtn> = ({ film }) => {
   const dispatch = useAppDispatch();
   const favouriteFilms = useAppSelector((state) => state.favouriteFilms);
+
   return (
     <Button
       disableRipple={true}
@@ -22,14 +25,16 @@ const AddToFavBtn: FC<IAddBtn> = ({ id }) => {
       }}
       onClick={(event) => {
         event.stopPropagation();
-        favouriteFilms.indexOf(id) === -1
-          ? dispatch(addfavouriteFilm(id))
-          : dispatch(removeFavouriteFilm(id));
+        favouriteFilms.find((el) => el.id === film.id)
+          ? dispatch(removeFavouriteFilm(film.id))
+          : dispatch(addfavouriteFilm(film));
       }}
     >
       <FavoriteIcon
         sx={{
-          color: favouriteFilms.includes(id) ? "rgba(164,23,23,0.84)" : "gray",
+          color: favouriteFilms.find((el) => el.id === film.id)
+            ? "rgba(164,23,23,0.84)"
+            : "gray",
           transition: "color 0.1s ease-in",
           "&:hover": { color: "rgba(157,63,63,0.84)" },
         }}

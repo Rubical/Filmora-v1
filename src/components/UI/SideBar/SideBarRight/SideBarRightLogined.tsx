@@ -1,6 +1,7 @@
 import * as React from "react";
-import { useContext } from "react";
-import { Context } from "../../../../context/context";
+import { useAppSelector } from "../../../../hooks/reduxHooks";
+import SideBarFilmCard from "../../Cards/FavouriteFilmCard";
+import ShowMoreBtn from "../../Button/ShowMoreBtn";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
@@ -10,21 +11,20 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import SideBarFilmCard from "../../Cards/FavouriteFilmCard";
-import { useAppSelector } from "../../../../hooks/reduxHooks";
+import Typography from "@mui/material/Typography";
 
 export default function SideBarRightLogined() {
   const favouriteFilms = useAppSelector((state) => state.favouriteFilms);
+  const filmIsLoading = useAppSelector((state) => state.film.loading);
+  const film = useAppSelector((state) => state.film.film);
+  const favFilmsCardsShow = useAppSelector((state) => state.favFilmsCardsShow);
 
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
-
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
-
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -38,6 +38,8 @@ export default function SideBarRightLogined() {
       sx={{
         "& .MuiPaper-root": {
           backgroundColor: "rgb(20, 20, 20)",
+          position: "relative",
+          zIndex: "2",
         },
       }}
       anchorEl={mobileMoreAnchorEl}
@@ -96,22 +98,23 @@ export default function SideBarRightLogined() {
         flexDirection: "column",
         alignItems: "center",
         color: "lightgray",
-        backgroundColor: "rgb(20,20,20)",
       }}
       role="presentation"
     >
       <Box
         sx={{
+          position: "relative",
+          zIndex: "2",
           display: {
             xs: "none",
             lg: "flex",
-            justifyContent: "center",
-            paddingTop: "13px",
           },
+          justifyContent: "center",
+          paddingTop: "13px",
         }}
       >
         <IconButton
-          sx={{ color: "white" }}
+          sx={{ color: "lightgray" }}
           size="large"
           aria-label="show 0 new mails"
           color="inherit"
@@ -121,7 +124,7 @@ export default function SideBarRightLogined() {
           </Badge>
         </IconButton>
         <IconButton
-          sx={{ color: "white" }}
+          sx={{ color: "lightgray" }}
           size="large"
           aria-label="show 0 new notifications"
           color="inherit"
@@ -131,7 +134,7 @@ export default function SideBarRightLogined() {
           </Badge>
         </IconButton>
         <IconButton
-          sx={{ color: "white" }}
+          sx={{ color: "lightgray" }}
           size="large"
           edge="end"
           aria-label="account of current user"
@@ -143,7 +146,7 @@ export default function SideBarRightLogined() {
       </Box>
       <Box sx={{ display: { md: "flex", lg: "none" } }}>
         <IconButton
-          sx={{ color: "white", padding: " 15px 0" }}
+          sx={{ color: "lightgray", padding: " 15px 0" }}
           size="large"
           aria-label="show more"
           aria-controls={mobileMenuId}
@@ -154,10 +157,40 @@ export default function SideBarRightLogined() {
         </IconButton>
       </Box>
       {renderMobileMenu}
-      <Box>
-        {favouriteFilms
-          ? favouriteFilms.map((el) => <SideBarFilmCard id={el} />)
-          : ""}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          marginTop: "40px",
+        }}
+      >
+        {favFilmsCardsShow ? (
+          favouriteFilms.length ? (
+            <>
+              <Typography
+                sx={{
+                  width: "150px",
+                  color: "white",
+                  marginBottom: "20px",
+                  fontWeight: "600",
+                }}
+                component="div"
+                variant="h5"
+              >
+                Favourite
+              </Typography>
+              {favouriteFilms.slice(0, 3).map((el) => (
+                <SideBarFilmCard key={el.id} film={el} />
+              ))}
+              {favouriteFilms.length > 3 ? <ShowMoreBtn /> : ""}
+            </>
+          ) : (
+            ""
+          )
+        ) : (
+          ""
+        )}
       </Box>
     </Box>
   );

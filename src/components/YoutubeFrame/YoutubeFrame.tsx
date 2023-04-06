@@ -11,6 +11,7 @@ const YoutubeFrame: FC<IYoutubeFrame> = ({ embedId }) => {
     <Card
       sx={{
         position: "relative",
+        zIndex: "2",
         backgroundColor: "transparent",
         width: "753px",
         marginBottom: "150px",

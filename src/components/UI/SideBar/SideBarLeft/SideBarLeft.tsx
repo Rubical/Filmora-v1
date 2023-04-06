@@ -1,5 +1,15 @@
 import * as React from "react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
+import { setPage } from "../../../../state/paginationSlice";
+import { setCategory, setType } from "../../../../state/categorySlice";
+import {
+  setActiveCategoryBtn,
+  setActiveTypeBtn,
+} from "../../../../state/activeBtnsSlice";
+import { showFavFilmsCards } from "../../../../state/favFilmsCardsShow";
+import { Context } from "../../../../context/context";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -10,30 +20,21 @@ import StarRateIcon from "@mui/icons-material/StarRate";
 import EventIcon from "@mui/icons-material/Event";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
-import logo from "../../../../images/logo.png";
-import { Context } from "../../../../context/context";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
-import { setPage } from "../../../../state/paginationSlice";
-import { setCategory, setType } from "../../../../state/categorySlice";
-import {
-  setActiveCategoryBtn,
-  setActiveTypeBtn,
-} from "../../../../state/activeBtnsSlice";
+import logo from "../../../../images/logo.png";
 
 export const SideBarLeft: React.FC = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const isAuth = useContext(Context);
+  const type = useAppSelector((state) => state.category.type);
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
-
-  const isAuth = useContext(Context);
-  const type = useAppSelector((state) => state.category.type);
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   const activeCategoryBtn = useAppSelector(
     (state) => state.activeBtns.activeCategoryBtn
@@ -54,11 +55,10 @@ export const SideBarLeft: React.FC = () => {
         margin: "0 auto",
         alignItems: { xs: "center", lg: "flex-start" },
         position: "relative",
-        zIndex: "5",
         width: "100%",
         height: "100%",
         paddingLeft: "20px",
-        backgroundColor: "rgb(20,20,20)",
+        zIndex: "2",
       }}
       role="presentation"
     >
@@ -75,6 +75,7 @@ export const SideBarLeft: React.FC = () => {
           dispatch(setPage(1));
           dispatch(setActiveTypeBtn(1));
           dispatch(setActiveCategoryBtn(1));
+          dispatch(showFavFilmsCards());
         }}
       >
         <img src={logo} alt="logo" style={{ width: "130px", height: "50px" }} />
@@ -131,6 +132,7 @@ export const SideBarLeft: React.FC = () => {
               navigate("/Zenix_Film/movie/popular/page/1");
               dispatch(setType("movie"));
               dispatch(setPage(1));
+
               handleCloseNavMenu();
             }}
           >
@@ -185,6 +187,7 @@ export const SideBarLeft: React.FC = () => {
               dispatch(setCategory("popular"));
               dispatch(setPage(1));
               navigate(`/Zenix_Film/${type}/popular/page/1`);
+              dispatch(showFavFilmsCards());
             }}
             sx={{
               marginBottom: "10px",
@@ -222,6 +225,7 @@ export const SideBarLeft: React.FC = () => {
               dispatch(setCategory("top_rated"));
               dispatch(setPage(1));
               navigate(`/Zenix_Film/${type}/top_rated/page/1`);
+              dispatch(showFavFilmsCards());
             }}
             sx={{
               marginBottom: "10px",
@@ -260,6 +264,7 @@ export const SideBarLeft: React.FC = () => {
               dispatch(setCategory("coming"));
               dispatch(setPage(1));
               navigate(`/Zenix_Film/${type}/coming/page/1`);
+              dispatch(showFavFilmsCards());
             }}
             sx={{
               marginBottom: "10px",
