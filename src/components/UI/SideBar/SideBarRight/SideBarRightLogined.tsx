@@ -8,7 +8,7 @@ import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
+import StarRateIcon from "@mui/icons-material/StarRate";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
@@ -59,7 +59,7 @@ export default function SideBarRightLogined() {
       <MenuItem sx={{ color: "white" }}>
         <IconButton size="medium" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={0} color="error">
-            <MailIcon />
+            <StarRateIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
@@ -120,7 +120,7 @@ export default function SideBarRightLogined() {
           color="inherit"
         >
           <Badge badgeContent={0} color="error">
-            <MailIcon />
+            <StarRateIcon />
           </Badge>
         </IconButton>
         <IconButton

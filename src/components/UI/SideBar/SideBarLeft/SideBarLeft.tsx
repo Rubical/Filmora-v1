@@ -15,9 +15,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import Typography from "@mui/material/Typography";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
-import StarRateIcon from "@mui/icons-material/StarRate";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import EventIcon from "@mui/icons-material/Event";
-import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -255,7 +254,7 @@ export const SideBarLeft: React.FC = () => {
               padding: { xs: "18px 0", sm: "8px 16px" },
             }}
           >
-            <StarRateIcon
+            <ThumbUpIcon
               sx={{
                 color: activeCategoryBtn === 2 ? "rgb(172, 0, 0)" : "lightgray",
                 marginRight: { xs: "18px 0", sm: "10px" },

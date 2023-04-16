@@ -41,7 +41,6 @@ const PagePagination: FC<IPagination> = ({
   changePage,
   currentPage,
 }) => {
-  console.log(totalPages);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const type = useAppSelector((state) => state.category.type);

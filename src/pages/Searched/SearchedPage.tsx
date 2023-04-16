@@ -52,7 +52,7 @@ const SearchedPage: FC = () => {
               width: "100%",
             }}
           >
-            {searchedFilms.slice(1, searchedFilms.length - 1).map((film) => {
+            {searchedFilms.map((film) => {
               return <FilmCard key={film.id} film={film} />;
             })}
           </Box>

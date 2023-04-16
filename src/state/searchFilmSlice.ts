@@ -34,7 +34,6 @@ export const fetchSearchedFilms = createAsyncThunk(
       console.log("Server Error!");
     }
     const data = await response.json();
-    console.log(data);
     return data;
   }
 );
