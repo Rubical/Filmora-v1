@@ -33,7 +33,7 @@ const ActorCard: FC<IActorCard> = ({ actor }) => {
           width: "180px",
           height: "270px",
           objectFit: "cover",
-          backgroundColor: "white",
+          backgroundColor: "rgba(30,30,30,0.67)",
         }}
         src={
           actor.profile_path

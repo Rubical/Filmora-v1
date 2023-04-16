@@ -36,7 +36,11 @@ const ActorCard: FC<IPosterCard> = ({ poster }) => {
     >
       {poster.file_path ? (
         <img
-          style={{ width: "100%", height: "100%", backgroundColor: "white" }}
+          style={{
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(30,30,30,0.67)",
+          }}
           src={`https://image.tmdb.org/t/p/w185_and_h278_face${file_path}`}
           alt="actor"
         />

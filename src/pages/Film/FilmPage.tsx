@@ -125,13 +125,19 @@ const FilmPage: FC = () => {
       </CardCover>
 
       <FilmInfo film={film} />
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: "150px",
+        }}
+      >
         {videoIsLoading ? (
           <Skeleton
-            animation="wave"
             sx={{
               position: "relative",
-              backgroundColor: "#fff",
+              backgroundColor: "rgba(30,30,30,0.67)",
+              zIndex: "10",
             }}
             variant="rectangular"
             width={750}

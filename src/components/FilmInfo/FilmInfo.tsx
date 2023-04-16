@@ -55,7 +55,7 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
           height: "450px",
           float: "left",
           marginRight: "30px",
-          background: "white",
+          background: "rgba(30,30,30,0.67)",
         }}
         src={
           poster_path

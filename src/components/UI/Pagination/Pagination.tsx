@@ -3,7 +3,6 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
-import { setPage } from "../../../state/paginationSlice";
 import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
@@ -31,7 +30,18 @@ declare module "@mui/material/Button" {
   }
 }
 
-const PagePagination: FC = () => {
+interface IPagination {
+  totalPages: number;
+  changePage: (page: number) => void;
+  currentPage: number;
+}
+
+const PagePagination: FC<IPagination> = ({
+  totalPages,
+  changePage,
+  currentPage,
+}) => {
+  console.log(totalPages);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const type = useAppSelector((state) => state.category.type);
@@ -56,15 +66,14 @@ const PagePagination: FC = () => {
             },
           }}
           onChange={(e, page) => {
-            dispatch(setPage(page));
-            navigate(`/Zenix_Film/${type}/${category}/page/${page}`);
+            changePage(page);
           }}
-          count={99}
+          count={totalPages}
           shape="rounded"
-          page={useAppSelector((state) => state.pagination)}
+          page={currentPage}
           color={"primary"}
         />
-      </Stack>{" "}
+      </Stack>
     </ThemeProvider>
   );
 };

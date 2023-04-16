@@ -4,17 +4,21 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import FilmInput from "../../FilmInput/FilmInput";
+import FilmInput from "../Input/FilmInput/FilmInput";
 import cl from "./NavBar.module.css";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import { setCategory, setType } from "../../../state/categorySlice";
 import { useNavigate } from "react-router-dom";
-import { setPage } from "../../../state/paginationSlice";
 import {
   setActiveCategoryBtn,
   setActiveTypeBtn,
 } from "../../../state/activeBtnsSlice";
 import { showFavFilmsCards } from "../../../state/favFilmsCardsShow";
+import {
+  changeSearchedFilmPage,
+  changeSearchedQuery,
+} from "../../../state/searchFilmSlice";
+import { changeFilmListPage } from "../../../state/filmListSlice";
 
 const NavBar: FC = () => {
   const dispatch = useAppDispatch();
@@ -56,12 +60,14 @@ const NavBar: FC = () => {
           >
             <Button
               onClick={() => {
-                dispatch(setPage(1));
+                dispatch(changeFilmListPage(1));
                 dispatch(setType("movie"));
                 dispatch(setCategory("popular"));
                 dispatch(setActiveTypeBtn(1));
                 dispatch(setActiveCategoryBtn(1));
                 dispatch(showFavFilmsCards());
+                dispatch(changeSearchedQuery(""));
+                dispatch(changeSearchedFilmPage(1));
                 navigate(`/Zenix_Film/movie/popular/page/1`);
               }}
               disableRipple={true}
@@ -85,12 +91,14 @@ const NavBar: FC = () => {
 
             <Button
               onClick={() => {
-                dispatch(setPage(1));
+                dispatch(changeFilmListPage(1));
                 dispatch(setType("tv"));
                 dispatch(setCategory("popular"));
                 dispatch(setActiveTypeBtn(2));
                 dispatch(setActiveCategoryBtn(1));
                 dispatch(showFavFilmsCards());
+                dispatch(changeSearchedQuery(""));
+                dispatch(changeSearchedFilmPage(1));
                 navigate(`/Zenix_Film/tv/popular/page/1`);
               }}
               disableRipple={true}

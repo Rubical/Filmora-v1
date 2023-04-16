@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from "react";
 import Card from "@mui/material/Card";
-import comingSoon from "./coming-soon.jpg";
+import noSources from "./no-sources.jpg";
 
 interface IYoutubeFrame {
   embedId: string;
@@ -14,7 +14,6 @@ const YoutubeFrame: FC<IYoutubeFrame> = ({ embedId }) => {
         zIndex: "2",
         backgroundColor: "transparent",
         width: "753px",
-        marginBottom: "150px",
         boxShadow: "none",
       }}
     >
@@ -28,7 +27,7 @@ const YoutubeFrame: FC<IYoutubeFrame> = ({ embedId }) => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         ></iframe>
       ) : (
-        <img style={{ width: "753px", height: "420px" }} src={comingSoon} />
+        <img style={{ width: "753px", height: "420px" }} src={noSources} />
       )}
     </Card>
   );

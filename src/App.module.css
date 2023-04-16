@@ -120,7 +120,6 @@ legend {
 .app {
 
   background-color: black;
-  min-height: 100vh;
 }
 
 .grid {
@@ -132,5 +131,7 @@ legend {
   position: relative;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+
 }
 

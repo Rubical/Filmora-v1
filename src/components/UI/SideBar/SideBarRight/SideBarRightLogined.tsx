@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useAppSelector } from "../../../../hooks/reduxHooks";
-import SideBarFilmCard from "../../Cards/FavouriteFilmCard";
+import SideBarFilmCard from "../../Cards/FavourilteFilmCard/FavouriteFilmCard";
 import ShowMoreBtn from "../../Button/ShowMoreBtn";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";

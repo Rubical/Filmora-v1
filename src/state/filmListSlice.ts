@@ -14,25 +14,30 @@ export interface IFilmsList {
   genre_ids?: number[];
   first_air_date?: string;
   name?: string;
+  poster_path?: string;
 }
 
 interface IFilmsState {
   filmsList: IFilmsList[];
   loading: boolean;
   error: string | null;
+  page: number;
+  totalPages: number;
 }
 
 const initialState: IFilmsState = {
   filmsList: [],
   loading: true,
   error: null,
+  page: 1,
+  totalPages: 1,
 };
 
-export const fetchFilms = createAsyncThunk<IFilmsList[]>(
+export const fetchFilms = createAsyncThunk(
   "filmsList/fetchPopularFilms",
   async (__, thunkAPI) => {
     const state: any = thunkAPI.getState();
-    const page = state.pagination;
+    const page = state.films.page;
     const type = state.category.type;
     const category =
       state.category.category !== "coming"
@@ -47,24 +52,29 @@ export const fetchFilms = createAsyncThunk<IFilmsList[]>(
       console.log("Server Error!");
     }
     const data = await response.json();
-    return data.results;
+    return data;
   }
 );
 
 export const filmListSlice = createSlice({
   name: "films",
   initialState,
-  reducers: {},
+  reducers: {
+    changeFilmListPage: (state, action) => {
+      state.page = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchFilms.pending, (state) => {
         state.loading = true;
       })
       .addCase(fetchFilms.fulfilled, (state, action) => {
-        state.filmsList = action.payload;
+        state.filmsList = action.payload.results;
+        state.totalPages = action.payload.total_pages;
         state.loading = false;
       });
   },
 });
-
+export const { changeFilmListPage } = filmListSlice.actions;
 export default filmListSlice.reducer;

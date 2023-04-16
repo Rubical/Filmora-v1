@@ -146,7 +146,6 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
         ) : (
           ""
         )}
-
         <NavLink
           style={{ width: "160px", marginTop: "20px" }}
           to={`/Zenix_Film/view/film/${id}`}

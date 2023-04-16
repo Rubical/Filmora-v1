@@ -33,6 +33,7 @@ const FilmCard: FC<IFilm> = ({ film }) => {
     genre_ids,
     name,
     first_air_date,
+    poster_path,
   } = film;
 
   const date = release_date ? release_date : first_air_date;
@@ -43,7 +44,7 @@ const FilmCard: FC<IFilm> = ({ film }) => {
         width: { xs: "90%", sm: "40%", lg: "calc(33.3% - 40px)" },
         height: { xs: "220px", sm: "180px", md: "250px", lg: "220px" },
         margin: "10px 10px",
-        backgroundColor: "relevant",
+        backgroundColor: "rgba(30,30,30,0.67)",
         boxShadow: "none",
         borderRadius: "5px",
         cursor: "pointer",
@@ -61,6 +62,8 @@ const FilmCard: FC<IFilm> = ({ film }) => {
           src={
             backdrop_path
               ? `https://www.themoviedb.org/t/p/original/${backdrop_path}`
+              : poster_path
+              ? `https://www.themoviedb.org/t/p/original/${poster_path}`
               : imgNotFound
           }
           alt="image"

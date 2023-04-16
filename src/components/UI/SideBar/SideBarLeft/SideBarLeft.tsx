@@ -2,7 +2,6 @@ import * as React from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
-import { setPage } from "../../../../state/paginationSlice";
 import { setCategory, setType } from "../../../../state/categorySlice";
 import {
   setActiveCategoryBtn,
@@ -25,6 +24,11 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "../../../../images/logo.png";
+import {
+  changeSearchedFilmPage,
+  changeSearchedQuery,
+} from "../../../../state/searchFilmSlice";
+import { changeFilmListPage } from "../../../../state/filmListSlice";
 
 export const SideBarLeft: React.FC = () => {
   const navigate = useNavigate();
@@ -69,13 +73,16 @@ export const SideBarLeft: React.FC = () => {
         }}
         onClick={(e) => {
           e.stopPropagation();
-          navigate("/Zenix_Film/movie/popular/page/1");
           dispatch(setType("movie"));
           dispatch(setCategory("popular"));
-          dispatch(setPage(1));
+          dispatch(changeFilmListPage(1));
           dispatch(setActiveTypeBtn(1));
           dispatch(setActiveCategoryBtn(1));
           dispatch(showFavFilmsCards());
+          dispatch(changeSearchedQuery(""));
+          dispatch(changeSearchedFilmPage(1));
+
+          navigate("/Zenix_Film/movie/popular/page/1");
         }}
       >
         <img src={logo} alt="logo" style={{ width: "130px", height: "50px" }} />
@@ -129,9 +136,12 @@ export const SideBarLeft: React.FC = () => {
             }}
             onClick={(e) => {
               e.stopPropagation();
-              navigate("/Zenix_Film/movie/popular/page/1");
               dispatch(setType("movie"));
-              dispatch(setPage(1));
+              dispatch(changeFilmListPage(1));
+              dispatch(changeSearchedQuery(""));
+              dispatch(changeSearchedFilmPage(1));
+
+              navigate("/Zenix_Film/movie/popular/page/1");
 
               handleCloseNavMenu();
             }}
@@ -154,9 +164,13 @@ export const SideBarLeft: React.FC = () => {
             }}
             onClick={(e) => {
               e.stopPropagation();
-              navigate("/Zenix_Film/tv/popular/page/1");
               dispatch(setType("tv"));
-              dispatch(setPage(1));
+              dispatch(changeFilmListPage(1));
+              dispatch(changeSearchedQuery(""));
+              dispatch(changeSearchedFilmPage(1));
+
+              navigate("/Zenix_Film/tv/popular/page/1");
+
               handleCloseNavMenu();
             }}
           >
@@ -185,9 +199,13 @@ export const SideBarLeft: React.FC = () => {
             onClick={() => {
               dispatch(setActiveCategoryBtn(1));
               dispatch(setCategory("popular"));
-              dispatch(setPage(1));
-              navigate(`/Zenix_Film/${type}/popular/page/1`);
+              dispatch(changeFilmListPage(1));
+              dispatch(changeSearchedQuery(""));
+              dispatch(changeSearchedFilmPage(1));
+
               dispatch(showFavFilmsCards());
+
+              navigate(`/Zenix_Film/${type}/popular/page/1`);
             }}
             sx={{
               marginBottom: "10px",
@@ -223,7 +241,12 @@ export const SideBarLeft: React.FC = () => {
             onClick={() => {
               dispatch(setActiveCategoryBtn(2));
               dispatch(setCategory("top_rated"));
-              dispatch(setPage(1));
+              dispatch(changeFilmListPage(1));
+              dispatch(changeSearchedQuery(""));
+              dispatch(changeSearchedFilmPage(1));
+
+              dispatch(showFavFilmsCards());
+
               navigate(`/Zenix_Film/${type}/top_rated/page/1`);
               dispatch(showFavFilmsCards());
             }}
@@ -262,9 +285,13 @@ export const SideBarLeft: React.FC = () => {
             onClick={() => {
               dispatch(setActiveCategoryBtn(3));
               dispatch(setCategory("coming"));
-              dispatch(setPage(1));
-              navigate(`/Zenix_Film/${type}/coming/page/1`);
+              dispatch(changeFilmListPage(1));
+              dispatch(changeSearchedQuery(""));
+              dispatch(changeSearchedFilmPage(1));
+
               dispatch(showFavFilmsCards());
+
+              navigate(`/Zenix_Film/${type}/coming/page/1`);
             }}
             sx={{
               marginBottom: "10px",
@@ -296,53 +323,26 @@ export const SideBarLeft: React.FC = () => {
           </ListItemButton>
         </ListItem>
       </List>
-
-      <Typography
-        sx={{
-          fontSize: "10px",
-          padding: "40px 0 16px 20px",
-          color: "gray",
-          display: { xs: "none", lg: "flex" },
-          letterSpacing: "8px",
-        }}
-      >
-        OPTIONS
-      </Typography>
-
+      {isAuth ? (
+        <Typography
+          sx={{
+            fontSize: "10px",
+            padding: "40px 0 16px 20px",
+            color: "gray",
+            display: { xs: "none", lg: "flex" },
+            letterSpacing: "8px",
+          }}
+        >
+          OPTIONS
+        </Typography>
+      ) : (
+        ""
+      )}
       <List>
-        <ListItem disablePadding>
-          <ListItemButton
-            sx={{
-              marginBottom: "10px",
-              padding: { xs: "18px 0", sm: "8px 16px" },
-            }}
-          >
-            <SettingsIcon
-              sx={{
-                color: "lightgray",
-                marginRight: { xs: "8px 0", sm: "10px" },
-              }}
-            />
-            <Typography
-              sx={{
-                fontWeight: "600",
-                fontSize: "14px",
-                display: { xs: "none", lg: "flex" },
-                transition: "color 0.1s ease-in",
-                "&:hover": {
-                  color: "white",
-                },
-                color: "lightgray",
-                letterSpacing: "1px",
-              }}
-            >
-              SEETINGS
-            </Typography>
-          </ListItemButton>
-        </ListItem>
         <ListItem disablePadding>
           {isAuth ? (
             <ListItemButton
+              disableRipple={true}
               sx={{
                 marginBottom: "10px",
                 padding: { xs: "0", sm: "8px 16px" },
