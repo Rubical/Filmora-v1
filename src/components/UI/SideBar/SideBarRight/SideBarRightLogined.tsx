@@ -202,7 +202,11 @@ export default function SideBarRightLogined() {
                 Favourite
               </Typography>
               {favouriteFilms.slice(0, 3).map((el) => (
-                <SideBarFilmCard key={el.id} film={el} />
+                <SideBarFilmCard
+                  key={el.film.id}
+                  film={el.film}
+                  filmType={el.type}
+                />
               ))}
               {favouriteFilms.length > 3 ? <ShowMoreBtn /> : ""}
             </>

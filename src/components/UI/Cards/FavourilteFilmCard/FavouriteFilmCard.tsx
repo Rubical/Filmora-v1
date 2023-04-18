@@ -14,6 +14,7 @@ import { styled } from "@mui/material/styles";
 
 interface IFavouriteFilmCard {
   film: IFilmsList;
+  filmType: string;
 }
 
 const CardContentNoPadding = styled(CardContent)(`
@@ -23,10 +24,9 @@ const CardContentNoPadding = styled(CardContent)(`
   }
 `);
 
-const FavouriteFilmCard: FC<IFavouriteFilmCard> = ({ film }) => {
+const FavouriteFilmCard: FC<IFavouriteFilmCard> = ({ film, filmType }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const type = useAppSelector((state) => state.category.type);
   const deleteFavFilm = () => {
     dispatch(removeFavouriteFilm(film.id));
   };
@@ -38,7 +38,7 @@ const FavouriteFilmCard: FC<IFavouriteFilmCard> = ({ film }) => {
       }}
       onClick={() => {
         dispatch(hideFavFilmsCards());
-        navigate(`/Zenix_Film/view/${type}/${film.id}`);
+        navigate(`/Zenix_Film/view/${filmType}/${film.id}`);
       }}
     >
       <Box sx={{ position: "relative" }}>

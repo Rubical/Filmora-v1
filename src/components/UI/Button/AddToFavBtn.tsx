@@ -8,7 +8,6 @@ import { IFilmsList } from "../../../state/filmListSlice";
 import Button from "@mui/material/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { Face3 } from "@mui/icons-material";
 
 interface IAddBtn {
   film: IFilmsList;
@@ -17,6 +16,7 @@ interface IAddBtn {
 const AddToFavBtn: FC<IAddBtn> = ({ film }) => {
   const dispatch = useAppDispatch();
   const favouriteFilms = useAppSelector((state) => state.favouriteFilms);
+  const type = useAppSelector((state) => state.category.type);
 
   return (
     <Button
@@ -27,12 +27,12 @@ const AddToFavBtn: FC<IAddBtn> = ({ film }) => {
       }}
       onClick={(event) => {
         event.stopPropagation();
-        favouriteFilms.find((el) => el.id === film.id)
+        favouriteFilms.find((el) => el.film.id === film.id)
           ? dispatch(removeFavouriteFilm(film.id))
-          : dispatch(addfavouriteFilm(film));
+          : dispatch(addfavouriteFilm({ film: film, type: type }));
       }}
     >
-      {favouriteFilms.find((el) => el.id === film.id) ? (
+      {favouriteFilms.find((el) => el.film.id === film.id) ? (
         <FavoriteIcon
           sx={{
             color: "rgba(164,23,23,0.84)",

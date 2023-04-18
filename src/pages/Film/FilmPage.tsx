@@ -42,6 +42,8 @@ interface IEpisode {
 
 const FilmPage: FC = () => {
   const { id } = useParams();
+  const { type } = useParams();
+
   const dispatch = useAppDispatch();
 
   const film: any = useAppSelector((state) => state.film.film);
@@ -68,16 +70,15 @@ const FilmPage: FC = () => {
   );
   const videoIsLoading = useAppSelector((state) => state.filmVideo.loading);
 
-  const type = useAppSelector((state) => state.category.type);
   const date = type === " movie" ? release_date : first_air_date;
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(fetchFilm(id));
-    dispatch(fetchActors(id));
-    dispatch(fetchVideo(id));
-    dispatch(fetchPosters(id));
-    dispatch(fetchSimilarMovies(id));
+    dispatch(fetchFilm({ id, filmType: type }));
+    dispatch(fetchActors({ id, filmType: type }));
+    dispatch(fetchVideo({ id, filmType: type }));
+    dispatch(fetchPosters({ id, filmType: type }));
+    dispatch(fetchSimilarMovies({ id, filmType: type }));
   }, [id]);
 
   return filmIsLoading ? (

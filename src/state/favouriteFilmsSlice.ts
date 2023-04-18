@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IFilmsList } from "./filmListSlice";
 
-const initialState: IFilmsList[] = [];
+interface IFavouriteFilms {
+  film: IFilmsList;
+  type: string;
+}
+
+const initialState: IFavouriteFilms[] = [];
 
 export const favouriteFilmsSlice = createSlice({
   name: "favouriteFilms",
@@ -12,7 +17,7 @@ export const favouriteFilmsSlice = createSlice({
     },
     removeFavouriteFilm: (state, action) => {
       state.splice(
-        state.findIndex((el) => el?.id === action.payload),
+        state.findIndex((el) => el?.film?.id === action.payload),
         1
       );
     },

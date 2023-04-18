@@ -17,9 +17,10 @@ import StarIcon from "@mui/icons-material/Star";
 
 interface IFilm {
   film: IFilmsList;
+  filmType?: string;
 }
 
-const FilmCard: FC<IFilm> = ({ film }) => {
+const FilmCard: FC<IFilm> = ({ film, filmType }) => {
   const isAuth = useContext(Context);
   const type = useAppSelector((state) => state.category.type);
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ const FilmCard: FC<IFilm> = ({ film }) => {
       }}
       onClick={() => {
         dispatch(hideFavFilmsCards());
-        navigate(`/Zenix_Film/view/${type}/${id}`);
+        navigate(`/Zenix_Film/view/${filmType || type}/${id}`);
       }}
     >
       <CardCover sx={{ position: "absolute" }}>

@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchFilm } from "./filmSlice";
+
+interface IFilm {
+  id?: string;
+  filmType?: string;
+}
 
 const initialState = {
   similarMovies: [],
@@ -9,11 +13,13 @@ const initialState = {
 
 export const fetchSimilarMovies = createAsyncThunk(
   "similarMovies/fetchSimilarMovies",
-  async (movie_id: string | undefined, thunkAPI) => {
+  async (payload: IFilm, thunkAPI) => {
     const state: any = thunkAPI.getState();
     const type = state.category.type;
     const response = await fetch(
-      `https://api.themoviedb.org/3/${type}/${movie_id}/similar?api_key=b053e4b701c01a664de1a144e1ab9f7f&language=en-US&page=1`
+      `https://api.themoviedb.org/3/${payload.filmType || type}/${
+        payload.id
+      }/similar?api_key=b053e4b701c01a664de1a144e1ab9f7f&language=en-US&page=1`
     );
     if (!response.ok) {
       console.log("Server Error!");

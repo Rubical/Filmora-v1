@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// interface IFilm {
-
-// }
+interface IFilm {
+  id?: string;
+  filmType?: string;
+}
 
 const initialState = {
   film: {},
@@ -12,11 +13,13 @@ const initialState = {
 
 export const fetchFilm = createAsyncThunk(
   "film/fetchFilm",
-  async (id: string | undefined, thunkAPI) => {
+  async (payload: IFilm, thunkAPI) => {
     const state: any = thunkAPI.getState();
     const type = state.category.type;
     const response = await fetch(
-      `https://api.themoviedb.org/3/${type}/${id}?api_key=b053e4b701c01a664de1a144e1ab9f7f&language=en-US`
+      `https://api.themoviedb.org/3/${payload.filmType || type}/${
+        payload.id
+      }?api_key=b053e4b701c01a664de1a144e1ab9f7f&language=en-US`
     );
     if (!response.ok) {
       console.log("Server Error!");
