@@ -353,7 +353,7 @@ const FilmPage: FC = () => {
               padding: "0",
             }}
           >
-            {similarMovies.slice(0, 15).map((film: any) => {
+            {similarMovies.slice(0, 14).map((film: any) => {
               return <FilmCard key={film.id} film={film} />;
             })}
           </Box>

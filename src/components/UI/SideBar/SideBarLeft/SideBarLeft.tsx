@@ -258,6 +258,7 @@ export const SideBarLeft: React.FC = () => {
               sx={{
                 color: activeCategoryBtn === 2 ? "rgb(172, 0, 0)" : "lightgray",
                 marginRight: { xs: "18px 0", sm: "10px" },
+                transform: "scale(0.9)",
               }}
             />
             <Typography

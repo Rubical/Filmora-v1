@@ -7,6 +7,8 @@ import {
 import { IFilmsList } from "../../../state/filmListSlice";
 import Button from "@mui/material/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { Face3 } from "@mui/icons-material";
 
 interface IAddBtn {
   film: IFilmsList;
@@ -30,15 +32,23 @@ const AddToFavBtn: FC<IAddBtn> = ({ film }) => {
           : dispatch(addfavouriteFilm(film));
       }}
     >
-      <FavoriteIcon
-        sx={{
-          color: favouriteFilms.find((el) => el.id === film.id)
-            ? "rgba(164,23,23,0.84)"
-            : "gray",
-          transition: "color 0.1s ease-in",
-          "&:hover": { color: "rgba(157,63,63,0.84)" },
-        }}
-      />
+      {favouriteFilms.find((el) => el.id === film.id) ? (
+        <FavoriteIcon
+          sx={{
+            color: "rgba(164,23,23,0.84)",
+            transition: "color 0.1s ease-in",
+            "&:hover": { color: "rgba(129,50,50,0.84)" },
+          }}
+        />
+      ) : (
+        <FavoriteBorderIcon
+          sx={{
+            color: "rgba(129,50,50,0.84)",
+            transition: "color 0.1s ease-in",
+            "&:hover": { color: "rgba(164,23,23,0.84)" },
+          }}
+        />
+      )}
     </Button>
   );
 };

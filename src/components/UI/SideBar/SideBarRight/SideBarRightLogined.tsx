@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useAppSelector } from "../../../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
 import SideBarFilmCard from "../../Cards/FavourilteFilmCard/FavouriteFilmCard";
 import ShowMoreBtn from "../../Button/ShowMoreBtn";
 import Box from "@mui/material/Box";
@@ -8,12 +8,22 @@ import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import StarRateIcon from "@mui/icons-material/StarRate";
+import StarsIcon from "@mui/icons-material/Stars";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
+import { setCategory, setType } from "../../../../state/categorySlice";
+import { changeFilmListPage } from "../../../../state/filmListSlice";
+import {
+  setActiveCategoryBtn,
+  setActiveTypeBtn,
+} from "../../../../state/activeBtnsSlice";
+import { hideFavFilmsCards } from "../../../../state/favFilmsCardsShow";
+import { useNavigate } from "react-router-dom";
 
 export default function SideBarRightLogined() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const favouriteFilms = useAppSelector((state) => state.favouriteFilms);
   const filmIsLoading = useAppSelector((state) => state.film.loading);
   const film = useAppSelector((state) => state.film.film);
@@ -32,6 +42,16 @@ export default function SideBarRightLogined() {
   const menuId = "primary-search-account-menu";
 
   const mobileMenuId = "primary-search-account-menu-mobile";
+
+  const openFavPage = () => {
+    dispatch(setType("movie"));
+    dispatch(setCategory("popular"));
+    dispatch(changeFilmListPage(1));
+    dispatch(setActiveTypeBtn(1));
+    dispatch(setActiveCategoryBtn(1));
+    dispatch(hideFavFilmsCards());
+    navigate("/Zenix_Film/favourite");
+  };
 
   const renderMobileMenu = (
     <Menu
@@ -56,10 +76,10 @@ export default function SideBarRightLogined() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem sx={{ color: "white" }}>
+      <MenuItem onClick={openFavPage} sx={{ color: "white" }}>
         <IconButton size="medium" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={0} color="error">
-            <StarRateIcon />
+            <StarsIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
@@ -114,13 +134,14 @@ export default function SideBarRightLogined() {
         }}
       >
         <IconButton
+          onClick={openFavPage}
           sx={{ color: "lightgray" }}
           size="large"
           aria-label="show 0 new mails"
           color="inherit"
         >
           <Badge badgeContent={0} color="error">
-            <StarRateIcon />
+            <StarsIcon />
           </Badge>
         </IconButton>
         <IconButton

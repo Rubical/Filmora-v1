@@ -10,10 +10,18 @@ import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
 import { removeFavouriteFilm } from "../../../../state/favouriteFilmsSlice";
 import { hideFavFilmsCards } from "../../../../state/favFilmsCardsShow";
 import { useNavigate } from "react-router-dom";
+import { styled } from "@mui/material/styles";
 
 interface IFavouriteFilmCard {
   film: IFilmsList;
 }
+
+const CardContentNoPadding = styled(CardContent)(`
+  padding: 0;
+  &:last-child {
+    padding-bottom: 0;
+  }
+`);
 
 const FavouriteFilmCard: FC<IFavouriteFilmCard> = ({ film }) => {
   const dispatch = useAppDispatch();
@@ -26,6 +34,7 @@ const FavouriteFilmCard: FC<IFavouriteFilmCard> = ({ film }) => {
     <Box
       sx={{
         cursor: "pointer",
+        marginBottom: "20px",
       }}
       onClick={() => {
         dispatch(hideFavFilmsCards());
@@ -66,13 +75,13 @@ const FavouriteFilmCard: FC<IFavouriteFilmCard> = ({ film }) => {
           }}
         />
       </Box>
-      <CardContent
+      <CardContentNoPadding
         sx={{ flex: "1 0 auto", padding: "7px 0", marginBottom: "15px" }}
       >
         <Typography sx={{ width: "150px", textAlign: "center" }}>
           {film.original_title || film.name || "No name"}
         </Typography>
-      </CardContent>
+      </CardContentNoPadding>
     </Box>
   );
 };
