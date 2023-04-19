@@ -11,12 +11,13 @@ const WatchFilmBtn = () => {
         dispatch(hideFavFilmsCards());
       }}
       sx={{
-        width: "160px",
-        padding: "11px 0",
+        width: { xs: "120px", sm: "160px" },
+        padding: { xs: "8px 0", sm: "11px 0" },
         backgroundColor: "rgb(172,0,0)",
         borderRadius: "25px",
         textTransform: "none",
         fontWeight: "600",
+        fontSize: { xs: "13px", sm: "15px" },
         marginTop: "20px",
         "&:hover": {
           backgroundColor: "rgb(142,0,0)",

@@ -60,6 +60,7 @@ export default function SideBarRightLogined() {
           backgroundColor: "rgb(20, 20, 20)",
           position: "relative",
           zIndex: "2",
+          width: "300px",
         },
       }}
       anchorEl={mobileMoreAnchorEl}
@@ -76,7 +77,15 @@ export default function SideBarRightLogined() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={openFavPage} sx={{ color: "white" }}>
+      <MenuItem
+        onClick={openFavPage}
+        sx={{
+          color: "white",
+          "&:hover": {
+            backgroundColor: "rgb(15,15,15)",
+          },
+        }}
+      >
         <IconButton size="medium" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={0} color="error">
             <StarsIcon />
@@ -84,7 +93,14 @@ export default function SideBarRightLogined() {
         </IconButton>
         <p>Messages</p>
       </MenuItem>
-      <MenuItem sx={{ color: "white" }}>
+      <MenuItem
+        sx={{
+          color: "white",
+          "&:hover": {
+            backgroundColor: "rgb(15,15,15)",
+          },
+        }}
+      >
         <IconButton
           size="medium"
           aria-label="show 17 new notifications"
@@ -96,7 +112,14 @@ export default function SideBarRightLogined() {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem sx={{ color: "white" }}>
+      <MenuItem
+        sx={{
+          color: "white",
+          "&:hover": {
+            backgroundColor: "rgb(15,15,15)",
+          },
+        }}
+      >
         <IconButton
           size="medium"
           aria-label="account of current user"
@@ -115,9 +138,11 @@ export default function SideBarRightLogined() {
     <Box
       sx={{
         display: "flex",
+        width: { xs: "50px", sm: "80px", md: "100px", lg: "200px" },
         flexDirection: "column",
         alignItems: "center",
         color: "lightgray",
+        flexShrink: "0",
       }}
       role="presentation"
     >
@@ -167,7 +192,7 @@ export default function SideBarRightLogined() {
       </Box>
       <Box sx={{ display: { md: "flex", lg: "none" } }}>
         <IconButton
-          sx={{ color: "lightgray", padding: " 15px 0" }}
+          sx={{ color: "lightgray", padding: " 24px 0" }}
           size="large"
           aria-label="show more"
           aria-controls={mobileMenuId}
@@ -180,7 +205,10 @@ export default function SideBarRightLogined() {
       {renderMobileMenu}
       <Box
         sx={{
-          display: "flex",
+          display: {
+            xs: "none",
+            lg: "flex",
+          },
           flexDirection: "column",
           alignItems: "center",
           marginTop: "40px",

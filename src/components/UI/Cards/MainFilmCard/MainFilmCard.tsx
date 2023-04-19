@@ -7,18 +7,21 @@ import { IFilmsList } from "../../../../state/filmListSlice";
 import { getGenreByID } from "../../../../utils/getGenreById";
 import { FC } from "react";
 import cl from "./MainFilmCard.module.css";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import WatchFilmBtn from "../../Button/WatchFilmBtn";
-import { useAppSelector } from "../../../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
 import img from "./img.jpg";
 import StarIcon from "@mui/icons-material/Star";
+import { hideFavFilmsCards } from "../../../../state/favFilmsCardsShow";
 
-export interface IFilm {
+interface IFilm {
   film: IFilmsList;
 }
 
 const MainFilmCard: FC<IFilm> = ({ film }) => {
   const type = useAppSelector((state) => state.category.type);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { id, original_title, backdrop_path, genre_ids, name, vote_average } =
     film;
 
@@ -58,39 +61,39 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
           }
           alt="image"
         />
-        <div
+        <Box
           className={`${cl.fromBlack} ${cl.bgGradientToRight}`}
-          style={{ borderRadius: "0px", width: "50%" }}
-        ></div>
-        <div
+          sx={{ borderRadius: "0px", width: { xs: "20%", md: "50%" } }}
+        ></Box>
+        <Box
           className={`${cl.fromBlack} ${cl.bgGradientToTop}`}
-          style={{
+          sx={{
             borderRadius: "0px",
             width: "100%",
-            height: "30vh",
+            height: { xs: "15vh", md: "30vh" },
             bottom: "0px",
           }}
-        ></div>
-        <div
+        ></Box>
+        <Box
           className={`${cl.fromBlack} ${cl.bgGradientToLeft}`}
-          style={{
-            width: "75%",
+          sx={{
+            width: { xs: "40%", md: "75%" },
             right: "0px",
           }}
-        ></div>
+        ></Box>
       </CardCover>
       <CardContent
         sx={{
           justifyContent: "center",
           ml: "15px",
           flexDirection: "column",
-          marginTop: { xs: "60px", sm: "0px" },
+          marginTop: { xs: "20px", sm: "0px" },
         }}
       >
         <Typography
           level="h2"
           sx={{
-            fontSize: { md: "50px", xd: "30px", xs: "25px" },
+            fontSize: { lg: "50px", md: "40px", sm: "30px", xs: "25px" },
             maxWidth: { xs: "200px", sm: "60%" },
           }}
           textColor="#fff"
@@ -102,10 +105,15 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
           <Box
             sx={{
               display: "flex",
-              marginBottom: "15px",
+              marginBottom: { xs: "10px", sm: "15px" },
             }}
           >
-            <StarIcon sx={{ color: "rgb(230, 230, 0)" }}></StarIcon>
+            <StarIcon
+              sx={{
+                color: "rgb(230, 230, 0)",
+                width: { xs: "20px", md: "30px" },
+              }}
+            ></StarIcon>
             <Box
               sx={{
                 marginLeft: "5px",
@@ -114,7 +122,12 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
               }}
             >
               <Typography
-                sx={{ fontSize: "16px", color: "white", fontWeight: "600" }}
+                sx={{
+                  fontSize: { xs: "13px", sm: "16px" },
+                  paddingTop: { xs: "2px", sm: "0" },
+                  color: "white",
+                  fontWeight: "600",
+                }}
               >
                 {`${vote_average?.toFixed(1)} `}
               </Typography>
@@ -133,9 +146,9 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
                     justifyContent: "center",
                     color: "white",
                     backgroundColor: "rgba(53, 51, 56, 0.7)",
-                    padding: "5px 10px",
+                    padding: { xs: "3px 10px", sm: "5px 10px" },
                     borderRadius: "15px",
-                    fontSize: { xs: "14px", sm: "16px" },
+                    fontSize: { xs: "13px", sm: "16px" },
                   }}
                 >
                   {el}
@@ -146,12 +159,15 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
         ) : (
           ""
         )}
-        <NavLink
-          style={{ width: "160px", marginTop: "20px" }}
-          to={`/Zenix_Film/view/film/${id}`}
+        <Box
+          onClick={() => {
+            dispatch(hideFavFilmsCards());
+            navigate(`/Zenix_Film/view/${type}/${id}`);
+          }}
         >
+          {" "}
           <WatchFilmBtn />
-        </NavLink>
+        </Box>
       </CardContent>
     </Card>
   );

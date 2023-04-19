@@ -58,10 +58,11 @@ export const SideBarLeft: React.FC = () => {
         margin: "0 auto",
         alignItems: { xs: "center", lg: "flex-start" },
         position: "relative",
-        width: "100%",
+        width: { xs: "50px", sm: "80px", md: "100px", lg: "200px" },
         height: "100%",
         paddingLeft: "20px",
         zIndex: "2",
+        flexShrink: "0",
       }}
       role="presentation"
     >
@@ -89,7 +90,6 @@ export const SideBarLeft: React.FC = () => {
 
       <Box
         sx={{
-          flexGrow: 1,
           display: { xs: "flex", lg: "none" },
           paddingLeft: { xs: "0", sm: "3px" },
           paddingTop: "9px",
@@ -124,6 +124,7 @@ export const SideBarLeft: React.FC = () => {
             display: { xs: "block", lg: "none" },
             "& .MuiPaper-root": {
               backgroundColor: "rgb(20, 20, 20)",
+              width: "200px",
             },
           }}
         >
@@ -147,7 +148,7 @@ export const SideBarLeft: React.FC = () => {
           >
             <Typography
               sx={{
-                color: "lightgray",
+                color: "white",
               }}
               textAlign="center"
             >
@@ -173,7 +174,7 @@ export const SideBarLeft: React.FC = () => {
               handleCloseNavMenu();
             }}
           >
-            <Typography sx={{ color: "lightgray" }} textAlign="center">
+            <Typography sx={{ color: "white" }} textAlign="center">
               TV series
             </Typography>
           </MenuItem>
@@ -207,12 +208,14 @@ export const SideBarLeft: React.FC = () => {
               navigate(`/Zenix_Film/${type}/popular/page/1`);
             }}
             sx={{
-              marginBottom: "10px",
-              padding: { xs: "8px 0", sm: "8px 16px" },
+              marginBottom: { xs: "10px", sm: "20px", lg: "10px" },
+              padding: { xs: "18px 0", sm: "8px 16px" },
             }}
           >
             <WhatshotIcon
               sx={{
+                width: "24px",
+                height: "24px",
                 color: activeCategoryBtn === 1 ? "rgb(172, 0, 0)" : "lightgray",
                 marginRight: { xs: "0", sm: "10px" },
               }}
@@ -250,7 +253,7 @@ export const SideBarLeft: React.FC = () => {
               dispatch(showFavFilmsCards());
             }}
             sx={{
-              marginBottom: "10px",
+              marginBottom: { xs: "10px", sm: "20px", lg: "10px" },
               padding: { xs: "18px 0", sm: "8px 16px" },
             }}
           >
@@ -294,8 +297,8 @@ export const SideBarLeft: React.FC = () => {
               navigate(`/Zenix_Film/${type}/coming/page/1`);
             }}
             sx={{
-              marginBottom: "10px",
-              padding: { xs: "8px 0", sm: "8px 16px" },
+              marginBottom: { xs: "10px", sm: "20px", lg: "10px" },
+              padding: { xs: "18px 0", sm: "8px 16px" },
             }}
           >
             <EventIcon
@@ -353,6 +356,7 @@ export const SideBarLeft: React.FC = () => {
                   color: "lightgray",
                   marginRight: { xs: "0", sm: "10px" },
                   marginLeft: "2px",
+                  marginTop: { xs: "25px", lg: "0" },
                 }}
               />
               <Typography

@@ -1,6 +1,8 @@
 /* Reset and base styles  */
 html {
   overflow-y: scroll;
+  background-color: black;
+
 }
 
 * {
@@ -117,10 +119,6 @@ legend {
 
 /* App styles */
 
-.app {
-
-  background-color: black;
-}
 
 .grid {
   display: grid;
