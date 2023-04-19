@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Zenix_Film/static/css/main.4f7652dd.css",
-    "main.js": "/Zenix_Film/static/js/main.8413627a.js",
+    "main.css": "/Zenix_Film/static/css/main.5ca4bb13.css",
+    "main.js": "/Zenix_Film/static/js/main.17595417.js",
     "static/media/background.jpg": "/Zenix_Film/static/media/background.a915cb010e8dbb0e2e14.jpg",
     "static/media/error-404.jpg": "/Zenix_Film/static/media/error-404.5db6274ef245113758a9.jpg",
     "static/media/no-img.jpg": "/Zenix_Film/static/media/no-img.15338d70acf0cd1ee659.jpg",
@@ -10,11 +10,11 @@
     "static/media/imgNotFound.jpg": "/Zenix_Film/static/media/imgNotFound.338f499f9ba03cf265d8.jpg",
     "static/media/no-sources.jpg": "/Zenix_Film/static/media/no-sources.0bc2eade3b56bffc36e1.jpg",
     "index.html": "/Zenix_Film/index.html",
-    "main.4f7652dd.css.map": "/Zenix_Film/static/css/main.4f7652dd.css.map",
-    "main.8413627a.js.map": "/Zenix_Film/static/js/main.8413627a.js.map"
+    "main.5ca4bb13.css.map": "/Zenix_Film/static/css/main.5ca4bb13.css.map",
+    "main.17595417.js.map": "/Zenix_Film/static/js/main.17595417.js.map"
   },
   "entrypoints": [
-    "static/css/main.4f7652dd.css",
-    "static/js/main.8413627a.js"
+    "static/css/main.5ca4bb13.css",
+    "static/js/main.17595417.js"
   ]
 }
