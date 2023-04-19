@@ -12,13 +12,13 @@ const WatchFilmBtn = () => {
       }}
       sx={{
         width: { xs: "120px", sm: "160px" },
-        padding: { xs: "8px 0", sm: "11px 0" },
+        padding: { xs: "6px 8px", sm: "11px 0" },
         backgroundColor: "rgb(172,0,0)",
         borderRadius: "25px",
         textTransform: "none",
         fontWeight: "600",
         fontSize: { xs: "13px", sm: "15px" },
-        marginTop: "20px",
+        marginTop: { xs: "10px", sm: "20px" },
         "&:hover": {
           backgroundColor: "rgb(142,0,0)",
         },

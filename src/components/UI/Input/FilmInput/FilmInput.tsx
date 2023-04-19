@@ -36,7 +36,8 @@ const FilmInput: FC = () => {
   return (
     <Box
       sx={{
-        maxWidth: "222px",
+        width: "200px",
+        height: { xs: "45px", sm: "50px" },
         border: "2px solid lightgray",
         marginRight: { xs: "0", md: "100px" },
         marginTop: { xs: "15px", lg: "0px" },

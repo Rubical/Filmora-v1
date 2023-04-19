@@ -18,3 +18,7 @@
 .bgGradientToLeft {
   background-image: linear-gradient(to left, var(--tw-gradient-stops));
 }
+
+.bgGradientToBottom {
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+}

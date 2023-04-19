@@ -91,7 +91,7 @@ export default function SideBarRightLogined() {
             <StarsIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>Favourite</p>
       </MenuItem>
       <MenuItem
         sx={{

@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
 import img from "./img.jpg";
 import StarIcon from "@mui/icons-material/Star";
 import { hideFavFilmsCards } from "../../../../state/favFilmsCardsShow";
+import AddToFavBtn from "../../Button/AddToFavBtn";
 
 interface IFilm {
   film: IFilmsList;
@@ -28,9 +29,9 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
   return (
     <Card
       sx={{
-        height: { lg: "500px", sm: "400px", md: "450px", xs: "350px" },
+        height: { lg: "500px", sm: "350px", md: "450px", xs: "200px" },
         width: "100%",
-        marginTop: "0",
+        marginTop: { xs: "110px", sm: "0" },
         background: "black",
         borderRadius: "0px",
         boxShadow: "none",
@@ -41,9 +42,9 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
           right: "0px",
           top: "0px",
           left: "auto",
-          width: "90%",
+          width: "100%",
           maxWidth: "1200px",
-          height: { lg: "600px", sm: "320px", md: "450px", xs: "220px" },
+          height: { lg: "600px", sm: "320px", md: "450px", xs: "200px" },
           display: "flex",
           alignSelf: "flex-end",
           borderRadius: "0px",
@@ -63,37 +64,47 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
         />
         <Box
           className={`${cl.fromBlack} ${cl.bgGradientToRight}`}
-          sx={{ borderRadius: "0px", width: { xs: "20%", md: "50%" } }}
+          sx={{ borderRadius: "0px", width: { xs: "20%", md: "40%" } }}
+        ></Box>
+        <Box
+          className={`${cl.fromBlack} ${cl.bgGradientToBottom}`}
+          sx={{
+            display: { xs: "flex", sm: "none" },
+            borderRadius: "0px",
+            width: "100%",
+            height: { xs: "10vh", md: "20vh" },
+            top: "0px",
+          }}
         ></Box>
         <Box
           className={`${cl.fromBlack} ${cl.bgGradientToTop}`}
           sx={{
             borderRadius: "0px",
             width: "100%",
-            height: { xs: "15vh", md: "30vh" },
+            height: { xs: "10vh", md: "20vh" },
             bottom: "0px",
           }}
         ></Box>
         <Box
           className={`${cl.fromBlack} ${cl.bgGradientToLeft}`}
           sx={{
-            width: { xs: "40%", md: "75%" },
+            width: { xs: "20%", md: "55%" },
             right: "0px",
           }}
         ></Box>
       </CardCover>
       <CardContent
         sx={{
-          justifyContent: "center",
+          justifyContent: { xs: "flex-start", sm: "center" },
           ml: "15px",
           flexDirection: "column",
-          marginTop: { xs: "20px", sm: "0px" },
+          marginTop: { xs: "0", sm: "25px" },
         }}
       >
         <Typography
           level="h2"
           sx={{
-            fontSize: { lg: "50px", md: "40px", sm: "30px", xs: "25px" },
+            fontSize: { lg: "50px", md: "40px", sm: "30px", xs: "20px" },
             maxWidth: { xs: "200px", sm: "60%" },
           }}
           textColor="#fff"
@@ -165,7 +176,6 @@ const MainFilmCard: FC<IFilm> = ({ film }) => {
             navigate(`/Zenix_Film/view/${type}/${id}`);
           }}
         >
-          {" "}
           <WatchFilmBtn />
         </Box>
       </CardContent>
