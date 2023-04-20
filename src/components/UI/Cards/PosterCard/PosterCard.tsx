@@ -26,8 +26,8 @@ const ActorCard: FC<IPosterCard> = ({ poster }) => {
   return (
     <Card
       sx={{
-        width: "145px",
-        height: "218px",
+        width: { xs: "100px", sm: "140px" },
+        height: { xs: "150px", sm: "210px" },
         color: "white",
         position: "relative",
         backgroundColor: "transparent",

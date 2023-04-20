@@ -59,7 +59,7 @@ export default function SideBarRightLogined() {
         "& .MuiPaper-root": {
           backgroundColor: "rgb(20, 20, 20)",
           position: "relative",
-          zIndex: "2",
+          zIndex: "5",
           width: "300px",
         },
       }}
@@ -143,13 +143,15 @@ export default function SideBarRightLogined() {
         alignItems: "center",
         color: "lightgray",
         flexShrink: "0",
+        position: "relative",
+        zIndex: "5",
       }}
       role="presentation"
     >
       <Box
         sx={{
           position: "relative",
-          zIndex: "2",
+          zIndex: "5",
           display: {
             xs: "none",
             lg: "flex",

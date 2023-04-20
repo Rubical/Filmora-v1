@@ -43,45 +43,60 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
       sx={{
         position: "relative",
         color: "lightgray",
-        marginTop: "170px",
+        marginTop: { xs: "120px", lg: "170px" },
         overflow: "auto",
-        marginBottom: "150px",
+        marginBottom: { xs: "100px", md: "150px" },
         zIndex: "2",
+        display: { xs: "flex", md: "block" },
+        flexDirection: "column",
+        alignItems: "flex-start",
+        marginLeft: { xs: "20px", lg: "0" },
       }}
     >
-      <img
-        style={{
-          width: "300px",
-          height: "450px",
+      <Box
+        sx={{
           float: "left",
+          width: { xs: "200px", sm: "300px" },
+          height: { xs: "300px", sm: "450px" },
           marginRight: "30px",
-          background: "rgba(30,30,30,0.67)",
+          marginBottom: { xs: "20px", md: "0" },
         }}
-        src={
-          poster_path
-            ? `https://www.themoviedb.org/t/p/original/${poster_path}`
-            : noImg
-        }
-        alt="poster"
-      />
+      >
+        <img
+          style={{
+            marginRight: "30px",
+            background: "rgba(30,30,30,0.67)",
+          }}
+          src={
+            poster_path
+              ? `https://www.themoviedb.org/t/p/original/${poster_path}`
+              : noImg
+          }
+          alt="poster"
+        />
+      </Box>
       <Box>
         <Typography
-          sx={{ fontSize: "35px", fontWeight: "600", maxWidth: "700px" }}
+          sx={{
+            fontSize: { xs: "25px", sm: "30px", md: "35px" },
+            fontWeight: "600",
+            maxWidth: "100%",
+            lineHeight: { xs: "1.2", md: "1.4" },
+          }}
         >
           {movieName ? movieName : "No title"}
         </Typography>
         {releaseDate ? (
           <Typography
             sx={{
-              fontSize: "35px",
+              fontSize: { xs: "25px", sm: "30px", md: "35px" },
               fontWeight: "600",
-              maxWidth: "700px",
+              maxWidth: "80%",
               whiteSpace: "nowrap",
+              lineHeight: { xs: "1.3", md: "1.4" },
             }}
           >
-            {"("}
-            {getPrettyDate(new Date(releaseDate))}
-            {" )"}
+            {`(${getPrettyDate(new Date(releaseDate))} )`}
           </Typography>
         ) : (
           ""
@@ -91,30 +106,38 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
         <Box
           sx={{
             display: "flex",
-            marginTop: "20px",
+            marginTop: { xs: "10px", md: "20px" },
             color: "lightgray",
             marginBottom: "5px",
           }}
         >
-          <StarIcon sx={{ color: "rgb(230, 230, 0)" }}></StarIcon>
+          <StarIcon
+            sx={{
+              color: "rgb(230, 230, 0)",
+              width: { xs: "15px", md: "20px" },
+            }}
+          ></StarIcon>
           <Box
             sx={{
               marginLeft: "5px",
               display: "flex",
               columnGap: "7px",
+              paddingTop: { xs: "2px", md: "0" },
             }}
           >
-            <Typography sx={{ fontSize: "16px" }}>
+            <Typography sx={{ fontSize: { xs: "13px", md: "16px" } }}>
               {vote_average?.toFixed(1)}
             </Typography>
-            <Typography sx={{ fontSize: "16px" }}>Rating</Typography>
+            <Typography sx={{ fontSize: { xs: "13px", md: "16px" } }}>
+              Rating
+            </Typography>
           </Box>
         </Box>
       ) : (
         ""
       )}
       {genres ? (
-        <Box sx={{ display: "flex", columnGap: "7px" }}>
+        <Box sx={{ display: "flex", columnGap: "7px", flexWrap: "wrap" }}>
           {genres.map((el: any, index: number) => {
             return index === genres.length - 1 ? (
               <Typography key={el.id} sx={{ fontSize: "14px" }}>
@@ -122,7 +145,7 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
               </Typography>
             ) : (
               <Typography key={el.id} sx={{ fontSize: "14px" }}>
-                {el.name} {"/"}
+                {`${el.name} /`}
               </Typography>
             );
           })}
@@ -133,11 +156,19 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
       {overview ? (
         <Box>
           <Typography
-            sx={{ marginTop: "40px", fontWeight: "600", marginBottom: "10px" }}
+            sx={{
+              marginTop: { xs: "25px", md: "40px" },
+              fontWeight: "600",
+              marginBottom: "10px",
+            }}
           >
             Overview
           </Typography>
-          <Typography sx={{ maxWidth: "95%" }}>{overview}</Typography>
+          <Typography
+            sx={{ maxWidth: "100%", fontSize: { xs: "14px", md: "16px" } }}
+          >
+            {overview}
+          </Typography>
         </Box>
       ) : (
         ""

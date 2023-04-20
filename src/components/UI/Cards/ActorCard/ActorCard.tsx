@@ -20,8 +20,8 @@ const ActorCard: FC<IActorCard> = ({ actor }) => {
   return (
     <Card
       sx={{
-        maxWidth: "180px",
-        height: "358px",
+        width: { xs: "120px", md: "180px" },
+        height: { xs: "260px", md: "360px" },
         color: "white",
         position: "relative",
         backgroundColor: "transparent",
@@ -30,8 +30,6 @@ const ActorCard: FC<IActorCard> = ({ actor }) => {
     >
       <img
         style={{
-          width: "180px",
-          height: "270px",
           objectFit: "cover",
           backgroundColor: "rgba(30,30,30,0.67)",
         }}
@@ -44,10 +42,14 @@ const ActorCard: FC<IActorCard> = ({ actor }) => {
       />
 
       <CardContent>
-        <Typography sx={{ fontSize: "15px", fontWeight: "600" }}>
+        <Typography
+          sx={{ fontSize: { xs: "12px", md: "15px" }, fontWeight: "600" }}
+        >
           {name ? name : "No info"}
         </Typography>
-        <Typography sx={{ fontSize: "12px", color: "lightgray" }}>
+        <Typography
+          sx={{ fontSize: { xs: "10px", md: "12px" }, color: "lightgray" }}
+        >
           {character ? character : "No info"}
         </Typography>
       </CardContent>

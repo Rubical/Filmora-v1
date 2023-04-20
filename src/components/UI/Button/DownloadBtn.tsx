@@ -31,13 +31,15 @@ const DownloadBtn: FC<IDownloadBtn> = ({ download }) => {
         sx={{
           color: "#313131",
           fontWeight: "600",
-          fontSize: "14px",
+          fontSize: { xs: "12px", sm: "14px" },
           paddingTop: "1px",
         }}
       >
         Download
       </Typography>
-      <FileDownloadIcon sx={{ color: "#313131" }}></FileDownloadIcon>
+      <FileDownloadIcon
+        sx={{ color: "#313131", width: { xs: "18px", md: "24px" } }}
+      ></FileDownloadIcon>
     </Button>
   );
 };

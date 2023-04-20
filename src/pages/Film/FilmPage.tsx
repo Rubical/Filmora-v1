@@ -129,8 +129,9 @@ const FilmPage: FC = () => {
       <Box
         sx={{
           display: "flex",
+          flexWrap: { xs: "wrap", md: "no-wrap" },
           justifyContent: "space-between",
-          marginBottom: "150px",
+          marginBottom: { xs: "100px", md: "150px" },
         }}
       >
         {videoIsLoading ? (
@@ -139,10 +140,10 @@ const FilmPage: FC = () => {
               position: "relative",
               backgroundColor: "rgba(30,30,30,0.67)",
               zIndex: "10",
+              width: { xs: "100%", sm: "440px", md: "600px", lg: "600px" },
+              height: { xs: "200px", sm: "230px", md: "330px", lg: "330px" },
             }}
             variant="rectangular"
-            width={750}
-            height={420}
           />
         ) : (
           <YoutubeFrame
@@ -153,7 +154,15 @@ const FilmPage: FC = () => {
           />
         )}
 
-        <Box sx={{ position: "relative", zIndex: "2", marginTop: "40px" }}>
+        <Box
+          sx={{
+            position: "relative",
+            zIndex: "2",
+            display: { xs: "flex", lg: "block" },
+            columnGap: "30px",
+            flexWrap: "wrap",
+          }}
+        >
           <Box
             sx={{
               position: "relative",
@@ -279,8 +288,10 @@ const FilmPage: FC = () => {
             sx={{
               color: "white",
               position: "relative",
-              fontSize: "34px",
+              fontSize: { xs: "24px", md: "34px" },
               marginBottom: "40px",
+              display: { xs: "flex", md: "block" },
+              justifyContent: "center",
             }}
           >
             Top billed casts
@@ -289,9 +300,10 @@ const FilmPage: FC = () => {
             sx={{
               display: "flex",
               flexWrap: "wrap",
+              justifyContent: "center",
               columnGap: "30px",
               rowGap: "30px",
-              marginBottom: "150px",
+              marginBottom: { xs: "100px", md: "150px" },
             }}
           >
             {actors.slice(0, 10).map((actor: any) => {
@@ -310,8 +322,10 @@ const FilmPage: FC = () => {
             sx={{
               color: "white",
               position: "relative",
-              fontSize: "34px",
+              fontSize: { xs: "24px", md: "34px" },
               marginBottom: "40px",
+              display: { xs: "flex", md: "block" },
+              justifyContent: "center",
             }}
           >
             {`${firstLetterToUpperCase(type)} posters`}
@@ -320,9 +334,10 @@ const FilmPage: FC = () => {
             sx={{
               display: "flex",
               flexWrap: "wrap",
+              justifyContent: "center",
               columnGap: "30px",
               rowGap: "30px",
-              marginBottom: "150px",
+              marginBottom: { xs: "100px", md: "150px" },
             }}
           >
             {posters.slice(0, 18).map((poster: any) => {
@@ -339,8 +354,10 @@ const FilmPage: FC = () => {
             sx={{
               color: "white",
               position: "relative",
-              fontSize: "34px",
-              marginBottom: "40px",
+              fontSize: { xs: "24px", md: "34px" },
+              marginBottom: { xs: "20px", md: "40px" },
+              display: { xs: "flex", md: "block" },
+              justifyContent: "center",
             }}
           >
             {`Similar ${type === "movie" ? "movies" : "tv series"}`}
