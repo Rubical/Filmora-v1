@@ -1,10 +1,5 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
-import { Download } from "@mui/icons-material";
 import DownloadBtn from "../../Button/DownloadBtn";
 import { downloadFileUrl } from "../../../../utils/downloadFileUrl";
 

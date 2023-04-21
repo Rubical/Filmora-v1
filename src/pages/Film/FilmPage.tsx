@@ -134,26 +134,12 @@ const FilmPage: FC = () => {
           marginBottom: { xs: "100px", md: "150px" },
         }}
       >
-        {videoIsLoading ? (
-          <Skeleton
-            sx={{
-              position: "relative",
-              backgroundColor: "rgba(30,30,30,0.67)",
-              zIndex: "10",
-              width: { xs: "100%", sm: "440px", md: "600px", lg: "600px" },
-              height: { xs: "200px", sm: "230px", md: "330px", lg: "330px" },
-            }}
-            variant="rectangular"
-          />
-        ) : (
-          <YoutubeFrame
-            embedId={
-              video?.find((el: any) => el.type === "Trailer")?.key ||
-              video?.find((el: any) => el.key)
-            }
-          />
-        )}
-
+        <YoutubeFrame
+          embedId={
+            video?.find((el: any) => el.type === "Trailer")?.key ||
+            video?.find((el: any) => el.key)
+          }
+        />
         <Box
           sx={{
             position: "relative",
@@ -291,7 +277,7 @@ const FilmPage: FC = () => {
               fontSize: { xs: "24px", md: "34px" },
               marginBottom: "40px",
               display: { xs: "flex", md: "block" },
-              justifyContent: "center",
+              justifyContent: { xs: "center", md: "flex-start" },
             }}
           >
             Top billed casts
@@ -300,7 +286,7 @@ const FilmPage: FC = () => {
             sx={{
               display: "flex",
               flexWrap: "wrap",
-              justifyContent: "center",
+              justifyContent: { xs: "center", md: "flex-start" },
               columnGap: "30px",
               rowGap: "30px",
               marginBottom: { xs: "100px", md: "150px" },
@@ -325,7 +311,7 @@ const FilmPage: FC = () => {
               fontSize: { xs: "24px", md: "34px" },
               marginBottom: "40px",
               display: { xs: "flex", md: "block" },
-              justifyContent: "center",
+              justifyContent: { xs: "center", md: "flex-start" },
             }}
           >
             {`${firstLetterToUpperCase(type)} posters`}
@@ -334,7 +320,7 @@ const FilmPage: FC = () => {
             sx={{
               display: "flex",
               flexWrap: "wrap",
-              justifyContent: "center",
+              justifyContent: { xs: "center", md: "flex-start" },
               columnGap: "30px",
               rowGap: "30px",
               marginBottom: { xs: "100px", md: "150px" },

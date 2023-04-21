@@ -64,8 +64,10 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
       >
         <img
           style={{
+            width: "100%",
+            height: "100%",
             marginRight: "30px",
-            background: "rgba(30,30,30,0.67)",
+            backgroundColor: "rgba(30,30,30,0.67)",
           }}
           src={
             poster_path
