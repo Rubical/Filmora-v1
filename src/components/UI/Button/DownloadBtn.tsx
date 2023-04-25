@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import Button from "@mui/material/Button";

@@ -1,6 +1,9 @@
 import * as React from "react";
-import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
-import SideBarFilmCard from "../../Cards/FavourilteFilmCard/FavouriteFilmCard";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../hooks/useTypedSelector";
+import SideBarFilmCard from "../../../FavourilteFilmCard/FavouriteFilmCard";
 import ShowMoreBtn from "../../Button/ShowMoreBtn";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -12,13 +15,13 @@ import StarsIcon from "@mui/icons-material/Stars";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
-import { setCategory, setType } from "../../../../state/categorySlice";
-import { changeFilmListPage } from "../../../../state/filmListSlice";
+import { setCategory, setType } from "../../../../store/filmFilterSlice.slice";
+import { changeFilmListPage } from "../../../../store/filmList.slice";
 import {
   setActiveCategoryBtn,
   setActiveTypeBtn,
-} from "../../../../state/activeBtnsSlice";
-import { hideFavFilmsCards } from "../../../../state/favFilmsCardsShow";
+} from "../../../../store/activeFilterBtns.slice";
+import { hideFavFilmsCards } from "../../../../store/favFilmCardsShow.slice";
 import { useNavigate } from "react-router-dom";
 
 export default function SideBarRightLogined() {

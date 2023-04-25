@@ -1,9 +1,9 @@
 import React from "react";
-import FilmPage from "../pages/Film/FilmPage";
-import MainPage from "../pages/Main/MainPage";
-import ErrorPage from "../pages/Error/ErrorPage";
-import FavouritePage from "../pages/Favourite/FavouritePage";
-import SearchedPage from "../pages/Searched/SearchedPage";
+import FilmPage from "../screens/film/FilmPage";
+import MainPage from "../screens/main/MainPage";
+import ErrorPage from "../screens/error/ErrorPage";
+import FavouritePage from "../screens/favourite/FavouritePage";
+import SearchedFilmsPage from "../screens/searchedFilms/SearchedFilmsPage";
 
 interface Routes {
   path: string;
@@ -23,7 +23,7 @@ export const privateRoutes: Routes[] = [
   { path: "/Zenix_Film/favourite", element: FavouritePage },
   {
     path: "/Zenix_Film/searched/:queryParam/:page/:num",
-    element: SearchedPage,
+    element: SearchedFilmsPage,
   },
 ];
 export const publicRoutes: Routes[] = [

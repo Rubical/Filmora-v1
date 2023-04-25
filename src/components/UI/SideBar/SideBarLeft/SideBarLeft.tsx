@@ -1,13 +1,16 @@
 import * as React from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
-import { setCategory, setType } from "../../../../state/categorySlice";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../hooks/useTypedSelector";
+import { setCategory, setType } from "../../../../store/filmFilterSlice.slice";
 import {
   setActiveCategoryBtn,
   setActiveTypeBtn,
-} from "../../../../state/activeBtnsSlice";
-import { showFavFilmsCards } from "../../../../state/favFilmsCardsShow";
+} from "../../../../store/activeFilterBtns.slice";
+import { showFavFilmsCards } from "../../../../store/favFilmCardsShow.slice";
 import { Context } from "../../../../context/context";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
@@ -22,12 +25,12 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import logo from "../../../../images/logo.png";
+import logo from "./logo.png";
 import {
   changeSearchedFilmPage,
   changeSearchedQuery,
-} from "../../../../state/searchFilmSlice";
-import { changeFilmListPage } from "../../../../state/filmListSlice";
+} from "../../../../store/searchedFilm.slice";
+import { changeFilmListPage } from "../../../../store/filmList.slice";
 
 export const SideBarLeft: React.FC = () => {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from "react";
 import Card from "@mui/material/Card";
-import noSources from "./no-sources.jpg";
+import imgPlaceholder from "./youtube-frame-img-placeholder.jpg";
 
 interface IYoutubeFrame {
   embedId: string;
@@ -28,7 +28,7 @@ const YoutubeFrame: FC<IYoutubeFrame> = ({ embedId }) => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         ></iframe>
       ) : (
-        <img style={{ width: "100%", height: "420px" }} src={noSources} />
+        <img style={{ width: "100%", height: "420px" }} src={imgPlaceholder} />
       )}
     </Card>
   );

@@ -1,12 +1,12 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import logo from "./../../../images/logo.png";
+import logo from "./logo.png";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-import cl from "../Cards/MainFilmCard/MainFilmCard.module.css";
+import cl from "../../FrontFilmCard/FrontFilmCard.module.css";
 const Footer = () => {
   return (
     <Box sx={{ position: "relative", zIndex: "2" }}>

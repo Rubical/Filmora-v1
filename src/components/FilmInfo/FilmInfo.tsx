@@ -1,26 +1,12 @@
 import { FC } from "react";
-import Typography from "@mui/material/Typography";
+import { IFilm, TypeGenre } from "../../types/film.types";
+import imgPlaceholder from "./filminfo-img-placeholder.jpg";
 import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
-import Skeleton from "@mui/material/Skeleton";
-import getPrettyDate from "../../utils/getPrettyDate";
-import { IFilmsList } from "../../state/filmListSlice";
-import noImg from "./no-img.jpg";
-import { useAppSelector } from "../../hooks/reduxHooks";
-
-interface IFilmInfo {
-  film: IFilmInfo;
-}
-
-interface IFilmInfo extends IFilmsList {
-  budget: number;
-  homepage: string;
-  genres: any;
-  poster_path: string;
-}
+import Typography from "@mui/material/Typography";
 
 interface IFilmInfoCard {
-  film: IFilmInfo;
+  film: IFilm;
 }
 
 const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
@@ -34,9 +20,6 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
     poster_path,
     first_air_date,
   } = film;
-
-  const movieName = original_title ? original_title : name;
-  const releaseDate = release_date ? release_date : first_air_date;
 
   return (
     <Box
@@ -72,7 +55,7 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
           src={
             poster_path
               ? `https://www.themoviedb.org/t/p/original/${poster_path}`
-              : noImg
+              : imgPlaceholder
           }
           alt="poster"
         />
@@ -86,9 +69,9 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
             lineHeight: { xs: "1.2", md: "1.4" },
           }}
         >
-          {movieName ? movieName : "No title"}
+          {original_title || name ? original_title || name : "No title"}
         </Typography>
-        {releaseDate ? (
+        {release_date || first_air_date ? (
           <Typography
             sx={{
               fontSize: { xs: "25px", sm: "30px", md: "35px" },
@@ -98,7 +81,7 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
               lineHeight: { xs: "1.3", md: "1.4" },
             }}
           >
-            {`(${getPrettyDate(new Date(releaseDate))} )`}
+            {new Date(release_date || first_air_date).getFullYear()}
           </Typography>
         ) : (
           ""
@@ -128,7 +111,7 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
             }}
           >
             <Typography sx={{ fontSize: { xs: "13px", md: "16px" } }}>
-              {vote_average?.toFixed(1)}
+              {vote_average.toFixed(1)}
             </Typography>
             <Typography sx={{ fontSize: { xs: "13px", md: "16px" } }}>
               Rating
@@ -140,14 +123,10 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
       )}
       {genres ? (
         <Box sx={{ display: "flex", columnGap: "7px", flexWrap: "wrap" }}>
-          {genres.map((el: any, index: number) => {
-            return index === genres.length - 1 ? (
+          {genres.map((el: TypeGenre, index: number) => {
+            return (
               <Typography key={el.id} sx={{ fontSize: "14px" }}>
-                {el.name}
-              </Typography>
-            ) : (
-              <Typography key={el.id} sx={{ fontSize: "14px" }}>
-                {`${el.name} /`}
+                {`${el.name} / `}
               </Typography>
             );
           })}

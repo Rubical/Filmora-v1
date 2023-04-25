@@ -4,21 +4,24 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import FilmInput from "../Input/FilmInput/FilmInput";
+import FilmSearchInput from "../../FilmSearchInput/FilmSearchInput";
 import cl from "./NavBar.module.css";
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
-import { setCategory, setType } from "../../../state/categorySlice";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../hooks/useTypedSelector";
+import { setCategory, setType } from "../../../store/filmFilterSlice.slice";
 import { useNavigate } from "react-router-dom";
 import {
   setActiveCategoryBtn,
   setActiveTypeBtn,
-} from "../../../state/activeBtnsSlice";
-import { showFavFilmsCards } from "../../../state/favFilmsCardsShow";
+} from "../../../store/activeFilterBtns.slice";
+import { showFavFilmsCards } from "../../../store/favFilmCardsShow.slice";
 import {
   changeSearchedFilmPage,
   changeSearchedQuery,
-} from "../../../state/searchFilmSlice";
-import { changeFilmListPage } from "../../../state/filmListSlice";
+} from "../../../store/searchedFilm.slice";
+import { changeFilmListPage } from "../../../store/filmList.slice";
 
 const NavBar: FC = () => {
   const dispatch = useAppDispatch();
@@ -119,7 +122,7 @@ const NavBar: FC = () => {
               TV series
             </Button>
           </Box>
-          <FilmInput />
+          <FilmSearchInput />
         </Toolbar>
       </Container>
     </AppBar>

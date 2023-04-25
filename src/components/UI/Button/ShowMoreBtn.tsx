@@ -2,18 +2,14 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../../hooks/reduxHooks";
-import { hideFavFilmsCards } from "../../../state/favFilmsCardsShow";
+import { useAppDispatch } from "../../../hooks/useTypedSelector";
+import { hideFavFilmsCards } from "../../../store/favFilmCardsShow.slice";
 import {
   setActiveCategoryBtn,
   setActiveTypeBtn,
-} from "../../../state/activeBtnsSlice";
-import { setCategory, setType } from "../../../state/categorySlice";
-import { changeFilmListPage } from "../../../state/filmListSlice";
-import {
-  changeSearchedFilmPage,
-  changeSearchedQuery,
-} from "../../../state/searchFilmSlice";
+} from "../../../store/activeFilterBtns.slice";
+import { setCategory, setType } from "../../../store/filmFilterSlice.slice";
+import { changeFilmListPage } from "../../../store/filmList.slice";
 
 export default function ShowMoreBtn() {
   const navigate = useNavigate();
