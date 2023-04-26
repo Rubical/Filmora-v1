@@ -1,52 +1,44 @@
 import { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks/useTypedSelector";
-import { fetchFilm } from "../../store/film.slice";
 import CardCover from "@mui/joy/CardCover";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import cl from "./FilmPage.module.css";
 import Loader from "../../components/UI/Loader/Loader";
-import { fetchActors } from "../../store/actors.slice";
 import ActorCard from "../../components/ActorCard/ActorCard";
 import FilmInfo from "../../components/FilmInfo/FilmInfo";
 import Typography from "@mui/material/Typography";
 import YoutubeFrame from "../../components/YoutubeFrame/YoutubeFrame";
-import { fetchVideo } from "../../store/filmVideo.slice";
 import { toHoursAndMinutes } from "../../utils/convertToHoursAndMinutes";
-import { fetchPosters } from "../../store/posters.slice";
 import PosterCard from "../../components/PosterCard/PosterCard";
-import { fetchSimilarMovies } from "../../store/similarMovies.slice";
 import FilmCard from "../../components/FilmCard/FilmCard";
 import backgroundImg from "./background-img-placeholder.jpg";
-import Skeleton from "@mui/material/Skeleton";
 import { firstLetterToUpperCase } from "../../utils/firstLetterToUpperCase";
 import { useActions } from "../../hooks/useActions";
-
-interface IFilm {
-  backdrop_path: string;
-  release_date: string;
-  status: string;
-  budget: number;
-  revenue: number;
-  runtime: number;
-  first_air_date: "string";
-  last_episode_to_air: IEpisode;
-  next_episode_to_air: IEpisode;
-}
-
-interface IEpisode {
-  air_date: string;
-  episode_number: number;
-  name: string;
-}
+import { useActors } from "../../hooks/useActors";
+import { useFilm } from "../../hooks/useFilm";
+import { useVideo } from "../../hooks/useVideo";
+import { usePosters } from "../../hooks/usePosters";
+import { useSimilarMovies } from "../../hooks/useSimilarMovies";
+import { Skeleton } from "@mui/material";
 
 const FilmPage: FC = () => {
   const { id } = useParams();
   const { type } = useParams();
 
-  const film: any = useAppSelector((state) => state.film.film);
-  const filmIsLoading = useAppSelector((state) => state.film.loading);
+  const {
+    fetchFilm,
+    fetchActors,
+    fetchVideo,
+    fetchPosters,
+    fetchSimilarMovies,
+  } = useActions();
+
+  const actors = useActors();
+  const { film, loading } = useFilm();
+  const { filmVideo, videoIsLoading } = useVideo();
+  const posters = usePosters();
+  const similarMovies = useSimilarMovies();
 
   const {
     backdrop_path,
@@ -58,31 +50,20 @@ const FilmPage: FC = () => {
     first_air_date,
     last_episode_to_air,
     next_episode_to_air,
-  } = film as IFilm;
-
-  const actors = useAppSelector((state) => state.actors.actors);
-
-  const video: any = useAppSelector((state) => state.filmVideo.filmVideo);
-  const posters = useAppSelector((state) => state.posters.posters);
-  const similarMovies = useAppSelector(
-    (state) => state.similarMovies.similarMovies
-  );
-  const videoIsLoading = useAppSelector((state) => state.filmVideo.loading);
+  } = film;
 
   const date = type === " movie" ? release_date : first_air_date;
 
-  const {} = useActions();
-
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(fetchFilm({ id, filmType: type }));
-    dispatch(fetchActors({ id, filmType: type }));
-    dispatch(fetchVideo({ id, filmType: type }));
-    dispatch(fetchPosters({ id, filmType: type }));
-    dispatch(fetchSimilarMovies({ id, filmType: type }));
+    fetchFilm({ id, filmType: type });
+    fetchActors({ id, filmType: type });
+    fetchVideo({ id, filmType: type });
+    fetchPosters({ id, filmType: type });
+    fetchSimilarMovies({ id, filmType: type });
   }, [id]);
 
-  return filmIsLoading ? (
+  return loading ? (
     <Loader />
   ) : (
     <Container>
@@ -135,12 +116,18 @@ const FilmPage: FC = () => {
           marginBottom: { xs: "100px", md: "150px" },
         }}
       >
-        <YoutubeFrame
-          embedId={
-            video?.find((el: any) => el.type === "Trailer")?.key ||
-            video?.find((el: any) => el.key)
-          }
-        />
+        {videoIsLoading ? (
+          <Skeleton
+            sx={{
+              width: { xs: "100%", sm: "440px", md: "600px", lg: "600px" },
+              height: { xs: "auto", sm: "230px", md: "330px", lg: "330px" },
+            }}
+          />
+        ) : (
+          <YoutubeFrame
+            embedId={filmVideo?.find((el) => el.type === "Trailer")?.key}
+          />
+        )}
         <Box
           sx={{
             position: "relative",

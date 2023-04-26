@@ -1,11 +1,8 @@
 import { FC } from "react";
-import Card from "@mui/material/Card";
-import DownloadBtn from "../UI/Button/DownloadBtn";
+import { IPoster } from "./../../types/posters.types";
 import { downloadFileUrl } from "../../utils/downloadFileUrl";
-
-interface IPoster {
-  file_path: string;
-}
+import DownloadBtn from "../UI/Button/DownloadBtn";
+import Card from "@mui/material/Card";
 
 interface IPosterCard {
   poster: IPoster;

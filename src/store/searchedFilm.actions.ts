@@ -9,9 +9,9 @@ type TypeFetchData = {
 
 export const fetchSearchedFilms = createAsyncThunk<
   TypeFetchData,
-  unknown,
+  void,
   { state: RootState }
->("film/searchedFilmSlice", async (__, thunkAPI) => {
+>("film/searchedFilmSlice", async (_, thunkAPI) => {
   const { searchedFilm, filmFilter } = thunkAPI.getState();
   const searchedParams = searchedFilm.filmQuery;
   const page = searchedFilm.page;

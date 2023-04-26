@@ -1,7 +1,7 @@
 import { FC, useContext } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/useTypedSelector";
 import { Context } from "../../context/context";
 import { useNavigate } from "react-router-dom";
+import { useFilmFilter } from "../../hooks/useFilmFilter";
 import { IFilm } from "../../types/film.types";
 import { hideFavFilmsCards } from "../../store/favFilmCardsShow.slice";
 import { getGenreByID } from "../../utils/getGenreById";
@@ -13,6 +13,7 @@ import CardCover from "@mui/joy/CardCover";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import StarIcon from "@mui/icons-material/Star";
+import { useActions } from "../../hooks/useActions";
 
 interface IFilmCard {
   film: IFilm;
@@ -20,10 +21,11 @@ interface IFilmCard {
 }
 
 const FilmCard: FC<IFilmCard> = ({ film, filmType }) => {
-  const isAuth = useContext(Context);
-  const type = useAppSelector((state) => state.category.type);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const isAuth = useContext(Context);
+  const { type } = useFilmFilter();
+  const { hideFavFilmsCards } = useActions();
+
   const {
     id,
     original_title,
@@ -52,7 +54,7 @@ const FilmCard: FC<IFilmCard> = ({ film, filmType }) => {
         "&:hover": { transform: "scale(1.1)" },
       }}
       onClick={() => {
-        dispatch(hideFavFilmsCards());
+        hideFavFilmsCards();
         navigate(`/Zenix_Film/view/${filmType || type}/${id}`);
       }}
     >
@@ -123,7 +125,7 @@ const FilmCard: FC<IFilmCard> = ({ film, filmType }) => {
               textColor="white"
               sx={{ fontSize: "12px", marginRight: "10px", marginTop: "2px" }}
             >
-              {date ? getPrettyDate(new Date(date)) : ""}
+              {date ? new Date(date).getFullYear() : ""}
             </Typography>
             <Box sx={{ display: "flex", columnGap: "10px" }}>
               {getGenreByID(genre_ids)?.map((el) => {

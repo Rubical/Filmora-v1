@@ -1,15 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchFilm } from "./film.actions";
-import { IFilm } from "../types/film.types";
+import { IEpisode, IFilm, TypeFilmGenre } from "../types/film.types";
 
 interface IFilmSlice {
-  film: IFilm | {};
+  film: IFilm;
   loading: boolean;
   error: null | string;
 }
 
 const initialState: IFilmSlice = {
-  film: {},
+  film: {
+    id: 0,
+    backdrop_path: "",
+    budget: 0,
+    first_air_date: "",
+    genres: [],
+    genre_ids: [],
+    homepage: "",
+    name: "",
+    original_title: "",
+    overview: "",
+    poster_path: "",
+    release_date: "",
+    vote_average: 0,
+    status: "",
+    revenue: 0,
+    runtime: 0,
+    last_episode_to_air: { air_date: "", episode_number: 0, name: "" },
+    next_episode_to_air: { air_date: "", episode_number: 0, name: "" },
+  },
   loading: true,
   error: null,
 };
@@ -28,7 +47,6 @@ export const filmSlice = createSlice({
         state.loading = false;
       })
       .addCase(fetchFilm.rejected, (state) => {
-        state.film = {};
         state.loading = false;
       });
   },

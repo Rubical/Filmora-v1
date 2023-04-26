@@ -3,26 +3,25 @@ import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import { useAppDispatch, useAppSelector } from "../../hooks/useTypedSelector";
-import {
-  changeSearchedFilmPage,
-  changeSearchedQuery,
-  fetchSearchedFilms,
-} from "../../store/searchedFilm.slice";
 import { useNavigate } from "react-router-dom";
+import { useSearchedFilms } from "../../hooks/useSearchedFilms";
+import { useActions } from "../../hooks/useActions";
 
 const FilmSearchInput: FC = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const queryFilm = useAppSelector((state) => state.searchFilm.filmQuery);
+  const { fetchSearchedFilms, changeSearchedFilmPage, changeSearchedQuery } =
+    useActions();
+
+  const { filmQuery } = useSearchedFilms();
 
   const getSearchedFilms = () => {
-    if (!queryFilm.length) {
+    if (!filmQuery.length) {
       return;
     }
-    dispatch(fetchSearchedFilms());
-    dispatch(changeSearchedFilmPage(1));
-    navigate(`/Zenix_Film/searched/${queryFilm}/page/1`);
+
+    fetchSearchedFilms();
+    changeSearchedFilmPage(1);
+    navigate(`/Zenix_Film/searched/${filmQuery}/page/1`);
   };
 
   const handleKeyDown = (
@@ -57,11 +56,11 @@ const FilmSearchInput: FC = () => {
           },
         }}
         placeholder="Search"
-        value={queryFilm}
+        value={filmQuery}
         onKeyDown={handleKeyDown}
         onChange={(e: ChangeEvent) => {
           let currValue = (e.target as HTMLInputElement).value;
-          dispatch(changeSearchedQuery(currValue));
+          changeSearchedQuery(currValue);
         }}
       />
       <IconButton

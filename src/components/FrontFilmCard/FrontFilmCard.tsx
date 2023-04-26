@@ -1,29 +1,35 @@
+import { FC } from "react";
+import { useActions } from "../../hooks/useActions";
+import { useFilmFilter } from "../../hooks/useFilmFilter";
+import { useNavigate } from "react-router-dom";
+import { IFilm } from "../../types/film.types";
+import { getGenreByID } from "../../utils/getGenreById";
+import cl from "./FrontFilmCard.module.css";
+import WatchFilmBtn from "./WatchFilmBtn";
+import imgPlaceholder from "./background-img.jpg";
 import Card from "@mui/joy/Card";
 import Box from "@mui/joy/Box";
 import CardCover from "@mui/joy/CardCover";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
-import { IFilm } from "../../types/film.types";
-import { getGenreByID } from "../../utils/getGenreById";
-import { FC } from "react";
-import cl from "./FrontFilmCard.module.css";
-import { useNavigate } from "react-router-dom";
-import WatchFilmBtn from "./WatchFilmBtn";
-import { useAppDispatch, useAppSelector } from "../../hooks/useTypedSelector";
-import imgPlaceholder from "./background-img.jpg";
 import StarIcon from "@mui/icons-material/Star";
-import { hideFavFilmsCards } from "../../store/favFilmCardsShow.slice";
 
 type IFrontFilmCard = {
   film: IFilm;
 };
 
 const FrontFilmCard: FC<IFrontFilmCard> = ({ film }) => {
-  const type = useAppSelector((state) => state.category.type);
+  const { hideFavFilmsCards } = useActions();
+  const { type } = useFilmFilter();
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+
   const { id, original_title, backdrop_path, genre_ids, name, vote_average } =
     film;
+
+  const onClick = () => {
+    hideFavFilmsCards();
+    navigate(`/Zenix_Film/view/${type}/${id}`);
+  };
 
   return (
     <Card
@@ -169,14 +175,8 @@ const FrontFilmCard: FC<IFrontFilmCard> = ({ film }) => {
         ) : (
           ""
         )}
-        <Box
-          onClick={() => {
-            dispatch(hideFavFilmsCards());
-            navigate(`/Zenix_Film/view/${type}/${id}`);
-          }}
-        >
-          <WatchFilmBtn />
-        </Box>
+
+        <WatchFilmBtn clickAction={onClick} />
       </CardContent>
     </Card>
   );

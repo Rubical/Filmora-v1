@@ -1,10 +1,7 @@
 import * as React from "react";
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../../hooks/useTypedSelector";
+
 import SideBarFilmCard from "../../../FavourilteFilmCard/FavouriteFilmCard";
-import ShowMoreBtn from "../../Button/ShowMoreBtn";
+import ShowMoreBtn from "./ShowMoreBtn";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
@@ -15,22 +12,23 @@ import StarsIcon from "@mui/icons-material/Stars";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
-import { setCategory, setType } from "../../../../store/filmFilterSlice.slice";
-import { changeFilmListPage } from "../../../../store/filmList.slice";
-import {
-  setActiveCategoryBtn,
-  setActiveTypeBtn,
-} from "../../../../store/activeFilterBtns.slice";
-import { hideFavFilmsCards } from "../../../../store/favFilmCardsShow.slice";
 import { useNavigate } from "react-router-dom";
+import { useFavouriteFilms } from "../../../../hooks/useFavouriteFilms";
+import { useFavFilmCardsShow } from "../../../../hooks/useFavFilmCardsShow";
+import { useActions } from "../../../../hooks/useActions";
 
 export default function SideBarRightLogined() {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const favouriteFilms = useAppSelector((state) => state.favouriteFilms);
-  const filmIsLoading = useAppSelector((state) => state.film.loading);
-  const film = useAppSelector((state) => state.film.film);
-  const favFilmsCardsShow = useAppSelector((state) => state.favFilmsCardsShow);
+  const {
+    setType,
+    setCategory,
+    changeFilmListPage,
+    setActiveTypeBtn,
+    setActiveCategoryBtn,
+    hideFavFilmsCards,
+  } = useActions();
+  const favouriteFilms = useFavouriteFilms();
+  const favFilmsCardsShow = useFavFilmCardsShow();
 
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -41,18 +39,16 @@ export default function SideBarRightLogined() {
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-
   const menuId = "primary-search-account-menu";
-
   const mobileMenuId = "primary-search-account-menu-mobile";
 
   const openFavPage = () => {
-    dispatch(setType("movie"));
-    dispatch(setCategory("popular"));
-    dispatch(changeFilmListPage(1));
-    dispatch(setActiveTypeBtn(1));
-    dispatch(setActiveCategoryBtn(1));
-    dispatch(hideFavFilmsCards());
+    setType("movie");
+    setCategory("popular");
+    changeFilmListPage(1);
+    setActiveTypeBtn(1);
+    setActiveCategoryBtn(1);
+    hideFavFilmsCards();
     navigate("/Zenix_Film/favourite");
   };
 

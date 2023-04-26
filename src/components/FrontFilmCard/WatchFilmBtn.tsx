@@ -1,14 +1,16 @@
+import { FC } from "react";
 import { Button } from "@mui/material";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
-import { hideFavFilmsCards } from "../../store/favFilmCardsShow.slice";
-import { useAppDispatch } from "../../hooks/useTypedSelector";
 
-const WatchFilmBtn = () => {
-  const dispatch = useAppDispatch();
+interface IWatchFilmBtn {
+  clickAction: () => void;
+}
+
+const WatchFilmBtn: FC<IWatchFilmBtn> = ({ clickAction }) => {
   return (
     <Button
       onClick={() => {
-        dispatch(hideFavFilmsCards());
+        clickAction();
       }}
       sx={{
         width: { xs: "120px", sm: "160px" },

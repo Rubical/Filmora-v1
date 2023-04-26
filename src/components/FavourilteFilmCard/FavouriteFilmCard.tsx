@@ -1,10 +1,8 @@
 import { FC } from "react";
-import { useAppDispatch } from "../../hooks/useTypedSelector";
 import { useNavigate } from "react-router-dom";
+import { useActions } from "../../hooks/useActions";
 import { IFilm } from "../../types/film.types";
-import { removeFavouriteFilm } from "../../store/favouriteFilms.slice";
-import { hideFavFilmsCards } from "../../store/favFilmCardsShow.slice";
-import imgNotFound from "../FilmCard/filmcard-image-placeholder.jpg";
+import imgNotFound from "./favfilmcard-image-placeholder.jpg";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import CardContent from "@mui/material/CardContent";
@@ -25,12 +23,10 @@ const CardContentNoPadding = styled(CardContent)(`
 `);
 
 const FavouriteFilmCard: FC<IFavouriteFilmCard> = ({ film, filmType }) => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const deleteFavFilm = () => {
-    dispatch(removeFavouriteFilm(film.id));
-  };
+  const { removeFavouriteFilm, hideFavFilmsCards } = useActions();
+
   return (
     <Box
       sx={{
@@ -38,7 +34,7 @@ const FavouriteFilmCard: FC<IFavouriteFilmCard> = ({ film, filmType }) => {
         marginBottom: "20px",
       }}
       onClick={() => {
-        dispatch(hideFavFilmsCards());
+        hideFavFilmsCards();
         navigate(`/Zenix_Film/view/${filmType}/${film.id}`);
       }}
     >
@@ -60,7 +56,7 @@ const FavouriteFilmCard: FC<IFavouriteFilmCard> = ({ film, filmType }) => {
         <CloseIcon
           onClick={(e) => {
             e.stopPropagation();
-            deleteFavFilm();
+            removeFavouriteFilm(film.id);
           }}
           sx={{
             position: "absolute",

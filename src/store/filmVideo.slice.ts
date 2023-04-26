@@ -4,13 +4,13 @@ import { IVideo } from "../types/video.types";
 
 interface IVideoSlice {
   filmVideo: IVideo[];
-  loading: boolean;
+  videoIsLoading: boolean;
   error: null | string;
 }
 
 const initialState: IVideoSlice = {
   filmVideo: [],
-  loading: true,
+  videoIsLoading: true,
   error: null,
 };
 
@@ -21,15 +21,15 @@ export const filmVideoSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchVideo.pending, (state) => {
-        state.loading = true;
+        state.videoIsLoading = true;
       })
       .addCase(fetchVideo.fulfilled, (state, action) => {
         state.filmVideo = action.payload;
-        state.loading = false;
+        state.videoIsLoading = false;
       })
       .addCase(fetchVideo.rejected, (state) => {
         state.filmVideo = [];
-        state.loading = false;
+        state.videoIsLoading = false;
       });
   },
 });

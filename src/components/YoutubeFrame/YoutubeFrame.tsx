@@ -1,9 +1,9 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import Card from "@mui/material/Card";
 import imgPlaceholder from "./youtube-frame-img-placeholder.jpg";
 
 interface IYoutubeFrame {
-  embedId: string;
+  embedId: string | undefined;
 }
 
 const YoutubeFrame: FC<IYoutubeFrame> = ({ embedId }) => {

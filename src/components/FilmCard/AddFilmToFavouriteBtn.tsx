@@ -1,9 +1,7 @@
 import React, { FC } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/useTypedSelector";
-import {
-  addfavouriteFilm,
-  removeFavouriteFilm,
-} from "../../store/favouriteFilms.slice";
+import { useActions } from "../../hooks/useActions";
+import { useFavouriteFilms } from "../../hooks/useFavouriteFilms";
+import { useFilmFilter } from "../../hooks/useFilmFilter";
 import { IFilm } from "../../types/film.types";
 import Button from "@mui/material/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -14,9 +12,9 @@ interface IAddBtn {
 }
 
 const AddFilmToFavouriteBtn: FC<IAddBtn> = ({ film }) => {
-  const dispatch = useAppDispatch();
-  const favouriteFilms = useAppSelector((state) => state.favouriteFilms);
-  const type = useAppSelector((state) => state.category.type);
+  const favouriteFilms = useFavouriteFilms();
+  const { type } = useFilmFilter();
+  const { removeFavouriteFilm, addFavouriteFilm } = useActions();
 
   return (
     <Button
@@ -28,8 +26,8 @@ const AddFilmToFavouriteBtn: FC<IAddBtn> = ({ film }) => {
       onClick={(event) => {
         event.stopPropagation();
         favouriteFilms.find((el) => el.film.id === film.id)
-          ? dispatch(removeFavouriteFilm(film.id))
-          : dispatch(addfavouriteFilm({ film: film, type: type }));
+          ? removeFavouriteFilm(film.id)
+          : addFavouriteFilm({ film: film, type: type });
       }}
     >
       {favouriteFilms.find((el) => el.film.id === film.id) ? (

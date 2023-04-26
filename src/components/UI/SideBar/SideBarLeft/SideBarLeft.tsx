@@ -1,16 +1,6 @@
 import * as React from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../../hooks/useTypedSelector";
-import { setCategory, setType } from "../../../../store/filmFilterSlice.slice";
-import {
-  setActiveCategoryBtn,
-  setActiveTypeBtn,
-} from "../../../../store/activeFilterBtns.slice";
-import { showFavFilmsCards } from "../../../../store/favFilmCardsShow.slice";
 import { Context } from "../../../../context/context";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
@@ -26,30 +16,32 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "./logo.png";
-import {
-  changeSearchedFilmPage,
-  changeSearchedQuery,
-} from "../../../../store/searchedFilm.slice";
-import { changeFilmListPage } from "../../../../store/filmList.slice";
+import { useFilmFilter } from "../../../../hooks/useFilmFilter";
+import { useActiveFilterBtns } from "../../../../hooks/useActiveFilterBtns";
+import { useActions } from "../../../../hooks/useActions";
 
 export const SideBarLeft: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const isAuth = useContext(Context);
-  const type = useAppSelector((state) => state.category.type);
+  const { type } = useFilmFilter();
+  const { activeCategoryBtn } = useActiveFilterBtns();
+  const {
+    setType,
+    setCategory,
+    changeFilmListPage,
+    setActiveTypeBtn,
+    setActiveCategoryBtn,
+    showFavFilmsCards,
+    changeSearchedQuery,
+    changeSearchedFilmPage,
+  } = useActions();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
-
-  const activeCategoryBtn = useAppSelector(
-    (state) => state.activeBtns.activeCategoryBtn
-  );
-
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -76,15 +68,14 @@ export const SideBarLeft: React.FC = () => {
         }}
         onClick={(e) => {
           e.stopPropagation();
-          dispatch(setType("movie"));
-          dispatch(setCategory("popular"));
-          dispatch(changeFilmListPage(1));
-          dispatch(setActiveTypeBtn(1));
-          dispatch(setActiveCategoryBtn(1));
-          dispatch(showFavFilmsCards());
-          dispatch(changeSearchedQuery(""));
-          dispatch(changeSearchedFilmPage(1));
-
+          setType("movie");
+          setCategory("popular");
+          changeFilmListPage(1);
+          setActiveTypeBtn(1);
+          setActiveCategoryBtn(1);
+          showFavFilmsCards();
+          changeSearchedQuery("");
+          changeSearchedFilmPage(1);
           navigate("/Zenix_Film/movie/popular/page/1");
         }}
       >
@@ -139,10 +130,10 @@ export const SideBarLeft: React.FC = () => {
             }}
             onClick={(e) => {
               e.stopPropagation();
-              dispatch(setType("movie"));
-              dispatch(changeFilmListPage(1));
-              dispatch(changeSearchedQuery(""));
-              dispatch(changeSearchedFilmPage(1));
+              setType("movie");
+              changeFilmListPage(1);
+              changeSearchedQuery("");
+              changeSearchedFilmPage(1);
 
               navigate("/Zenix_Film/movie/popular/page/1");
 
@@ -167,13 +158,12 @@ export const SideBarLeft: React.FC = () => {
             }}
             onClick={(e) => {
               e.stopPropagation();
-              dispatch(setType("tv"));
-              dispatch(changeFilmListPage(1));
-              dispatch(changeSearchedQuery(""));
-              dispatch(changeSearchedFilmPage(1));
+              setType("tv");
+              changeFilmListPage(1);
+              changeSearchedQuery("");
+              changeSearchedFilmPage(1);
 
               navigate("/Zenix_Film/tv/popular/page/1");
-
               handleCloseNavMenu();
             }}
           >
@@ -200,13 +190,12 @@ export const SideBarLeft: React.FC = () => {
           <ListItemButton
             disableRipple={true}
             onClick={() => {
-              dispatch(setActiveCategoryBtn(1));
-              dispatch(setCategory("popular"));
-              dispatch(changeFilmListPage(1));
-              dispatch(changeSearchedQuery(""));
-              dispatch(changeSearchedFilmPage(1));
-
-              dispatch(showFavFilmsCards());
+              setActiveCategoryBtn(1);
+              setCategory("popular");
+              changeFilmListPage(1);
+              changeSearchedQuery("");
+              changeSearchedFilmPage(1);
+              showFavFilmsCards();
 
               navigate(`/Zenix_Film/${type}/popular/page/1`);
             }}
@@ -244,16 +233,15 @@ export const SideBarLeft: React.FC = () => {
           <ListItemButton
             disableRipple={true}
             onClick={() => {
-              dispatch(setActiveCategoryBtn(2));
-              dispatch(setCategory("top_rated"));
-              dispatch(changeFilmListPage(1));
-              dispatch(changeSearchedQuery(""));
-              dispatch(changeSearchedFilmPage(1));
-
-              dispatch(showFavFilmsCards());
+              setActiveCategoryBtn(2);
+              setCategory("top_rated");
+              changeFilmListPage(1);
+              changeSearchedQuery("");
+              changeSearchedFilmPage(1);
+              showFavFilmsCards();
+              showFavFilmsCards();
 
               navigate(`/Zenix_Film/${type}/top_rated/page/1`);
-              dispatch(showFavFilmsCards());
             }}
             sx={{
               marginBottom: { xs: "10px", sm: "20px", lg: "10px" },
@@ -289,13 +277,12 @@ export const SideBarLeft: React.FC = () => {
           <ListItemButton
             disableRipple={true}
             onClick={() => {
-              dispatch(setActiveCategoryBtn(3));
-              dispatch(setCategory("coming"));
-              dispatch(changeFilmListPage(1));
-              dispatch(changeSearchedQuery(""));
-              dispatch(changeSearchedFilmPage(1));
-
-              dispatch(showFavFilmsCards());
+              setActiveCategoryBtn(3);
+              setCategory("coming");
+              changeFilmListPage(1);
+              changeSearchedQuery("");
+              changeSearchedFilmPage(1);
+              showFavFilmsCards();
 
               navigate(`/Zenix_Film/${type}/coming/page/1`);
             }}

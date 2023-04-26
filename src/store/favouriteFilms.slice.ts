@@ -12,7 +12,7 @@ export const favouriteFilmsSlice = createSlice({
   name: "favouriteFilms",
   initialState,
   reducers: {
-    addfavouriteFilm: (state, action: PayloadAction<IFavouriteFilm>) => {
+    addFavouriteFilm: (state, action: PayloadAction<IFavouriteFilm>) => {
       state.push(action.payload);
     },
     removeFavouriteFilm: (state, action: PayloadAction<number>) => {
@@ -24,6 +24,6 @@ export const favouriteFilmsSlice = createSlice({
   },
 });
 
-export const { addfavouriteFilm, removeFavouriteFilm } =
+export const { addFavouriteFilm, removeFavouriteFilm } =
   favouriteFilmsSlice.actions;
 export default favouriteFilmsSlice.reducer;

@@ -1,11 +1,11 @@
 import React, { FC, useEffect } from "react";
-import { useAppSelector } from "../../hooks/useTypedSelector";
 import FilmCard from "../../components/FilmCard/FilmCard";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { useFavouriteFilms } from "../../hooks/useFavouriteFilms";
 
 const FavouritePage: FC = () => {
-  const favouriteFilms = useAppSelector((state) => state.favouriteFilms);
+  const favouriteFilms = useFavouriteFilms();
 
   useEffect(() => {
     window.scrollTo(0, 0);

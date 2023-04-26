@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { IFilm, TypeGenre } from "../../types/film.types";
+import { IFilm, TypeFilmGenre } from "../../types/film.types";
 import imgPlaceholder from "./filminfo-img-placeholder.jpg";
 import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
@@ -123,7 +123,7 @@ const FilmInfo: FC<IFilmInfoCard> = ({ film }) => {
       )}
       {genres ? (
         <Box sx={{ display: "flex", columnGap: "7px", flexWrap: "wrap" }}>
-          {genres.map((el: TypeGenre, index: number) => {
+          {genres.map((el: TypeFilmGenre, index: number) => {
             return (
               <Typography key={el.id} sx={{ fontSize: "14px" }}>
                 {`${el.name} / `}

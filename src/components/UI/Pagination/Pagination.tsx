@@ -2,11 +2,6 @@ import React, { FC } from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../hooks/useTypedSelector";
-import { useNavigate } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 const theme = createTheme({
@@ -45,11 +40,6 @@ const PagePagination: FC<IPagination> = ({
   changePage,
   currentPage,
 }) => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const type = useAppSelector((state) => state.category.type);
-  const category = useAppSelector((state) => state.category.category);
-
   const isScreenBig = useMediaQuery("(min-width:600px)");
   return (
     <ThemeProvider theme={theme}>

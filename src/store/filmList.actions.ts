@@ -9,7 +9,7 @@ type TypeFetchData = {
 
 export const fetchFilms = createAsyncThunk<
   TypeFetchData,
-  unknown,
+  void,
   { state: RootState }
 >("filmsList/fetchPopularFilms", async (__, thunkAPI) => {
   const { films, filmFilter } = thunkAPI.getState();

@@ -1,40 +1,29 @@
-import { FC, useState } from "react";
+import { FC } from "react";
+import { useNavigate } from "react-router-dom";
+import { useActions } from "../../../hooks/useActions";
+import { useActiveFilterBtns } from "../../../hooks/useActiveFilterBtns";
+import cl from "./NavBar.module.css";
+import FilmSearchInput from "../../FilmSearchInput/FilmSearchInput";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import FilmSearchInput from "../../FilmSearchInput/FilmSearchInput";
-import cl from "./NavBar.module.css";
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../hooks/useTypedSelector";
-import { setCategory, setType } from "../../../store/filmFilterSlice.slice";
-import { useNavigate } from "react-router-dom";
-import {
-  setActiveCategoryBtn,
-  setActiveTypeBtn,
-} from "../../../store/activeFilterBtns.slice";
-import { showFavFilmsCards } from "../../../store/favFilmCardsShow.slice";
-import {
-  changeSearchedFilmPage,
-  changeSearchedQuery,
-} from "../../../store/searchedFilm.slice";
-import { changeFilmListPage } from "../../../store/filmList.slice";
 
 const NavBar: FC = () => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const {
+    changeFilmListPage,
+    setType,
+    setCategory,
+    setActiveTypeBtn,
+    setActiveCategoryBtn,
+    showFavFilmsCards,
+    changeSearchedQuery,
+    changeSearchedFilmPage,
+  } = useActions();
 
-  const type = useAppSelector((state) => state.category.type);
-  const category = useAppSelector((state) => state.category.category);
-  const activeTypeBtn = useAppSelector(
-    (state) => state.activeBtns.activeTypeBtn
-  );
-  const activeCategoryBtn = useAppSelector(
-    (state) => state.activeBtns.activeCategoryBtn
-  );
+  const { activeTypeBtn } = useActiveFilterBtns();
 
   return (
     <AppBar
@@ -63,14 +52,14 @@ const NavBar: FC = () => {
           >
             <Button
               onClick={() => {
-                dispatch(changeFilmListPage(1));
-                dispatch(setType("movie"));
-                dispatch(setCategory("popular"));
-                dispatch(setActiveTypeBtn(1));
-                dispatch(setActiveCategoryBtn(1));
-                dispatch(showFavFilmsCards());
-                dispatch(changeSearchedQuery(""));
-                dispatch(changeSearchedFilmPage(1));
+                changeFilmListPage(1);
+                setType("movie");
+                setCategory("popular");
+                setActiveTypeBtn(1);
+                setActiveCategoryBtn(1);
+                showFavFilmsCards();
+                changeSearchedQuery("");
+                changeSearchedFilmPage(1);
                 navigate(`/Zenix_Film/movie/popular/page/1`);
               }}
               disableRipple={true}
@@ -94,14 +83,14 @@ const NavBar: FC = () => {
 
             <Button
               onClick={() => {
-                dispatch(changeFilmListPage(1));
-                dispatch(setType("tv"));
-                dispatch(setCategory("popular"));
-                dispatch(setActiveTypeBtn(2));
-                dispatch(setActiveCategoryBtn(1));
-                dispatch(showFavFilmsCards());
-                dispatch(changeSearchedQuery(""));
-                dispatch(changeSearchedFilmPage(1));
+                changeFilmListPage(1);
+                setType("tv");
+                setCategory("popular");
+                setActiveTypeBtn(2);
+                setActiveCategoryBtn(1);
+                showFavFilmsCards();
+                changeSearchedQuery("");
+                changeSearchedFilmPage(1);
                 navigate(`/Zenix_Film/tv/popular/page/1`);
               }}
               disableRipple={true}
