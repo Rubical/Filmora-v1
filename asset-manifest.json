@@ -1,20 +1,21 @@
 {
   "files": {
-    "main.css": "/Zenix_Film/static/css/main.5ca4bb13.css",
-    "main.js": "/Zenix_Film/static/js/main.812e82cc.js",
-    "static/media/background.jpg": "/Zenix_Film/static/media/background.a915cb010e8dbb0e2e14.jpg",
+    "main.css": "/Zenix_Film/static/css/main.c5e39bea.css",
+    "main.js": "/Zenix_Film/static/js/main.5ea101cd.js",
+    "static/media/background-img-placeholder.jpg": "/Zenix_Film/static/media/background-img-placeholder.a915cb010e8dbb0e2e14.jpg",
     "static/media/error-404.jpg": "/Zenix_Film/static/media/error-404.5db6274ef245113758a9.jpg",
-    "static/media/no-img.jpg": "/Zenix_Film/static/media/no-img.15338d70acf0cd1ee659.jpg",
-    "static/media/img.jpg": "/Zenix_Film/static/media/img.5ef1615947dd0afc2474.jpg",
-    "static/media/logo.png": "/Zenix_Film/static/media/logo.b34b6aadf00fb7497787.png",
-    "static/media/imgNotFound.jpg": "/Zenix_Film/static/media/imgNotFound.338f499f9ba03cf265d8.jpg",
-    "static/media/no-sources.jpg": "/Zenix_Film/static/media/no-sources.0bc2eade3b56bffc36e1.jpg",
+    "static/media/filminfo-img-placeholder.jpg": "/Zenix_Film/static/media/filminfo-img-placeholder.15338d70acf0cd1ee659.jpg",
+    "static/media/background-img.jpg": "/Zenix_Film/static/media/background-img.5ef1615947dd0afc2474.jpg",
+    "static/media/logo.png": "/Zenix_Film/static/media/logo.f211906f45c3875275d2.png",
+    "static/media/favfilmcard-image-placeholder.jpg": "/Zenix_Film/static/media/favfilmcard-image-placeholder.338f499f9ba03cf265d8.jpg",
+    "static/media/filmcard-image-placeholder.jpg": "/Zenix_Film/static/media/filmcard-image-placeholder.338f499f9ba03cf265d8.jpg",
+    "static/media/youtube-frame-img-placeholder.jpg": "/Zenix_Film/static/media/youtube-frame-img-placeholder.0bc2eade3b56bffc36e1.jpg",
     "index.html": "/Zenix_Film/index.html",
-    "main.5ca4bb13.css.map": "/Zenix_Film/static/css/main.5ca4bb13.css.map",
-    "main.812e82cc.js.map": "/Zenix_Film/static/js/main.812e82cc.js.map"
+    "main.c5e39bea.css.map": "/Zenix_Film/static/css/main.c5e39bea.css.map",
+    "main.5ea101cd.js.map": "/Zenix_Film/static/js/main.5ea101cd.js.map"
   },
   "entrypoints": [
-    "static/css/main.5ca4bb13.css",
-    "static/js/main.812e82cc.js"
+    "static/css/main.c5e39bea.css",
+    "static/js/main.5ea101cd.js"
   ]
 }
