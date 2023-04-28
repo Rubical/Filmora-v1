@@ -1,3 +1,16 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1.2fr 6fr 1.2fr;
+}
+
+.main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+}
+
 .fromBlack {
   --tw-gradient-from: black;
   --tw-gradient-to: transparent;

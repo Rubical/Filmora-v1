@@ -4,6 +4,7 @@ import MainPage from "../screens/main/MainPage";
 import ErrorPage from "../screens/error/ErrorPage";
 import FavouritePage from "../screens/favourite/FavouritePage";
 import SearchedFilmsPage from "../screens/searchedFilms/SearchedFilmsPage";
+import SignInPage from "../screens/signin/SignInPage";
 
 interface Routes {
   path: string;
@@ -21,10 +22,6 @@ export const privateRoutes: Routes[] = [
   },
   { path: "/*", element: ErrorPage },
   { path: "/Zenix_Film/favourite", element: FavouritePage },
-  {
-    path: "/Zenix_Film/searched/:queryParam/:page/:num",
-    element: SearchedFilmsPage,
-  },
 ];
 export const publicRoutes: Routes[] = [
   {
@@ -36,4 +33,9 @@ export const publicRoutes: Routes[] = [
     element: FilmPage,
   },
   { path: "/*", element: ErrorPage },
+  { path: "/Zenix_Film/login", element: SignInPage },
+  {
+    path: "/Zenix_Film/searched/:queryParam/:page/:num",
+    element: SearchedFilmsPage,
+  },
 ];

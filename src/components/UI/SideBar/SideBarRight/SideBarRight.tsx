@@ -1,5 +1,8 @@
 import * as React from "react";
-
+import { useNavigate } from "react-router-dom";
+import { useFavouriteFilms } from "../../../../hooks/useFavouriteFilms";
+import { useFavFilmCardsShow } from "../../../../hooks/useFavFilmCardsShow";
+import { useActions } from "../../../../hooks/useActions";
 import SideBarFilmCard from "../../../FavourilteFilmCard/FavouriteFilmCard";
 import ShowMoreBtn from "./ShowMoreBtn";
 import Box from "@mui/material/Box";
@@ -12,12 +15,8 @@ import StarsIcon from "@mui/icons-material/Stars";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
-import { useNavigate } from "react-router-dom";
-import { useFavouriteFilms } from "../../../../hooks/useFavouriteFilms";
-import { useFavFilmCardsShow } from "../../../../hooks/useFavFilmCardsShow";
-import { useActions } from "../../../../hooks/useActions";
 
-export default function SideBarRightLogined() {
+export default function SideBarRight() {
   const navigate = useNavigate();
   const {
     setType,

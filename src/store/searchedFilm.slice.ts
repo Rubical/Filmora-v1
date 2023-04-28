@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IFilm } from "../types/film.types";
 import { fetchSearchedFilms } from "./searchedFilm.actions";
-import { fetchFilms } from "./filmList.actions";
 
 interface ISearchedFilmSlice {
   filmQuery: string;

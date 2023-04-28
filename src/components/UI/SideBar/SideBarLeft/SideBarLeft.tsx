@@ -20,7 +20,7 @@ import { useFilmFilter } from "../../../../hooks/useFilmFilter";
 import { useActiveFilterBtns } from "../../../../hooks/useActiveFilterBtns";
 import { useActions } from "../../../../hooks/useActions";
 
-export const SideBarLeft: React.FC = () => {
+const SideBarLeft: React.FC = () => {
   const navigate = useNavigate();
   const isAuth = useContext(Context);
   const { type } = useFilmFilter();
@@ -196,12 +196,16 @@ export const SideBarLeft: React.FC = () => {
               changeSearchedQuery("");
               changeSearchedFilmPage(1);
               showFavFilmsCards();
-
               navigate(`/Zenix_Film/${type}/popular/page/1`);
             }}
             sx={{
               marginBottom: { xs: "10px", sm: "20px", lg: "10px" },
               padding: { xs: "18px 0", sm: "8px 16px" },
+              transition: "color 0.1s ease-in",
+              "&:hover": {
+                color: "white",
+              },
+              color: activeCategoryBtn === 1 ? "white" : "lightgray",
             }}
           >
             <WhatshotIcon
@@ -217,11 +221,7 @@ export const SideBarLeft: React.FC = () => {
                 fontWeight: "600",
                 fontSize: "14px",
                 display: { xs: "none", lg: "flex" },
-                transition: "color 0.1s ease-in",
-                "&:hover": {
-                  color: "white",
-                },
-                color: activeCategoryBtn === 1 ? "white" : "lightgray",
+
                 letterSpacing: "1px",
               }}
             >
@@ -246,6 +246,11 @@ export const SideBarLeft: React.FC = () => {
             sx={{
               marginBottom: { xs: "10px", sm: "20px", lg: "10px" },
               padding: { xs: "18px 0", sm: "8px 16px" },
+              transition: "color 0.1s ease-in",
+              "&:hover": {
+                color: "white",
+              },
+              color: activeCategoryBtn === 2 ? "white" : "lightgray",
             }}
           >
             <ThumbUpIcon
@@ -260,12 +265,6 @@ export const SideBarLeft: React.FC = () => {
                 fontWeight: "600",
                 fontSize: "14px",
                 display: { xs: "none", lg: "flex" },
-                transition: "color 0.1s ease-in",
-                "&:hover": {
-                  color: "white",
-                },
-                color: activeCategoryBtn === 2 ? "white" : "lightgray",
-
                 letterSpacing: "1px",
               }}
             >
@@ -289,6 +288,11 @@ export const SideBarLeft: React.FC = () => {
             sx={{
               marginBottom: { xs: "10px", sm: "20px", lg: "10px" },
               padding: { xs: "18px 0", sm: "8px 16px" },
+              transition: "color 0.1s ease-in",
+              "&:hover": {
+                color: "white",
+              },
+              color: activeCategoryBtn === 3 ? "white" : "lightgray",
             }}
           >
             <EventIcon
@@ -302,12 +306,6 @@ export const SideBarLeft: React.FC = () => {
                 fontWeight: "600",
                 fontSize: "14px",
                 display: { xs: "none", lg: "flex" },
-                transition: "color 0.1s ease-in",
-                "&:hover": {
-                  color: "white",
-                },
-                color: activeCategoryBtn === 3 ? "white" : "lightgray",
-
                 letterSpacing: "1px",
               }}
             >
@@ -371,3 +369,5 @@ export const SideBarLeft: React.FC = () => {
     </Box>
   );
 };
+
+export default SideBarLeft;

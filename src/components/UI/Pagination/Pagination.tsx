@@ -3,31 +3,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "rgb(172,0,0)",
-      contrastText: "white",
-    },
-  },
-});
-
-declare module "@mui/material/styles" {
-  interface Palette {
-    primary: Palette["primary"];
-  }
-
-  interface PaletteOptions {
-    primary?: PaletteOptions["primary"];
-  }
-}
-
-declare module "@mui/material/Button" {
-  interface ButtonPropsColorOverrides {
-    primary: true;
-  }
-}
+import { theme } from "../../../themes/themes";
 
 interface IPagination {
   totalPages: number;

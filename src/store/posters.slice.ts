@@ -1,7 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { fetchPosters } from "./posters.actions";
 import { IPoster } from "../types/posters.types";
-import { fetchVideo } from "./filmVideo.actions";
 
 interface IPostersSlice {
   posters: IPoster[];

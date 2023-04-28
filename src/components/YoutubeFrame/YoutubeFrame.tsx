@@ -28,7 +28,11 @@ const YoutubeFrame: FC<IYoutubeFrame> = ({ embedId }) => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         ></iframe>
       ) : (
-        <img style={{ width: "100%", height: "420px" }} src={imgPlaceholder} />
+        <img
+          style={{ width: "100%", height: "420px" }}
+          src={imgPlaceholder}
+          alt="img"
+        />
       )}
     </Card>
   );

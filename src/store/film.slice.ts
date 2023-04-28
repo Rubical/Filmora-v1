@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchFilm } from "./film.actions";
-import { IEpisode, IFilm, TypeFilmGenre } from "../types/film.types";
+import { IFilm } from "../types/film.types";
 
 interface IFilmSlice {
   film: IFilm;
