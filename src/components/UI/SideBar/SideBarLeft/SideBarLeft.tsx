@@ -1,7 +1,10 @@
 import * as React from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Context } from "../../../../context/context";
+import { useFilmFilter } from "../../../../hooks/useFilmFilter";
+import { useActiveFilterBtns } from "../../../../hooks/useActiveFilterBtns";
+import { useActions } from "../../../../hooks/useActions";
+import { useAuth } from "../../../../hooks/useAuth";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -16,13 +19,12 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "./logo.png";
-import { useFilmFilter } from "../../../../hooks/useFilmFilter";
-import { useActiveFilterBtns } from "../../../../hooks/useActiveFilterBtns";
-import { useActions } from "../../../../hooks/useActions";
+import { supabase } from "../../../../auth/auth";
 
 const SideBarLeft: React.FC = () => {
+  const { logout } = useActions();
   const navigate = useNavigate();
-  const isAuth = useContext(Context);
+  const { isLogined } = useAuth();
   const { type } = useFilmFilter();
   const { activeCategoryBtn } = useActiveFilterBtns();
   const {
@@ -35,6 +37,14 @@ const SideBarLeft: React.FC = () => {
     changeSearchedQuery,
     changeSearchedFilmPage,
   } = useActions();
+
+  const signOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.log(error);
+    }
+    logout();
+  };
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -314,7 +324,7 @@ const SideBarLeft: React.FC = () => {
           </ListItemButton>
         </ListItem>
       </List>
-      {isAuth ? (
+      {isLogined ? (
         <Typography
           sx={{
             fontSize: "10px",
@@ -331,8 +341,11 @@ const SideBarLeft: React.FC = () => {
       )}
       <List>
         <ListItem disablePadding>
-          {isAuth ? (
+          {isLogined ? (
             <ListItemButton
+              onClick={() => {
+                signOut();
+              }}
               disableRipple={true}
               sx={{
                 marginBottom: "10px",

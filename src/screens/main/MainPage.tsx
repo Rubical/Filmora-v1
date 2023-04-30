@@ -1,21 +1,21 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFilmList } from "../../hooks/useFilmList";
 import { useFilmFilter } from "../../hooks/useFilmFilter";
 import { useActions } from "../../hooks/useActions";
+import { useAuth } from "../../hooks/useAuth";
 import FilmCard from "../../components/FilmCard/FilmCard";
 import FrontFilmCard from "../../components/FrontFilmCard/FrontFilmCard";
 import Loader from "../../components/UI/Loader/Loader";
 import PagePagination from "../../components/UI/Pagination/Pagination";
 import cl from "./MainPage.module.css";
-import { Context } from "../../context/context";
 import SideBarLeft from "../../components/UI/SideBar/SideBarLeft/SideBarLeft";
 import SideBarRight from "../../components/UI/SideBar/SideBarRight/SideBarRight";
 import SignInBtn from "../../components/UI/Button/SignInBtn";
 import NavBar from "../../components/UI/NavBar/NavBar";
 
 const MainPage = () => {
-  const isAuth = useContext(Context);
+  const { isLogined } = useAuth();
   const navigate = useNavigate();
   const { page, loading, filmsList } = useFilmList();
   const { type, category } = useFilmFilter();
@@ -63,7 +63,7 @@ const MainPage = () => {
           </>
         )}
       </div>
-      {isAuth ? <SideBarRight /> : <SignInBtn />}
+      {isLogined ? <SideBarRight /> : <SignInBtn />}
     </div>
   );
 };

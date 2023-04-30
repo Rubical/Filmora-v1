@@ -10,6 +10,7 @@ import activeFilterBtnsReducer from "./activeFilterBtns.slice";
 import favouriteFilmsReducer from "./favouriteFilms.slice";
 import favFilmCardsShowReducer from "./favFilmCardsShow.slice";
 import searchedFilmReducer from "./searchedFilm.slice";
+import authReducer from "./auth.slice";
 
 const rootReducer = combineReducers({
   films: filmsReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   favouriteFilms: favouriteFilmsReducer,
   favFilmCardsShow: favFilmCardsShowReducer,
   searchedFilm: searchedFilmReducer,
+  auth: authReducer,
 });
 
 export const store = configureStore({

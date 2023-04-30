@@ -1,6 +1,7 @@
-import { FC, useContext, useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useActions } from "../../hooks/useActions";
+import { useAuth } from "../../hooks/useAuth";
 import { useActors } from "../../hooks/useActors";
 import { useFilm } from "../../hooks/useFilm";
 import { useVideo } from "../../hooks/useVideo";
@@ -16,7 +17,6 @@ import SideBarLeft from "../../components/UI/SideBar/SideBarLeft/SideBarLeft";
 import SideBarRight from "../../components/UI/SideBar/SideBarRight/SideBarRight";
 import SignInBtn from "../../components/UI/Button/SignInBtn";
 import NavBar from "../../components/UI/NavBar/NavBar";
-import { Context } from "../../context/context";
 import cl from "./FilmPage.module.css";
 import backgroundImg from "./background-img-placeholder.jpg";
 import { firstLetterToUpperCase } from "../../utils/firstLetterToUpperCase";
@@ -28,7 +28,7 @@ import Typography from "@mui/material/Typography";
 import { Skeleton } from "@mui/material";
 
 const FilmPage: FC = () => {
-  const isAuth = useContext(Context);
+  const { isLogined } = useAuth();
   const { id } = useParams();
   const { type } = useParams();
 
@@ -415,7 +415,7 @@ const FilmPage: FC = () => {
           </>
         )}
       </div>
-      {isAuth ? <SideBarRight /> : <SignInBtn />}
+      {isLogined ? <SideBarRight /> : <SignInBtn />}
     </div>
   );
 };

@@ -1,9 +1,9 @@
-import { FC, useContext } from "react";
-import { Context } from "../../context/context";
+import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFilmFilter } from "../../hooks/useFilmFilter";
+import { useActions } from "../../hooks/useActions";
+import { useAuth } from "../../hooks/useAuth";
 import { IFilm } from "../../types/film.types";
-import { hideFavFilmsCards } from "../../store/favFilmCardsShow.slice";
 import { getGenreByID } from "../../utils/getGenreById";
 import AddFilmToFavouriteBtn from "./AddFilmToFavouriteBtn";
 import imgNotFound from "./filmcard-image-placeholder.jpg";
@@ -13,7 +13,6 @@ import CardCover from "@mui/joy/CardCover";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import StarIcon from "@mui/icons-material/Star";
-import { useActions } from "../../hooks/useActions";
 
 interface IFilmCard {
   film: IFilm;
@@ -22,7 +21,7 @@ interface IFilmCard {
 
 const FilmCard: FC<IFilmCard> = ({ film, filmType }) => {
   const navigate = useNavigate();
-  const isAuth = useContext(Context);
+  const { isLogined } = useAuth();
   const { type } = useFilmFilter();
   const { hideFavFilmsCards } = useActions();
 
@@ -97,7 +96,7 @@ const FilmCard: FC<IFilmCard> = ({ film, filmType }) => {
           justifyContent: "flex-end",
         }}
       >
-        {isAuth ? (
+        {isLogined ? (
           <Box sx={{ position: "absolute", right: "0px", top: "0px" }}>
             <AddFilmToFavouriteBtn film={film} />
           </Box>

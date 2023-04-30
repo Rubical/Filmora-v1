@@ -2,11 +2,11 @@ import React, { FC, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSearchedFilms } from "../../hooks/useSearchedFilms";
 import { useActions } from "../../hooks/useActions";
+import { useAuth } from "../../hooks/useAuth";
 import FilmCard from "../../components/FilmCard/FilmCard";
 import Loader from "../../components/UI/Loader/Loader";
 import PagePagination from "../../components/UI/Pagination/Pagination";
 import cl from "./SearchedFilmsPage.module.css";
-import { Context } from "../../context/context";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import SideBarLeft from "../../components/UI/SideBar/SideBarLeft/SideBarLeft";
@@ -15,7 +15,7 @@ import SignInBtn from "../../components/UI/Button/SignInBtn";
 import NavBar from "../../components/UI/NavBar/NavBar";
 
 const SearchedFilmsPage: FC = () => {
-  const isAuth = useContext(Context);
+  const { isLogined } = useAuth();
   const navigate = useNavigate();
   const { filmsFound, loading, totalPages, page, filmQuery } =
     useSearchedFilms();
@@ -86,7 +86,7 @@ const SearchedFilmsPage: FC = () => {
           </>
         )}
       </div>
-      {isAuth ? <SideBarRight /> : <SignInBtn />}
+      {isLogined ? <SideBarRight /> : <SignInBtn />}
     </div>
   );
 };

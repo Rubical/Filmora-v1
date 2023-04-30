@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { useActions } from "../../hooks/useActions";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../../themes/themes";
 import Container from "@mui/material/Container";
@@ -12,11 +14,15 @@ import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import UndoIcon from "@mui/icons-material/Undo";
+import { supabase } from "../../auth/auth";
 
 const SignInPage = () => {
   const [isSignIn, setSignIn] = useState(false);
   const [isBtnVisible, setVisible] = useState(true);
   const navigate = useNavigate();
+  const { email, nickname, password } = useAuth();
+  const { changePassword, changeEmail, changeNickname, login, logout } =
+    useActions();
 
   const makeBtnUnvisible = () => {
     setVisible(false);
@@ -25,19 +31,87 @@ const SignInPage = () => {
     }, 1000);
   };
 
-  const signIn = () => {
-    setSignIn(true);
-    makeBtnUnvisible();
+  const clearFields = () => {
+    changePassword("");
+    changeEmail("");
+    changeNickname("");
   };
 
-  const signUp = () => {
+  const changeFormSignIn = () => {
+    setSignIn(true);
+    makeBtnUnvisible();
+    clearFields();
+  };
+
+  const changeFormSignUp = () => {
     setSignIn(false);
     makeBtnUnvisible();
+    clearFields();
   };
 
   const backToMainPage = () => {
     navigate("/Zenix_Film");
   };
+
+  const createUser = async () => {
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        data: {
+          nickname: nickname,
+        },
+      },
+    });
+    if (data.session && data.user) {
+      clearFields();
+      login();
+      navigate("/Zenix_Film");
+    }
+    if (error) {
+      console.log(error);
+    }
+  };
+
+  const signinUser = async () => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      console.log(error);
+    }
+
+    if (data.session && data.user) {
+      clearFields();
+      login();
+      navigate("/Zenix_Film");
+    }
+  };
+
+  const resetPassword = async () => {
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email);
+    if (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event == "PASSWORD_RECOVERY") {
+        const newPassword = prompt(
+          "What would you like your new password to be?"
+        );
+        const { data, error } = await supabase.auth.updateUser({
+          password: newPassword as string | undefined,
+        });
+
+        if (data) alert("Password updated successfully!");
+        if (error) alert("There was an error updating your password.");
+      }
+    });
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -61,8 +135,11 @@ const SignInPage = () => {
             zIndex: "300",
             padding: "0px",
             opacity: isBtnVisible ? "1" : "0",
-            transition: "opacity 0.5s ease-in",
-            "&:hover": { backgroundColor: "transparent" },
+            transition: "transform 0.3s ease-in",
+            "&:hover": {
+              backgroundColor: "transparent",
+              transform: "scale(2) rotate(-45deg)",
+            },
           }}
           disableRipple={true}
         >
@@ -129,6 +206,10 @@ const SignInPage = () => {
               or use email for registration
             </Typography>
             <Input
+              value={nickname}
+              onChange={(e) => {
+                changeNickname(e.target.value);
+              }}
               sx={{
                 width: "350px",
                 height: "40px",
@@ -153,6 +234,10 @@ const SignInPage = () => {
               placeholder="Name"
             />
             <Input
+              value={email}
+              onChange={(e) => {
+                changeEmail(e.target.value);
+              }}
               sx={{
                 width: "350px",
                 height: "40px",
@@ -176,6 +261,10 @@ const SignInPage = () => {
               placeholder="Email"
             />
             <Input
+              value={password}
+              onChange={(e) => {
+                changePassword(e.target.value);
+              }}
               sx={{
                 width: "350px",
                 height: "40px",
@@ -200,6 +289,9 @@ const SignInPage = () => {
               placeholder="Password"
             />
             <Button
+              onClick={() => {
+                createUser();
+              }}
               sx={{
                 width: " 180px",
                 height: "50px",
@@ -283,6 +375,10 @@ const SignInPage = () => {
               or use your email account
             </Typography>
             <Input
+              value={email}
+              onChange={(e) => {
+                changeEmail(e.target.value);
+              }}
               sx={{
                 width: "350px",
                 height: "40px",
@@ -306,6 +402,10 @@ const SignInPage = () => {
               placeholder="Email"
             />
             <Input
+              value={password}
+              onChange={(e) => {
+                changePassword(e.target.value);
+              }}
               sx={{
                 width: "350px",
                 height: "40px",
@@ -329,8 +429,18 @@ const SignInPage = () => {
               type="password"
               placeholder="Password"
             />
-            <Link sx={{ cursor: "pointer" }}>Forgot your password?</Link>
+            <Link
+              onClick={() => {
+                resetPassword();
+              }}
+              sx={{ cursor: "pointer" }}
+            >
+              Forgot your password?
+            </Link>
             <Button
+              onClick={() => {
+                signinUser();
+              }}
               sx={{
                 width: " 180px",
                 height: "50px",
@@ -437,7 +547,7 @@ const SignInPage = () => {
             </Typography>
             <Button
               onClick={() => {
-                signIn();
+                changeFormSignIn();
               }}
               sx={{
                 width: " 180px",
@@ -496,7 +606,7 @@ const SignInPage = () => {
             </Typography>
             <Button
               onClick={() => {
-                signUp();
+                changeFormSignUp();
               }}
               sx={{
                 width: " 180px",

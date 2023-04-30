@@ -7,6 +7,7 @@ import { favFilmCardsShowSlice } from "../store/favFilmCardsShow.slice";
 import { favouriteFilmsSlice } from "../store/favouriteFilms.slice";
 import { searchedFilmSlice } from "../store/searchedFilm.slice";
 import { filmListSlice } from "../store/filmList.slice";
+import { authSlice } from "../store/auth.slice";
 import * as actorsActions from "../store/actors.actions";
 import * as filmActions from "../store/film.actions";
 import * as filmListActions from "../store/filmList.actions";
@@ -22,6 +23,7 @@ const rootActions = {
   ...favouriteFilmsSlice.actions,
   ...searchedFilmSlice.actions,
   ...filmListSlice.actions,
+  ...authSlice.actions,
   ...actorsActions,
   ...filmActions,
   ...filmListActions,

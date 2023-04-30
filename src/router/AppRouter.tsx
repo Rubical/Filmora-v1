@@ -1,12 +1,12 @@
 import { FC, useContext } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Context } from "../context/context";
+import { useAuth } from "../hooks/useAuth";
 import { publicRoutes, privateRoutes } from "./routes";
 
 const AppRouter: FC = () => {
-  const isAuth = useContext(Context);
+  const { isLogined } = useAuth();
 
-  return isAuth ? (
+  return isLogined ? (
     <Routes>
       {privateRoutes.map((route) => {
         return (
