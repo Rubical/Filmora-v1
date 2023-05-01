@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
+import { supabase } from "../../auth/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useActions } from "../../hooks/useActions";
@@ -7,22 +8,20 @@ import { theme } from "../../themes/themes";
 import Container from "@mui/material/Container";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
 import UndoIcon from "@mui/icons-material/Undo";
-import { supabase } from "../../auth/auth";
+import { validateEmail, validatePassword } from "../../utils/authValidation";
 
 const SignInPage = () => {
-  const [isSignIn, setSignIn] = useState(false);
+  const [isSignIn, setSignIn] = useState(true);
   const [isBtnVisible, setVisible] = useState(true);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { email, nickname, password } = useAuth();
-  const { changePassword, changeEmail, changeNickname, login, logout } =
-    useActions();
+  const { email, name, password } = useAuth();
+  const { changePassword, changeEmail, changeName, login } = useActions();
 
   const makeBtnUnvisible = () => {
     setVisible(false);
@@ -34,19 +33,25 @@ const SignInPage = () => {
   const clearFields = () => {
     changePassword("");
     changeEmail("");
-    changeNickname("");
+    changeName("");
   };
 
-  const changeFormSignIn = () => {
+  const removeError = () => {
+    setError("");
+  };
+
+  const changeFormToSignIn = () => {
     setSignIn(true);
     makeBtnUnvisible();
     clearFields();
+    removeError();
   };
 
-  const changeFormSignUp = () => {
+  const changeFormToSignUp = () => {
     setSignIn(false);
     makeBtnUnvisible();
     clearFields();
+    removeError();
   };
 
   const backToMainPage = () => {
@@ -59,7 +64,7 @@ const SignInPage = () => {
       password: password,
       options: {
         data: {
-          nickname: nickname,
+          name: name,
         },
       },
     });
@@ -69,7 +74,7 @@ const SignInPage = () => {
       navigate("/Zenix_Film");
     }
     if (error) {
-      console.log(error);
+      setError(error.message);
     }
   };
 
@@ -78,9 +83,8 @@ const SignInPage = () => {
       email: email,
       password: password,
     });
-
     if (error) {
-      console.log(error);
+      setError(error.message);
     }
 
     if (data.session && data.user) {
@@ -90,28 +94,49 @@ const SignInPage = () => {
     }
   };
 
-  const resetPassword = async () => {
-    const { data, error } = await supabase.auth.resetPasswordForEmail(email);
-    if (error) {
-      console.log(error);
+  async function signInWithFacebook() {
+    const { data } = await supabase.auth.signInWithOAuth({
+      provider: "facebook",
+      options: {
+        redirectTo: "https://rubical.github.io/Zenix_Film/",
+      },
+    });
+    if (data) {
+      localStorage.setItem("log", "true");
+    }
+  }
+
+  async function signInWithLinkedIn() {
+    const { data } = await supabase.auth.signInWithOAuth({
+      provider: "linkedin",
+      options: {
+        redirectTo: "https://rubical.github.io/Zenix_Film/",
+      },
+    });
+    if (data) {
+      localStorage.setItem("log", "true");
+    }
+  }
+
+  const checkPassword = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    if (!validatePassword(e.target.value)) {
+      setError("Password should be at least 6 characters");
+    } else {
+      setError("");
     }
   };
 
-  useEffect(() => {
-    supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event == "PASSWORD_RECOVERY") {
-        const newPassword = prompt(
-          "What would you like your new password to be?"
-        );
-        const { data, error } = await supabase.auth.updateUser({
-          password: newPassword as string | undefined,
-        });
-
-        if (data) alert("Password updated successfully!");
-        if (error) alert("There was an error updating your password.");
-      }
-    });
-  }, []);
+  const checkEmail = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    if (!validateEmail(e.target.value)) {
+      setError("Enter a valid email");
+    } else {
+      setError("");
+    }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -182,33 +207,11 @@ const SignInPage = () => {
             >
               Create Account
             </Typography>
-            <Box>
-              <Button
-                sx={{ "&:hover": { backgroundColor: "transparent" } }}
-                disableRipple={true}
-              >
-                <FacebookIcon sx={{ color: "#3b5998" }} />
-              </Button>
-              <Button
-                sx={{ "&:hover": { backgroundColor: "transparent" } }}
-                disableRipple={true}
-              >
-                <LinkedInIcon sx={{ color: "#0077b5" }} />
-              </Button>
-              <Button
-                sx={{ "&:hover": { backgroundColor: "transparent" } }}
-                disableRipple={true}
-              >
-                <TwitterIcon sx={{ color: "#1D9BF0" }} />
-              </Button>
-            </Box>
-            <Typography sx={{ marginTop: "30px", marginBottom: "12px" }}>
-              or use email for registration
-            </Typography>
             <Input
-              value={nickname}
+              onFocus={removeError}
+              value={name}
               onChange={(e) => {
-                changeNickname(e.target.value);
+                changeName(e.target.value);
               }}
               sx={{
                 width: "350px",
@@ -223,20 +226,23 @@ const SignInPage = () => {
                 backgroundColor: "rgba(31, 31, 31, 0.73)",
                 color: "lightgray",
                 transition: "0.25s ease",
-                boxShadow:
-                  "inset 2px 2px 4px rgba(44, 44, 44, 0.73), inset -2px -2px 4px rgba(44, 44, 44, 0.73)",
+                boxShadow: error
+                  ? "inset 2px 2px 4px rgba(174, 0, 0, 0.93), inset -2px -2px 4px rgba(174, 0, 0, 0.93)"
+                  : "inset 2px 2px 4px rgba(44, 44, 44, 0.73), inset -2px -2px 4px rgba(44, 44, 44, 0.73)",
                 "&:focus": {
                   boxShadow:
                     "inset 2px 2px 4px rgba(65, 65, 65, 0.58), inset -2px -2px 4px rgba(65, 65, 65, 0.58)",
                 },
               }}
               type="text"
-              placeholder="Name"
+              placeholder="Name (optional)"
             />
             <Input
+              onFocus={removeError}
               value={email}
               onChange={(e) => {
                 changeEmail(e.target.value);
+                checkEmail(e);
               }}
               sx={{
                 width: "350px",
@@ -251,8 +257,9 @@ const SignInPage = () => {
                 backgroundColor: "rgba(31, 31, 31, 0.73)",
                 color: "lightgray",
                 transition: "0.25s ease",
-                boxShadow:
-                  "inset 2px 2px 4px rgba(44, 44, 44, 0.73), inset -2px -2px 4px rgba(44, 44, 44, 0.73)",
+                boxShadow: error
+                  ? "inset 2px 2px 4px rgba(174, 0, 0, 0.93), inset -2px -2px 4px rgba(174, 0, 0, 0.93)"
+                  : "inset 2px 2px 4px rgba(44, 44, 44, 0.73), inset -2px -2px 4px rgba(44, 44, 44, 0.73)",
                 "&:focus": {
                   boxShadow:
                     "inset 2px 2px 4px rgba(65, 65, 65, 0.58), inset -2px -2px 4px rgba(65, 65, 65, 0.58)",
@@ -261,9 +268,11 @@ const SignInPage = () => {
               placeholder="Email"
             />
             <Input
+              onFocus={removeError}
               value={password}
               onChange={(e) => {
                 changePassword(e.target.value);
+                checkPassword(e);
               }}
               sx={{
                 width: "350px",
@@ -278,8 +287,9 @@ const SignInPage = () => {
                 backgroundColor: "rgba(31, 31, 31, 0.73)",
                 color: "lightgray",
                 transition: "0.25s ease",
-                boxShadow:
-                  "inset 2px 2px 4px rgba(44, 44, 44, 0.73), inset -2px -2px 4px rgba(44, 44, 44, 0.73)",
+                boxShadow: error
+                  ? "inset 2px 2px 4px rgba(174, 0, 0, 0.93), inset -2px -2px 4px rgba(174, 0, 0, 0.93)"
+                  : "inset 2px 2px 4px rgba(44, 44, 44, 0.73), inset -2px -2px 4px rgba(44, 44, 44, 0.73)",
                 "&:focus": {
                   boxShadow:
                     "inset 2px 2px 4px rgba(65, 65, 65, 0.58), inset -2px -2px 4px rgba(65, 65, 65, 0.58)",
@@ -288,6 +298,11 @@ const SignInPage = () => {
               type="password"
               placeholder="Password"
             />
+            <Typography
+              sx={{ color: "rgb(192,0,0)", fontSize: "15px", height: "22.5px" }}
+            >
+              {error}
+            </Typography>
             <Button
               onClick={() => {
                 createUser();
@@ -353,31 +368,35 @@ const SignInPage = () => {
             </Typography>
             <Box>
               <Button
-                sx={{ "&:hover": { backgroundColor: "transparent" } }}
+                onClick={() => {
+                  signInWithFacebook();
+                }}
+                sx={{
+                  "&:hover": { backgroundColor: "rgba(59,89,152,0.3)" },
+                }}
                 disableRipple={true}
               >
                 <FacebookIcon sx={{ color: "#3b5998" }} />
               </Button>
               <Button
-                sx={{ "&:hover": { backgroundColor: "transparent" } }}
+                onClick={() => {
+                  signInWithLinkedIn();
+                }}
+                sx={{ "&:hover": { backgroundColor: "rgba(0,119,181,0.3)" } }}
                 disableRipple={true}
               >
                 <LinkedInIcon sx={{ color: "#0077b5" }} />
-              </Button>
-              <Button
-                sx={{ "&:hover": { backgroundColor: "transparent" } }}
-                disableRipple={true}
-              >
-                <TwitterIcon sx={{ color: "#1D9BF0" }} />
               </Button>
             </Box>
             <Typography sx={{ marginTop: "30px", marginBottom: "12px" }}>
               or use your email account
             </Typography>
             <Input
+              onFocus={removeError}
               value={email}
               onChange={(e) => {
                 changeEmail(e.target.value);
+                checkEmail(e);
               }}
               sx={{
                 width: "350px",
@@ -392,8 +411,9 @@ const SignInPage = () => {
                 backgroundColor: "rgba(31, 31, 31, 0.73)",
                 color: "lightgray",
                 transition: "0.25s ease",
-                boxShadow:
-                  "inset 2px 2px 4px rgba(44, 44, 44, 0.73), inset -2px -2px 4px rgba(44, 44, 44, 0.73)",
+                boxShadow: error
+                  ? "inset 2px 2px 4px rgba(174, 0, 0, 0.93), inset -2px -2px 4px rgba(174, 0, 0, 0.93)"
+                  : "inset 2px 2px 4px rgba(44, 44, 44, 0.73), inset -2px -2px 4px rgba(44, 44, 44, 0.73)",
                 "&:focus": {
                   boxShadow:
                     "inset 2px 2px 4px rgba(65, 65, 65, 0.58), inset -2px -2px 4px rgba(65, 65, 65, 0.58)",
@@ -402,9 +422,11 @@ const SignInPage = () => {
               placeholder="Email"
             />
             <Input
+              onFocus={removeError}
               value={password}
               onChange={(e) => {
                 changePassword(e.target.value);
+                checkPassword(e);
               }}
               sx={{
                 width: "350px",
@@ -419,8 +441,9 @@ const SignInPage = () => {
                 backgroundColor: "rgba(31, 31, 31, 0.73)",
                 color: "lightgray",
                 transition: "0.25s ease",
-                boxShadow:
-                  "inset 2px 2px 4px rgba(44, 44, 44, 0.73), inset -2px -2px 4px rgba(44, 44, 44, 0.73)",
+                boxShadow: error
+                  ? "inset 2px 2px 4px rgba(174, 0, 0, 0.93), inset -2px -2px 4px rgba(174, 0, 0, 0.93)"
+                  : "inset 2px 2px 4px rgba(44, 44, 44, 0.73), inset -2px -2px 4px rgba(44, 44, 44, 0.73)",
                 "&:focus": {
                   boxShadow:
                     "inset 2px 2px 4px rgba(65, 65, 65, 0.58), inset -2px -2px 4px rgba(65, 65, 65, 0.58)",
@@ -429,14 +452,11 @@ const SignInPage = () => {
               type="password"
               placeholder="Password"
             />
-            <Link
-              onClick={() => {
-                resetPassword();
-              }}
-              sx={{ cursor: "pointer" }}
+            <Typography
+              sx={{ color: "rgb(192,0,0)", fontSize: "15px", height: "22.5px" }}
             >
-              Forgot your password?
-            </Link>
+              {error}
+            </Typography>
             <Button
               onClick={() => {
                 signinUser();
@@ -547,7 +567,7 @@ const SignInPage = () => {
             </Typography>
             <Button
               onClick={() => {
-                changeFormSignIn();
+                changeFormToSignIn();
               }}
               sx={{
                 width: " 180px",
@@ -606,7 +626,7 @@ const SignInPage = () => {
             </Typography>
             <Button
               onClick={() => {
-                changeFormSignUp();
+                changeFormToSignUp();
               }}
               sx={{
                 width: " 180px",

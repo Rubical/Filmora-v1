@@ -1,8 +1,6 @@
 import { FC } from "react";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
 const SignInBtn: FC = () => {
@@ -10,9 +8,6 @@ const SignInBtn: FC = () => {
 
   return (
     <Box
-      onClick={() => {
-        navigate("/Zenix_Film/login");
-      }}
       sx={{
         flexGrow: 0,
         color: "lightgray",
@@ -21,6 +16,9 @@ const SignInBtn: FC = () => {
       }}
     >
       <Button
+        onClick={() => {
+          navigate("/Zenix_Film/login");
+        }}
         disableRipple={true}
         sx={{
           fontSize: "14px",

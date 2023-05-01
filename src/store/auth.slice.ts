@@ -1,27 +1,29 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IAuthState {
-  nickname: string;
+  name: string;
   email: string;
   password: string;
   isLogined: boolean;
 }
 
 const initialState: IAuthState = {
-  nickname: "",
+  name: "",
   email: "",
   password: "",
-  isLogined: localStorage.getItem("sb-jdcbrbtfhykwfqsuukms-auth-token")
-    ? true
-    : false,
+  isLogined:
+    localStorage.getItem("sb-jdcbrbtfhykwfqsuukms-auth-token") ||
+    localStorage.getItem("log")
+      ? true
+      : false,
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    changeNickname: (state, action: PayloadAction<string>) => {
-      state.nickname = action.payload;
+    changeName: (state, action: PayloadAction<string>) => {
+      state.name = action.payload;
     },
     changeEmail: (state, action: PayloadAction<string>) => {
       state.email = action.payload;
@@ -38,6 +40,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { changeNickname, changePassword, changeEmail } =
-  authSlice.actions;
+export const { changeName, changePassword, changeEmail } = authSlice.actions;
 export default authSlice.reducer;

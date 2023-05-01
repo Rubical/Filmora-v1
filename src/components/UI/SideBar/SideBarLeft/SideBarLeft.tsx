@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFilmFilter } from "../../../../hooks/useFilmFilter";
 import { useActiveFilterBtns } from "../../../../hooks/useActiveFilterBtns";
@@ -39,11 +38,13 @@ const SideBarLeft: React.FC = () => {
   } = useActions();
 
   const signOut = async () => {
+    localStorage.removeItem("log");
     const { error } = await supabase.auth.signOut();
     if (error) {
       console.log(error);
     }
     logout();
+    navigate("/Zenix_Film/login");
   };
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
