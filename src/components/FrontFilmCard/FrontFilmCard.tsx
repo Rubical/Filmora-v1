@@ -109,7 +109,7 @@ const FrontFilmCard: FC<IFrontFilmCard> = ({ film }) => {
         <Typography
           level="h2"
           sx={{
-            fontSize: { lg: "50px", md: "40px", sm: "30px", xs: "20px" },
+            fontSize: { lg: "40px", md: "35px", sm: "30px", xs: "20px" },
             maxWidth: { xs: "200px", sm: "60%" },
           }}
           textColor="#fff"

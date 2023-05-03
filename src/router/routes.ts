@@ -22,6 +22,10 @@ export const privateRoutes: Routes[] = [
   },
   { path: "/*", element: ErrorPage },
   { path: "/Zenix_Film/favourite", element: FavouritePage },
+  {
+    path: "/Zenix_Film/searched/:queryParam/:page/:num",
+    element: SearchedFilmsPage,
+  },
 ];
 export const publicRoutes: Routes[] = [
   {

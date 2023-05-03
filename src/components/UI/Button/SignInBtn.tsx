@@ -2,6 +2,8 @@ import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import LoginIcon from "@mui/icons-material/Login";
+import Typography from "@mui/material/Typography";
 
 const SignInBtn: FC = () => {
   const navigate = useNavigate();
@@ -12,7 +14,7 @@ const SignInBtn: FC = () => {
         flexGrow: 0,
         color: "lightgray",
         justifySelf: "flex-end",
-        padding: { xs: "12px 5px 0 0", lg: "24px 40px 0 0" },
+        padding: { xs: "17px 5px 0 0", lg: "24px 40px 0 0" },
       }}
     >
       <Button
@@ -30,7 +32,16 @@ const SignInBtn: FC = () => {
           },
         }}
       >
-        SIGN IN
+        <Typography
+          sx={{
+            display: { xs: "none", sm: "flex" },
+            fontWeight: "600",
+            fontSize: "14px",
+          }}
+        >
+          SIGN IN
+        </Typography>
+        <LoginIcon sx={{ display: { xs: "flex", sm: "none" } }}></LoginIcon>
       </Button>
     </Box>
   );

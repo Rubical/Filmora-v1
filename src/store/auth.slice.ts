@@ -5,6 +5,7 @@ interface IAuthState {
   email: string;
   password: string;
   isLogined: boolean;
+  userId: string;
 }
 
 const initialState: IAuthState = {
@@ -16,6 +17,7 @@ const initialState: IAuthState = {
     localStorage.getItem("log")
       ? true
       : false,
+  userId: "",
 };
 
 export const authSlice = createSlice({
@@ -30,6 +32,9 @@ export const authSlice = createSlice({
     },
     changePassword: (state, action: PayloadAction<string>) => {
       state.password = action.payload;
+    },
+    setId: (state, action: PayloadAction<string>) => {
+      state.userId = action.payload;
     },
     login: (state) => {
       state.isLogined = true;

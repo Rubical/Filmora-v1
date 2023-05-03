@@ -14,6 +14,7 @@ import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
 import UndoIcon from "@mui/icons-material/Undo";
 import { validateEmail, validatePassword } from "../../utils/authValidation";
+import BackToMainBtn from "../../components/UI/Button/BackToMainBtn";
 
 const SignInPage = () => {
   const [isSignIn, setSignIn] = useState(true);
@@ -21,7 +22,8 @@ const SignInPage = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { email, name, password } = useAuth();
-  const { changePassword, changeEmail, changeName, login } = useActions();
+  const { changePassword, changeEmail, changeName, login, setId } =
+    useActions();
 
   const makeBtnUnvisible = () => {
     setVisible(false);
@@ -54,10 +56,6 @@ const SignInPage = () => {
     removeError();
   };
 
-  const backToMainPage = () => {
-    navigate("/Zenix_Film");
-  };
-
   const createUser = async () => {
     const { data, error } = await supabase.auth.signUp({
       email: email,
@@ -88,6 +86,8 @@ const SignInPage = () => {
     }
 
     if (data.session && data.user) {
+      setId(data.user.id);
+      console.log(data.user);
       clearFields();
       login();
       navigate("/Zenix_Film");
@@ -143,48 +143,30 @@ const SignInPage = () => {
       <Container
         sx={{
           position: "relative",
-          width: "1000px",
-          height: "600px",
+          width: { xs: "90%", md: "80%" },
+          height: { xs: "700px", lg: "600px" },
           margin: "50px auto 0 auto",
           borderRadius: "12px",
           overflow: "hidden",
         }}
       >
-        <Button
-          onClick={backToMainPage}
-          sx={{
-            position: "absolute",
-            top: "20px",
-            left: "20px",
-            transform: "scale(2)",
-            zIndex: "300",
-            padding: "0px",
-            opacity: isBtnVisible ? "1" : "0",
-            transition: "transform 0.3s ease-in",
-            "&:hover": {
-              backgroundColor: "transparent",
-              transform: "scale(2) rotate(-45deg)",
-            },
-          }}
-          disableRipple={true}
-        >
-          <UndoIcon />
-        </Button>
+        <BackToMainBtn isBtnVisible={isBtnVisible} />
         <Box
           sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             position: "absolute",
-            top: "0",
-            width: "600px",
-            height: "100%",
-            padding: "25px",
+            bottom: { xs: isSignIn ? "0px" : "calc(100% - 420px)", lg: "0" },
+            width: { xs: "100%", lg: "65%" },
+            height: { xs: "65%", lg: "100%" },
             backgroundColor: "#1e1e1e",
             transition: "1.25s",
             color: "lightgray",
             zIndex: "100",
-            left: isSignIn ? "0px" : "calc(100% - 600px)",
+            left: { xs: "0px", lg: isSignIn ? "0px" : "calc(100% - 800px)" },
+            visibility: isSignIn ? "hidden" : "visible",
+            opacity: isSignIn ? "0" : "1",
           }}
         >
           <Box
@@ -199,7 +181,7 @@ const SignInPage = () => {
           >
             <Typography
               sx={{
-                fontSize: "34px",
+                fontSize: { xs: "24px", md: "34px" },
                 fontWeight: "700",
                 lineHeight: "3",
                 color: "lightgray",
@@ -215,6 +197,7 @@ const SignInPage = () => {
               }}
               sx={{
                 width: "350px",
+                maxWidth: "90%",
                 height: "40px",
                 margin: "4px 0",
                 paddingLeft: "25px",
@@ -246,6 +229,7 @@ const SignInPage = () => {
               }}
               sx={{
                 width: "350px",
+                maxWidth: "90%",
                 height: "40px",
                 margin: "4px 0",
                 paddingLeft: "25px",
@@ -276,6 +260,7 @@ const SignInPage = () => {
               }}
               sx={{
                 width: "350px",
+                maxWidth: "90%",
                 height: "40px",
                 margin: "4px 0",
                 paddingLeft: "25px",
@@ -311,7 +296,7 @@ const SignInPage = () => {
                 width: " 180px",
                 height: "50px",
                 borderRadius: "25px",
-                marginTop: "50px",
+                marginTop: { xs: "0", md: "50px" },
                 fontWeight: "700",
                 fontSize: "14px",
                 letterSpacing: "1.15px",
@@ -334,16 +319,18 @@ const SignInPage = () => {
             justifyContent: "center",
             alignItems: "center",
             position: "absolute",
-            top: " 0",
-            width: "600px",
-            height: "100%",
+            bottom: { xs: isSignIn ? "0px" : "calc(100% - 600px)", lg: "0" },
+            width: { xs: "100%", lg: "65%" },
+            height: { xs: "65%", lg: "100%" },
             padding: "25px",
             backgroundColor: "#1e1e1e",
             transition: "1.25s",
             color: "lightgray",
-            left: isSignIn ? "0" : "calc(100% - 600px)",
+            left: { xs: "0px", lg: isSignIn ? "0px" : "calc(100% - 600px)" },
             zIndex: isSignIn ? "200" : "0",
             transformOrigin: "right",
+            visibility: isSignIn ? "visible" : "hidden",
+            opacity: isSignIn ? "1" : "0",
           }}
         >
           <Box
@@ -358,9 +345,10 @@ const SignInPage = () => {
           >
             <Typography
               sx={{
-                fontSize: "34px",
+                fontSize: { xs: "24px", md: "34px" },
+                marginBottom: { xs: "20px", md: "0" },
                 fontWeight: "700",
-                lineHeight: "3",
+                lineHeight: { xs: "1.5", md: "3" },
                 color: "lightgray",
               }}
             >
@@ -388,7 +376,12 @@ const SignInPage = () => {
                 <LinkedInIcon sx={{ color: "#0077b5" }} />
               </Button>
             </Box>
-            <Typography sx={{ marginTop: "30px", marginBottom: "12px" }}>
+            <Typography
+              sx={{
+                marginTop: { xs: "15px", md: "30px" },
+                marginBottom: "12px",
+              }}
+            >
               or use your email account
             </Typography>
             <Input
@@ -400,6 +393,7 @@ const SignInPage = () => {
               }}
               sx={{
                 width: "350px",
+                maxWidth: "90%",
                 height: "40px",
                 margin: "4px 0",
                 paddingLeft: "25px",
@@ -430,6 +424,7 @@ const SignInPage = () => {
               }}
               sx={{
                 width: "350px",
+                maxWidth: "90%",
                 height: "40px",
                 margin: "4px 0",
                 paddingLeft: "25px",
@@ -488,10 +483,10 @@ const SignInPage = () => {
             justifyContent: "center",
             alignItems: "center",
             position: "absolute",
-            top: " 0",
-            left: isSignIn ? "calc(100% - 400px)" : " 0",
-            height: "100%",
-            width: "400px",
+            top: { xs: isSignIn ? "0" : "calc(100% - 300px)", lg: "0" },
+            left: { xs: "0", lg: isSignIn ? "calc(100% - 450px)" : " 0" },
+            height: { xs: "35%", lg: "100%" },
+            width: { xs: "100%", lg: "35%" },
             padding: "50px",
             zIndex: "200",
             transition: "1.25s",
@@ -505,28 +500,28 @@ const SignInPage = () => {
           <Box
             sx={{
               position: "absolute",
-              width: "500px",
-              height: "500px",
+              width: { xs: "250px", md: "500px" },
+              height: { xs: "250px", md: "500px" },
               borderRadius: "50%",
               backgroundColor: "rgba(28, 28, 28, 0.87)",
               boxShadow:
                 "inset 8px 8px 12px rgba(70, 70, 70, 0.87), inset -8px -8px 12px rgba(70, 70, 70, 0.87)",
               bottom: "-60%",
-              left: isSignIn ? "calc(100% - 400px)" : "-60%",
+              left: isSignIn ? "calc(100% - 200px)" : "-40%",
               transition: "1.25s",
             }}
           ></Box>
           <Box
             sx={{
               position: "absolute",
-              width: "300px",
-              height: "300px",
+              width: { xs: "200px", md: "300px" },
+              height: { xs: "200px", md: "300px" },
               borderRadius: "50%",
               backgroundColor: "rgba(28, 28, 28, 0.87)",
               boxShadow:
                 "inset 8px 8px 12px rgba(70, 70, 70, 0.87), inset -8px -8px 12px rgba(70, 70, 70, 0.87)",
               top: "-30%",
-              left: isSignIn ? "calc(100% - 400px)" : "60%",
+              left: isSignIn ? "calc(100% - 350px)" : "60%",
               transition: "1.25s",
             }}
           ></Box>
@@ -546,7 +541,7 @@ const SignInPage = () => {
           >
             <Typography
               sx={{
-                fontSize: "34px",
+                fontSize: { xs: "25px", md: "34px" },
                 fontWeight: "700",
                 lineHeight: "3",
                 color: "lightgray",
@@ -573,7 +568,7 @@ const SignInPage = () => {
                 width: " 180px",
                 height: "50px",
                 borderRadius: "25px",
-                marginTop: "50px",
+                marginTop: { xs: "20px", md: "50px" },
                 fontWeight: "700",
                 fontSize: "14px",
                 letterSpacing: "1.15px",
@@ -605,7 +600,7 @@ const SignInPage = () => {
           >
             <Typography
               sx={{
-                fontSize: "34px",
+                fontSize: { xs: "25px", md: "34px" },
                 fontWeight: "700",
                 lineHeight: "3",
                 color: "lightgray",
@@ -632,7 +627,7 @@ const SignInPage = () => {
                 width: " 180px",
                 height: "50px",
                 borderRadius: "25px",
-                marginTop: "50px",
+                marginTop: { xs: "20px", md: "50px" },
                 fontWeight: "700",
                 fontSize: "14px",
                 letterSpacing: "1.15px",
