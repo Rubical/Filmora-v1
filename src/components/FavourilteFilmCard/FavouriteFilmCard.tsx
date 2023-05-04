@@ -9,6 +9,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
+import { supabase } from "../../auth/auth";
 
 interface IFavouriteFilmCard {
   film: IFilm;
@@ -25,7 +26,12 @@ const CardContentNoPadding = styled(CardContent)(`
 const FavouriteFilmCard: FC<IFavouriteFilmCard> = ({ film, filmType }) => {
   const navigate = useNavigate();
 
-  const { removeFavouriteFilm, hideFavFilmsCards } = useActions();
+  const { hideFavFilmsCards, deleteFavouriteFilm } = useActions();
+
+  const deleteFavouriteFilmCard = async () => {
+    deleteFavouriteFilm(film.id);
+    await supabase.from("FavFilm").delete().eq("filmId", film.id);
+  };
 
   return (
     <Box
@@ -56,7 +62,7 @@ const FavouriteFilmCard: FC<IFavouriteFilmCard> = ({ film, filmType }) => {
         <CloseIcon
           onClick={(e) => {
             e.stopPropagation();
-            removeFavouriteFilm(film.id);
+            deleteFavouriteFilmCard();
           }}
           sx={{
             position: "absolute",

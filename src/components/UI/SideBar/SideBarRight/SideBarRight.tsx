@@ -231,9 +231,9 @@ export default function SideBarRight() {
               </Typography>
               {favouriteFilms.slice(0, 3).map((el) => (
                 <SideBarFilmCard
-                  key={el.film.id}
-                  film={el.film}
-                  filmType={el.type}
+                  key={el.film.film.id}
+                  film={el.film.film}
+                  filmType={el.film.type}
                 />
               ))}
               {favouriteFilms.length > 3 ? <ShowMoreBtn /> : ""}

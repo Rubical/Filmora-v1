@@ -6,24 +6,29 @@ interface IFavouriteFilm {
   type: string;
 }
 
-const initialState: IFavouriteFilm[] = [];
+const initialState: { film: IFavouriteFilm }[] = [];
 
 export const favouriteFilmsSlice = createSlice({
   name: "favouriteFilms",
   initialState,
   reducers: {
-    addFavouriteFilm: (state, action: PayloadAction<IFavouriteFilm>) => {
-      state.push(action.payload);
+    setFavouriteFilm: (
+      state,
+      action: PayloadAction<{ film: IFavouriteFilm }[]>
+    ) => {
+      return action.payload;
     },
-    removeFavouriteFilm: (state, action: PayloadAction<number>) => {
-      state.splice(
-        state.findIndex((el) => el?.film?.id === action.payload),
-        1
-      );
+    deleteFavouriteFilm: (state, action: PayloadAction<number>) => {
+      return state.filter((el) => el.film.film.id !== action.payload);
+    },
+    addFavoutiteFilm: (
+      state,
+      action: PayloadAction<{ film: IFavouriteFilm }>
+    ) => {
+      state.push(action.payload);
     },
   },
 });
 
-export const { addFavouriteFilm, removeFavouriteFilm } =
-  favouriteFilmsSlice.actions;
+export const { setFavouriteFilm } = favouriteFilmsSlice.actions;
 export default favouriteFilmsSlice.reducer;

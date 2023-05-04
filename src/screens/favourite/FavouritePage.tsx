@@ -34,12 +34,12 @@ const FavouritePage: FC = () => {
             }}
           >
             {favouriteFilms.length ? (
-              favouriteFilms.map((film) => {
+              favouriteFilms.map((el) => {
                 return (
                   <FilmCard
-                    key={film.film.id}
-                    film={film.film}
-                    filmType={film.type}
+                    key={el.film.film.id}
+                    film={el.film.film}
+                    filmType={el.film.type}
                   />
                 );
               })

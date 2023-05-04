@@ -13,13 +13,36 @@ import SideBarLeft from "../../components/UI/SideBar/SideBarLeft/SideBarLeft";
 import SideBarRight from "../../components/UI/SideBar/SideBarRight/SideBarRight";
 import SignInBtn from "../../components/UI/Button/SignInBtn";
 import NavBar from "../../components/UI/NavBar/NavBar";
+import { supabase } from "../../auth/auth";
+import { PostgrestSingleResponse } from "@supabase/supabase-js";
+import { IFilm } from "../../types/film.types";
+
+interface IFilmInfo {
+  film: IFilm;
+  type: string;
+}
 
 const MainPage = () => {
   const { isLogined } = useAuth();
   const navigate = useNavigate();
   const { page, loading, filmsList } = useFilmList();
   const { type, category } = useFilmFilter();
-  const { fetchFilms, changeFilmListPage } = useActions();
+  const { fetchFilms, changeFilmListPage, setFavouriteFilm } = useActions();
+
+  useEffect(() => {
+    (async function getFavFilms() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      const { data }: PostgrestSingleResponse<{ film: IFilmInfo }[]> =
+        await supabase.from("FavFilm").select("film").eq("userId", user?.id);
+
+      if (data) {
+        setFavouriteFilm(data);
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
