@@ -94,7 +94,7 @@ const SignInPage = () => {
     const { data } = await supabase.auth.signInWithOAuth({
       provider: "facebook",
       options: {
-        redirectTo: "http://localhost:3000/Zenix_Film/",
+        redirectTo: "https://rubical.github.io/Zenix_Film/",
       },
     });
     if (data) {
