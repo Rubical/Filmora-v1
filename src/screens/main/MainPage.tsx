@@ -8,41 +8,21 @@ import FilmCard from "../../components/FilmCard/FilmCard";
 import FrontFilmCard from "../../components/FrontFilmCard/FrontFilmCard";
 import Loader from "../../components/UI/Loader/Loader";
 import PagePagination from "../../components/UI/Pagination/Pagination";
-import cl from "./MainPage.module.css";
 import SideBarLeft from "../../components/UI/SideBar/SideBarLeft/SideBarLeft";
 import SideBarRight from "../../components/UI/SideBar/SideBarRight/SideBarRight";
 import SignInBtn from "../../components/UI/Button/SignInBtn";
 import NavBar from "../../components/UI/NavBar/NavBar";
-import { supabase } from "../../auth/auth";
-import { PostgrestSingleResponse } from "@supabase/supabase-js";
-import { IFilm } from "../../types/film.types";
-
-interface IFilmInfo {
-  film: IFilm;
-  type: string;
-}
+import cl from "./MainPage.module.css";
+import { useSupabaseData } from "../../hooks/useSupabaseData";
 
 const MainPage = () => {
   const { isLogined } = useAuth();
   const navigate = useNavigate();
   const { page, loading, filmsList } = useFilmList();
   const { type, category } = useFilmFilter();
-  const { fetchFilms, changeFilmListPage, setFavouriteFilm } = useActions();
+  const { fetchFilms, changeFilmListPage } = useActions();
 
-  useEffect(() => {
-    (async function getFavFilms() {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      const { data }: PostgrestSingleResponse<{ film: IFilmInfo }[]> =
-        await supabase.from("FavFilm").select("film").eq("userId", user?.id);
-
-      if (data) {
-        setFavouriteFilm(data);
-      }
-    })();
-  }, []);
+  useSupabaseData();
 
   useEffect(() => {
     window.scrollTo(0, 0);

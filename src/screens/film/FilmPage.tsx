@@ -7,6 +7,7 @@ import { useFilm } from "../../hooks/useFilm";
 import { useVideo } from "../../hooks/useVideo";
 import { usePosters } from "../../hooks/usePosters";
 import { useSimilarMovies } from "../../hooks/useSimilarMovies";
+import { useSupabaseData } from "../../hooks/useSupabaseData";
 import Loader from "../../components/UI/Loader/Loader";
 import ActorCard from "../../components/ActorCard/ActorCard";
 import FilmInfo from "../../components/FilmInfo/FilmInfo";
@@ -59,6 +60,8 @@ const FilmPage: FC = () => {
   } = film;
 
   const date = type === " movie" ? release_date : first_air_date;
+
+  useSupabaseData();
 
   useEffect(() => {
     window.scrollTo(0, 0);

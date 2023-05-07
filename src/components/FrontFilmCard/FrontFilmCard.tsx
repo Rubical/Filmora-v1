@@ -40,6 +40,7 @@ const FrontFilmCard: FC<IFrontFilmCard> = ({ film }) => {
         background: "black",
         borderRadius: "0px",
         boxShadow: "none",
+        backgroundColor: "rgba(30,30,30,0.67)",
       }}
     >
       <CardCover

@@ -9,13 +9,19 @@ import FilmCard from "../../components/FilmCard/FilmCard";
 import cl from "./FavouritePage.module.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { useSupabaseData } from "../../hooks/useSupabaseData";
+import { useActions } from "../../hooks/useActions";
 
 const FavouritePage: FC = () => {
   const favouriteFilms = useFavouriteFilms();
   const { isLogined } = useAuth();
+  const { hideFavFilmsCards } = useActions();
+
+  useSupabaseData();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    hideFavFilmsCards();
   }, []);
   return (
     <div className={cl.grid}>

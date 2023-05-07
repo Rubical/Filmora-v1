@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useFavouriteFilms } from "../../../../hooks/useFavouriteFilms";
 import { useFavFilmCardsShow } from "../../../../hooks/useFavFilmCardsShow";
 import { useActions } from "../../../../hooks/useActions";
+import { useAuth } from "../../../../hooks/useAuth";
 import SideBarFilmCard from "../../../FavourilteFilmCard/FavouriteFilmCard";
 import ShowMoreBtn from "./ShowMoreBtn";
 import Box from "@mui/material/Box";
@@ -15,6 +16,8 @@ import StarsIcon from "@mui/icons-material/Stars";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
+import { Modal } from "@mui/material";
+import getPrettyDate from "../../../../utils/getPrettyDate";
 
 export default function SideBarRight() {
   const navigate = useNavigate();
@@ -28,6 +31,7 @@ export default function SideBarRight() {
   } = useActions();
   const favouriteFilms = useFavouriteFilms();
   const favFilmsCardsShow = useFavFilmCardsShow();
+  const { user } = useAuth();
 
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -38,6 +42,15 @@ export default function SideBarRight() {
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const [openNotifications, setNotifications] = React.useState(false);
+  const handleOpenNotifications = () => setNotifications(true);
+  const handleCloseNotifications = () => setNotifications(false);
+
+  const [openProfile, setProfile] = React.useState(false);
+  const handleOpenProfile = () => setProfile(true);
+  const handleCloseProfile = () => setProfile(false);
+
   const menuId = "primary-search-account-menu";
   const mobileMenuId = "primary-search-account-menu-mobile";
 
@@ -76,7 +89,10 @@ export default function SideBarRight() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem
-        onClick={openFavPage}
+        onClick={() => {
+          handleMobileMenuClose();
+          openFavPage();
+        }}
         sx={{
           color: "white",
           "&:hover": {
@@ -92,6 +108,10 @@ export default function SideBarRight() {
         <p>Favourite</p>
       </MenuItem>
       <MenuItem
+        onClick={() => {
+          handleMobileMenuClose();
+          handleOpenNotifications();
+        }}
         sx={{
           color: "white",
           "&:hover": {
@@ -111,6 +131,10 @@ export default function SideBarRight() {
         <p>Notifications</p>
       </MenuItem>
       <MenuItem
+        onClick={() => {
+          handleMobileMenuClose();
+          handleOpenProfile();
+        }}
         sx={{
           color: "white",
           "&:hover": {
@@ -170,6 +194,7 @@ export default function SideBarRight() {
           </Badge>
         </IconButton>
         <IconButton
+          onClick={handleOpenNotifications}
           sx={{ color: "lightgray" }}
           size="large"
           aria-label="show 0 new notifications"
@@ -180,6 +205,7 @@ export default function SideBarRight() {
           </Badge>
         </IconButton>
         <IconButton
+          onClick={handleOpenProfile}
           sx={{ color: "lightgray" }}
           size="large"
           edge="end"
@@ -201,6 +227,101 @@ export default function SideBarRight() {
         >
           <MoreIcon />
         </IconButton>
+        <Modal
+          open={openNotifications}
+          onClose={handleCloseNotifications}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box
+            sx={{
+              position: "fixed",
+              top: "0",
+              left: "0",
+              right: "0",
+              padding: "30px 0",
+              backgroundColor: {
+                xs: "rgba(19,19,19,0.76)",
+                lg: "rgba(19,19,19,0.64)",
+              },
+              color: "lightgray",
+              boxShadow:
+                "inset 2px 2px 4px rgba(65, 65, 65, 0.58), inset -2px -2px 4px rgba(65, 65, 65, 0.58)",
+            }}
+          >
+            <Typography
+              sx={{ textAlign: "center", fontSize: { xs: "20px", lg: "25px" } }}
+            >
+              There are no new notifications!
+            </Typography>
+          </Box>
+        </Modal>
+        <Modal
+          open={openProfile}
+          onClose={handleCloseProfile}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: { xs: "90%", sm: "70%", md: "600px" },
+              backgroundColor: {
+                xs: "rgba(19,19,19,0.76)",
+                lg: "rgba(19,19,19,0.64)",
+              },
+              color: "lightgray",
+              boxShadow:
+                "inset 2px 2px 4px rgba(65, 65, 65, 0.58), inset -2px -2px 4px rgba(65, 65, 65, 0.58)",
+              padding: "30px 40px",
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: { xs: "22px", md: "28px" },
+                marginBottom: "40px",
+              }}
+            >
+              User Info
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", md: "16px" },
+                marginBottom: "15px",
+              }}
+            >
+              Name: {user?.user_metadata.name || "Anonymous"}
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", md: "16px" },
+                marginBottom: "15px",
+              }}
+            >
+              E-mail: {user?.email || "No info"}
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", md: "16px" },
+                marginBottom: "15px",
+              }}
+            >
+              Registered at:
+              {getPrettyDate(new Date(user?.created_at!)) || "No info"}
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", md: "16px" },
+                marginBottom: "15px",
+              }}
+            >
+              Your unique id: {user?.id || "No info"}
+            </Typography>
+          </Box>
+        </Modal>
       </Box>
       {renderMobileMenu}
       <Box

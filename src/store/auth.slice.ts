@@ -1,11 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+type TypeUserMetadata = {
+  name?: string;
+};
+
+interface IUser {
+  created_at: string;
+  email?: string;
+  id: string;
+  user_metadata: TypeUserMetadata;
+}
+
 interface IAuthState {
-  name: string;
+  name?: string;
   email: string;
   password: string;
   isLogined: boolean;
-  userId: string;
+  user: IUser | null;
 }
 
 const initialState: IAuthState = {
@@ -17,7 +28,7 @@ const initialState: IAuthState = {
     localStorage.getItem("log")
       ? true
       : false,
-  userId: "",
+  user: null,
 };
 
 export const authSlice = createSlice({
@@ -33,8 +44,8 @@ export const authSlice = createSlice({
     changePassword: (state, action: PayloadAction<string>) => {
       state.password = action.payload;
     },
-    setId: (state, action: PayloadAction<string>) => {
-      state.userId = action.payload;
+    setUser: (state, action: PayloadAction<IUser | null>) => {
+      state.user = action.payload;
     },
     login: (state) => {
       state.isLogined = true;

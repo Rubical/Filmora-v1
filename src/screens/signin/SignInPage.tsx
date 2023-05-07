@@ -12,7 +12,6 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
-import UndoIcon from "@mui/icons-material/Undo";
 import { validateEmail, validatePassword } from "../../utils/authValidation";
 import BackToMainBtn from "../../components/UI/Button/BackToMainBtn";
 
@@ -22,8 +21,7 @@ const SignInPage = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { email, name, password } = useAuth();
-  const { changePassword, changeEmail, changeName, login, setId } =
-    useActions();
+  const { changePassword, changeEmail, changeName, login } = useActions();
 
   const makeBtnUnvisible = () => {
     setVisible(false);
@@ -86,8 +84,6 @@ const SignInPage = () => {
     }
 
     if (data.session && data.user) {
-      setId(data.user.id);
-      console.log(data.user);
       clearFields();
       login();
       navigate("/Zenix_Film");
@@ -98,7 +94,7 @@ const SignInPage = () => {
     const { data } = await supabase.auth.signInWithOAuth({
       provider: "facebook",
       options: {
-        redirectTo: "https://rubical.github.io/Zenix_Film/",
+        redirectTo: "http://localhost:3000/Zenix_Film/",
       },
     });
     if (data) {

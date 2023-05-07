@@ -1,8 +1,12 @@
-import React, { FC, useContext, useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSearchedFilms } from "../../hooks/useSearchedFilms";
 import { useActions } from "../../hooks/useActions";
 import { useAuth } from "../../hooks/useAuth";
+import { useSupabaseData } from "../../hooks/useSupabaseData";
+import { supabase } from "../../auth/auth";
+import { PostgrestSingleResponse } from "@supabase/supabase-js";
+import { IFilmInfo } from "../../types/supabaseFilmInfo.types";
 import FilmCard from "../../components/FilmCard/FilmCard";
 import Loader from "../../components/UI/Loader/Loader";
 import PagePagination from "../../components/UI/Pagination/Pagination";
@@ -19,17 +23,35 @@ const SearchedFilmsPage: FC = () => {
   const navigate = useNavigate();
   const { filmsFound, loading, totalPages, page, filmQuery } =
     useSearchedFilms();
-  const { changeSearchedFilmPage, fetchSearchedFilms } = useActions();
+  const { changeSearchedFilmPage, fetchSearchedFilms, setFavouriteFilm } =
+    useActions();
 
   const changePage = (page: number) => {
     navigate(`/Zenix_film/searched/${filmQuery}/page/${page}`);
     changeSearchedFilmPage(page);
   };
 
+  useSupabaseData();
+
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchSearchedFilms();
   }, [page]);
+
+  useEffect(() => {
+    (async function getFavFilms() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      const { data }: PostgrestSingleResponse<{ film: IFilmInfo }[]> =
+        await supabase.from("FavFilm").select("film").eq("userId", user?.id);
+
+      if (data) {
+        setFavouriteFilm(data);
+      }
+    })();
+  }, []);
 
   return (
     <div className={cl.grid}>
