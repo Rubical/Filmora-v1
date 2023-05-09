@@ -11,7 +11,6 @@
 Zenix film is a movie database created on the basis of [themoviedb](https://www.themoviedb.org/).
 In this application there was implemented the following functional: 
 
-
    * Login/sign up of user, with preservation of user's info on supabase;
    * Display of movies by different categories;
    * Adding movies to the list of favorites, which is stored separately for each user on supabase tables;
@@ -32,4 +31,12 @@ In this application there was implemented the following functional:
 <img src="https://github.com/Rubical/Zenix_Film/assets/115991370/7c014328-a47f-4754-9479-67ad73f7f0cb"/>
 <img src="https://github.com/Rubical/Zenix_Film/assets/115991370/06310c66-a057-484b-836f-1ac9a30e9d7c"/>
 
+## Preview
 
+In this application there were used:
+
+ * Typescript;
+ * Redux;
+ * Css modules;
+ * Supabase;
+ * [Themoviedb](https://www.themoviedb.org/) APIs
