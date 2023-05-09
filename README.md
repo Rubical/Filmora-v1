@@ -19,4 +19,10 @@ In this application there was implemented the following functional:
 
 ## Preview
 
-<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/af58a15b-0488-4ff1-a951-aca4620d12cd"/>
+### User authentication
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/d95a5e15-dcf3-4ee9-a934-2e7c750e24d7"/>
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/7e91856e-1cc5-44f9-ae37-d3e30c0578bf"/>
+
+### Main page
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/04eb4124-70e4-4424-aa69-6409690e26ca"/>
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/32c1c66a-7fba-4aca-a95e-409369c4c23f"/>
