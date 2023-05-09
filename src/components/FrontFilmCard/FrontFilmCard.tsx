@@ -34,7 +34,7 @@ const FrontFilmCard: FC<IFrontFilmCard> = ({ film }) => {
   return (
     <Card
       sx={{
-        height: { lg: "500px", sm: "350px", md: "450px", xs: "200px" },
+        height: { lg: "700px", sm: "350px", md: "450px", xs: "200px" },
         width: "100%",
         marginTop: { xs: "110px", sm: "0" },
         background: "black",
@@ -49,8 +49,7 @@ const FrontFilmCard: FC<IFrontFilmCard> = ({ film }) => {
           top: "0px",
           left: "auto",
           width: "100%",
-          maxWidth: "1200px",
-          height: { lg: "600px", sm: "320px", md: "450px", xs: "200px" },
+          height: { lg: "700px", sm: "350px", md: "450px", xs: "200px" },
           display: "flex",
           alignSelf: "flex-end",
           borderRadius: "0px",
@@ -101,10 +100,10 @@ const FrontFilmCard: FC<IFrontFilmCard> = ({ film }) => {
       </CardCover>
       <CardContent
         sx={{
-          justifyContent: { xs: "flex-start", sm: "center" },
+          justifyContent: "flex-start",
           ml: "15px",
           flexDirection: "column",
-          marginTop: { xs: "0", sm: "25px" },
+          marginTop: { xs: "0", sm: "60px", md: "145px" },
         }}
       >
         <Typography

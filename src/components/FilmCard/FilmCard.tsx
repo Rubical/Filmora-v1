@@ -43,7 +43,7 @@ const FilmCard: FC<IFilmCard> = ({ film, filmType }) => {
       sx={{
         display: "flex",
         width: { xs: "100%", md: "calc(50% - 40px)" },
-        height: { xs: "180px", sm: "300px", md: "220px", lg: "300px" },
+        height: { xs: "180px", sm: "300px", md: "220px", lg: "330px" },
         margin: "10px 10px",
         backgroundColor: "rgba(30,30,30,0.67)",
         boxShadow: "none",
