@@ -31,12 +31,12 @@ In this application there was implemented the following functional:
 <img src="https://github.com/Rubical/Zenix_Film/assets/115991370/7c014328-a47f-4754-9479-67ad73f7f0cb"/>
 <img src="https://github.com/Rubical/Zenix_Film/assets/115991370/06310c66-a057-484b-836f-1ac9a30e9d7c"/>
 
-## Preview
+## Used technologies
 
 In this application there were used:
 
  * Typescript;
  * Redux;
- * Css modules;
+ * CSS modules;
  * Supabase;
  * [Themoviedb](https://www.themoviedb.org/) APIs
