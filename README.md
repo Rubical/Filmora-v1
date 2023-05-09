@@ -19,4 +19,4 @@ In this application there was implemented the following functional:
 
 ## Preview
 
-<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/af58a15b-0488-4ff1-a951-aca4620d12cd" width="20%"/>
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/af58a15b-0488-4ff1-a951-aca4620d12cd"/>
