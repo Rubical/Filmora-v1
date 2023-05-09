@@ -1,46 +1,43 @@
-# Getting Started with Create React App
+# Zenix Film
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### https://rubical.github.io/Zenix_Film/ - `if you have RU or BY IP - please use VPN!`
 
-## Available Scripts
+   * [About the app](#About-the-app)
+   * [Preview](#Preview)
+   * [Used technologies](#used-technologies)
 
-In the project directory, you can run:
+## About the app
 
-### `npm start`
+Zenix film is a movie database created on the basis of [themoviedb](https://www.themoviedb.org/).
+In this application there was implemented the following functional: 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+   * Login/sign up of user, with preservation of user's info on supabase;
+   * Display of movies by different categories;
+   * Adding movies to the list of favorites, which is stored separately for each user on supabase tables;
+   * Search for any movie from a list of over hundreds of thousands of movies.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Preview
 
-### `npm test`
+### User authentication
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/e66b8fe4-21d5-4476-8e74-1f950c8dae9d"/>
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/977d4c02-6dbe-4d68-9c67-b29f892873f5"/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Main page
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/87cf3cbd-6a23-4864-a339-aa451e9a5f47"/>
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/3298ed93-18d4-4984-8bdf-0de617629cbc"/>
 
-### `npm run build`
+### Film page
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/a6c2d5a4-bc03-4256-81f2-37815c512e82"/>
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/7c014328-a47f-4754-9479-67ad73f7f0cb"/>
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/06310c66-a057-484b-836f-1ac9a30e9d7c"/>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Used technologies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+In this application there were used:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+ * Typescript;
+ * Redux;
+ * CSS modules;
+ * Supabase;
+ * [Themoviedb](https://www.themoviedb.org/) APIs;
+ * Material UI.
