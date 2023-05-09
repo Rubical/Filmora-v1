@@ -39,4 +39,5 @@ In this application there were used:
  * Redux;
  * CSS modules;
  * Supabase;
- * [Themoviedb](https://www.themoviedb.org/) APIs
+ * [Themoviedb](https://www.themoviedb.org/) APIs;
+ * Material UI.
