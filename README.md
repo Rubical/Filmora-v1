@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+Zenix Film
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+https://rubical.github.io/Zenix_Film/ - please use VPN!
 
 ## Available Scripts
 
