@@ -24,14 +24,23 @@ In this application there was implemented the following functional:
 
 <img src="https://github.com/Rubical/Zenix_Film/assets/115991370/977d4c02-6dbe-4d68-9c67-b29f892873f5"/>
 
+
 ### Main page
-<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/228b2d5a-3893-45b9-8f67-b517fc8bed9b"/>
-<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/fcda0824-2c63-4177-9d6e-52840004f2c0"/>
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/87cf3cbd-6a23-4864-a339-aa451e9a5f47"/>
+
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/3298ed93-18d4-4984-8bdf-0de617629cbc"/>
+
 
 ### Film page
-<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/55bdaad6-0194-4d8a-9a45-d3ce057821dd"/>
-<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/e8cc1f69-fd22-442a-9ae3-3104fad79c14"/>
-<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/d43ee4ea-d795-4e70-80d1-1830dc56966f"/>
-<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/77f7915d-e79a-4677-8eee-3efc73dd3d35"/>
-<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/5dd3866c-3976-4f24-ae82-ba5c5f2fb5b5"/>
-<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/95f12d4a-4504-4dad-8471-ec118cafe9df"/>
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/a6c2d5a4-bc03-4256-81f2-37815c512e82"/>
+
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/9280c1e8-d7e0-4bd4-8870-c95bb2ba0496"/>
+
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/bae9f829-899b-4474-8354-8c6e96f04472"/>
+
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/7c014328-a47f-4754-9479-67ad73f7f0cb"/>
+
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/06310c66-a057-484b-836f-1ac9a30e9d7c"/>
+
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/1e132e2e-93b7-4171-9994-82f252796e83"/>
+
