@@ -20,7 +20,8 @@ In this application there was implemented the following functional:
 ## Preview
 
 ### User authentication
-<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/d95a5e15-dcf3-4ee9-!a934-2e7c750e24d7"/>
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/e66b8fe4-21d5-4476-8e74-1f950c8dae9d"/>
+
 <img src="https://github.com/Rubical/Zenix_Film/assets/115991370/977d4c02-6dbe-4d68-9c67-b29f892873f5"/>
 
 ### Main page
