@@ -4,6 +4,7 @@ import { useFilmList } from "../../hooks/useFilmList";
 import { useFilmFilter } from "../../hooks/useFilmFilter";
 import { useActions } from "../../hooks/useActions";
 import { useAuth } from "../../hooks/useAuth";
+import { useSupabaseData } from "../../hooks/useSupabaseData";
 import FilmCard from "../../components/FilmCard/FilmCard";
 import FrontFilmCard from "../../components/FrontFilmCard/FrontFilmCard";
 import Loader from "../../components/UI/Loader/Loader";
@@ -13,7 +14,6 @@ import SideBarRight from "../../components/UI/SideBar/SideBarRight/SideBarRight"
 import SignInBtn from "../../components/UI/Button/SignInBtn";
 import NavBar from "../../components/UI/NavBar/NavBar";
 import cl from "./MainPage.module.css";
-import { useSupabaseData } from "../../hooks/useSupabaseData";
 
 const MainPage = () => {
   const { isLogined } = useAuth();

@@ -8,7 +8,10 @@ export const useSupabaseData = () => {
   const { setUser, setFavouriteFilm } = useActions();
   useEffect(() => {
     (async function () {
-      if (localStorage.getItem("sb-jdcbrbtfhykwfqsuukms-auth-token")) {
+      if (
+        localStorage.getItem("sb-jdcbrbtfhykwfqsuukms-auth-token") ||
+        localStorage.getItem("log")
+      ) {
         const {
           data: { user },
         } = await supabase.auth.getUser();
