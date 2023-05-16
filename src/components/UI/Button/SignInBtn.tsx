@@ -15,6 +15,8 @@ const SignInBtn: FC = () => {
         color: "lightgray",
         justifySelf: "flex-end",
         padding: { xs: "17px 5px 0 0", lg: "24px 40px 0 0" },
+        position: "relative",
+        zIndex: "100",
       }}
     >
       <Button
