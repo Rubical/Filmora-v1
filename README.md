@@ -23,8 +23,9 @@ In this application there was implemented the following functional:
 <img src="https://github.com/Rubical/Zenix_Film/assets/115991370/977d4c02-6dbe-4d68-9c67-b29f892873f5"/>
 
 ### Main page
-<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/87cf3cbd-6a23-4864-a339-aa451e9a5f47"/>
-<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/3298ed93-18d4-4984-8bdf-0de617629cbc"/>
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/9b174bb7-1742-43c5-9da5-b74dec431989"/>
+<img src="https://github.com/Rubical/Zenix_Film/assets/115991370/e54aaa7b-c8aa-476c-8287-d7f6bd705d91"/>
+
 
 ### Film page
 <img src="https://github.com/Rubical/Zenix_Film/assets/115991370/a6c2d5a4-bc03-4256-81f2-37815c512e82"/>
