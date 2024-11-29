@@ -37,6 +37,7 @@ In this application there was implemented the following functional:
 In this application there were used:
 
  * Typescript;
+ * React;
  * Redux;
  * CSS modules;
  * Supabase;
