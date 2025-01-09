@@ -1,25 +1,28 @@
-import axios from "axios";
+export const downloadFileUrl = async (urlToDownload: string): Promise<string> => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const response = await fetch(urlToDownload)
 
-export const downloadFileUrl = async (urlToDownload: string) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const response = await axios.get(urlToDownload, {
-        responseType: "blob",
-      });
-      if (response) {
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", `poster_${new Date().getTime()}.jpg`);
-        document.body.appendChild(link);
-        link.click();
+			if (!response.ok) {
+				return reject(`Failed to download: ${response.statusText}`)
+			}
 
-        return resolve("Download successful.");
-      } else {
-        return reject("Failed to download");
-      }
-    } catch (e: unknown) {
-      return reject(`Failed to download: ${e}`);
-    }
-  });
-};
+			const blob = await response.blob()
+			const url = window.URL.createObjectURL(blob)
+
+			const link = document.createElement("a")
+			link.href = url
+			link.setAttribute("download", `poster_${new Date().getTime()}.jpg`)
+			document.body.appendChild(link)
+			link.click()
+
+			// Cleanup
+			document.body.removeChild(link)
+			window.URL.revokeObjectURL(url)
+
+			resolve("Download successful.")
+		} catch (error: unknown) {
+			reject(`Failed to download: ${error}`)
+		}
+	})
+}

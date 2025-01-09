@@ -1,3 +1,3 @@
-export const firstLetterToUpperCase = (word: string | undefined) => {
-  return word ? word[0].toUpperCase() + word.slice(1) : "";
-};
+export const firstLetterToUpperCase = (str: string) => {
+	return str.charAt(0).toUpperCase() + str.slice(1)
+}

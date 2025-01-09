@@ -1,60 +1,39 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { LOCAL_STORAGE_AUTH_TOKEN } from "@/constants/constants"
 
-type TypeUserMetadata = {
-  name?: string;
-};
-
-interface IUser {
-  created_at: string;
-  email?: string;
-  id: string;
-  user_metadata: TypeUserMetadata;
+interface User {
+	created_at: string
 }
 
-interface IAuthState {
-  name?: string;
-  email: string;
-  password: string;
-  isLogined: boolean;
-  user: IUser | null;
+interface AuthState {
+	name: string
+	email: string
+	isLogged: boolean
+	user: User | null
 }
 
-const initialState: IAuthState = {
-  name: "",
-  email: "",
-  password: "",
-  isLogined:
-    localStorage.getItem("sb-jdcbrbtfhykwfqsuukms-auth-token") ||
-    localStorage.getItem("log")
-      ? true
-      : false,
-  user: null,
-};
+const initialState: AuthState = {
+	name: "",
+	email: "",
+	isLogged: !!localStorage.getItem(LOCAL_STORAGE_AUTH_TOKEN),
+	user: null
+}
 
 export const authSlice = createSlice({
-  name: "auth",
-  initialState,
-  reducers: {
-    changeName: (state, action: PayloadAction<string>) => {
-      state.name = action.payload;
-    },
-    changeEmail: (state, action: PayloadAction<string>) => {
-      state.email = action.payload;
-    },
-    changePassword: (state, action: PayloadAction<string>) => {
-      state.password = action.payload;
-    },
-    setUser: (state, action: PayloadAction<IUser | null>) => {
-      state.user = action.payload;
-    },
-    login: (state) => {
-      state.isLogined = true;
-    },
-    logout: (state) => {
-      state.isLogined = false;
-    },
-  },
-});
+	name: "auth",
+	initialState,
+	reducers: {
+		setName: (state, action: PayloadAction<string>) => {
+			state.name = action.payload
+		},
+		setEmail: (state, action: PayloadAction<string>) => {
+			state.email = action.payload
+		},
+		setUser: (state, action: PayloadAction<User | null>) => {
+			state.user = action.payload
+		}
+	}
+})
 
-export const { changeName, changePassword, changeEmail } = authSlice.actions;
-export default authSlice.reducer;
+export const { setName, setEmail, setUser } = authSlice.actions
+export default authSlice.reducer
