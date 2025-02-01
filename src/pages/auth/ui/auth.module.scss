@@ -1,0 +1,31 @@
+.container {
+    width: 90%;
+    height: 700px;
+    position: relative;
+    margin: 50px auto 0 auto;
+    border-radius: 12px;
+    overflow: hidden
+}
+
+.button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    transform: scale(2);
+    z-index: 300;
+    padding: 0;
+    transition: transform 0.3s ease-in;
+}
+
+.button:hover {
+    background-color: transparent;
+    transform: scale(2) rotate(-45deg)
+}
+
+.button:active {
+    visibility: hidden;
+    transition: visibility ease-in 1.5s
+}
+
+
+
