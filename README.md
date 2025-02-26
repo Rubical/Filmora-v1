@@ -1,4 +1,4 @@
-# Filmora
+# Zenix Film
 
 
    * [About the app](#About-the-app)
