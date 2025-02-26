@@ -1,12 +1,12 @@
-.grid {
+.main {
     display: grid;
-    grid-template-columns: 1.2fr 6fr 1.2fr;
+    grid-template-columns: 1.2fr 6fr 1.2fr
 }
 
-.main {
+.container {
     position: relative;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh
 
 }

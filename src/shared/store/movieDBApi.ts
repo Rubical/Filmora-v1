@@ -1,6 +1,12 @@
+<<<<<<<< HEAD:src/shared/store/movieDBApi.ts
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query"
 import { BASE_URL } from "@/shared/constants/constants"
 import { Actor, Film, Poster, Video } from "@/shared/types/types"
+========
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { BASE_URL } from "@/shared/config/constants"
+import { Actor, Film, Poster, Video } from "@/shared/types"
+>>>>>>>> cef56e5721c22fc645066c9ca09d049775649834:src/shared/api/movieDBApi.ts
 
 type fetchActorsParams = {
 	id: string
@@ -13,16 +19,15 @@ type fetchFilmsParams = {
 	page: number
 }
 
-type fetchFilmParams = fetchActorsParams
-type fetchVideoParams = fetchActorsParams
-type fetchPostersParams = fetchActorsParams
-
 type fetchSearchedFilmsParams = {
 	searchedParams: string
 	type: string
 	page: number
 }
 
+type fetchFilmParams = fetchActorsParams
+type fetchVideoParams = fetchActorsParams
+type fetchPostersParams = fetchActorsParams
 type fetchSimilarMoviesParams = fetchActorsParams
 
 export const movieDBApi = createApi({
@@ -58,3 +63,13 @@ export const movieDBApi = createApi({
 		})
 	})
 })
+
+export const {
+	useFetchActorsQuery,
+	useFetchFilmQuery,
+	useFetchFilmsQuery,
+	useFetchVideoQuery,
+	useFetchPostersQuery,
+	useFetchSearchedFilmsQuery,
+	useFetchSimilarMoviesQuery
+} = movieDBApi

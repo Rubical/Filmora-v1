@@ -1,0 +1,149 @@
+.formSignUpContainer {
+    width: 100%;
+    height: 65%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1e1e1e;
+    transition: 1.25s;
+    color: lightgray;
+    visibility: visible;
+    opacity: 1;
+}
+
+.formSignUpContainer {
+    bottom: calc(100% - 420px);
+    left: calc(100% - 800px);
+    z-index: 100;
+}
+
+.formSignUpContainer__hidden {
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+    opacity: 0
+}
+
+
+
+
+.formBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.title {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 3;
+    color: lightgray;
+}
+
+.subTitle {
+    margin-top: 25px;
+    margin-bottom: 12px;
+}
+
+.errorMessage {
+    color: rgb(192, 0, 0);
+    font-size: 15px;
+    height: 22px;
+}
+
+.facebookBtn:hover {
+    background-color: rgba(59, 89, 152, 0.3);
+}
+
+.linkedinBtn:hover {
+    background-color: rgba(0, 119, 181, 0.3);
+}
+
+.changeFormTypeContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 35%;
+    padding: 50px;
+    z-index: 200;
+    transition: 1.25s;
+    background-color: #1e1e1e;
+    overflow: hidden;
+    transform-origin: left;
+    box-shadow: 4px 4px 10px rgba(70, 70, 70, 0.87), -4px -4px 10px rgba(70, 70, 70, 0.87)
+}
+
+.changeFormTypeContainer__hidden {
+    left: calc(100% - 450px)
+}
+
+.backgroundBubble {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(28, 28, 28, 0.87);
+    box-shadow: inset 8px 8px 12px rgba(70, 70, 70, 0.87), inset -8px -8px 12px rgba(70, 70, 70, 0.87);
+    transition: 1.25s;
+}
+
+.backgroundBubbleTop {
+    width: 500px;
+    height: 500px;
+    bottom: -60%;
+    left: calc(100% - 200px);
+}
+
+.backgroundBubbleTop__hidden {
+    left: -40%
+}
+
+.backgroundBubbleBottom {
+    width: 300px;
+    height: 300px;
+    top: -30%;
+    left: calc(100% - 350px);
+}
+
+.backgroundBubbleBottom__hidden {
+    left: 60%
+}
+
+.changeFormTypeBox {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 400px;
+    padding: 50px 55px;
+    transition: 1.25s;
+    visibility: visible;
+    opacity: 1;
+}
+
+.changeFormTypeBox__hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.changeFormTypeBoxTitle {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 3;
+    color: lightgray
+}
+
+.changeFormTypeBoxText {
+    font-size: 14px;
+    letter-spacing: 0.25px;
+    text-align: center;
+    line-height: 1.6;
+    color: lightgray
+}

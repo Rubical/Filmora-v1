@@ -1,0 +1,25 @@
+.input {
+    width: 350px;
+    max-width: 90%;
+    height: 40px;
+    margin: 4px 0;
+    padding-left: 25px;
+    font-size: 13px;
+    letter-spacing: 0.15px;
+    border: none;
+    outline: none;
+    font-family: Montserrat, sans-serif;
+    background-color: rgba(31, 31, 31, 0.73);
+    color: lightgray;
+    transition: 0.25s ease;
+    box-shadow: inset 2px 2px 4px rgba(44, 44, 44, 0.73), inset -2px -2px 4px rgba(44, 44, 44, 0.73);
+}
+
+.input:focus {
+    box-shadow: inset 2px 2px 4px rgba(65, 65, 65, 0.58), inset -2px -2px 4px rgba(65, 65, 65, 0.58);
+}
+
+
+.input_error {
+    box-shadow: inset 2px 2px 4px rgba(174, 0, 0, 0.93), inset -2px -2px 4px rgba(174, 0, 0, 0.93);
+}

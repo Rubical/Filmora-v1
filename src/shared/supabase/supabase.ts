@@ -1,9 +1,14 @@
 import { supabase } from "@/shared/libs/supabase/client"
 import { Provider } from "@supabase/supabase-js"
 import { PostgrestSingleResponse } from "@supabase/supabase-js"
+<<<<<<<< HEAD:src/shared/supabase/supabase.ts
 import { IFilmInfo } from "@/shared/types/supabaseFilmInfo.types"
 import { useActions } from "@/shared/hooks/useActions"
 import { LOCAL_STORAGE_AUTH_TOKEN, REDIRECT_URI } from "@/shared/constants/constants"
+========
+import { LOCAL_STORAGE_AUTH_TOKEN, REDIRECT_URI } from "@/constants/constants"
+import { FilmInfo } from "@/types/types"
+>>>>>>>> cef56e5721c22fc645066c9ca09d049775649834:src/shared/lib/supabase.ts
 
 export async function getCurrentUser() {
 	try {
@@ -15,17 +20,14 @@ export async function getCurrentUser() {
 			let favFilmsList
 
 			if (user) {
-				const { data }: PostgrestSingleResponse<{ film: IFilmInfo }[]> = await supabase
+				const { data }: PostgrestSingleResponse<{ film: FilmInfo }[]> = await supabase
 					.from("FavFilm")
 					.select("film")
 					.eq("userId", user.id)
 
 				favFilmsList = data
-			}
-			return {
-				user: user,
-				favouriteFilms: favFilmsList
-			}
+				return { user, favFilmsList }
+			} else return false
 		}
 	} catch (error) {
 		console.log(error)

@@ -1,0 +1,41 @@
+@use "@/shared/styles/constants";
+
+.container {
+	flex-grow: 1;
+	padding-top: 8px;
+	display: flex;
+
+	@include constants.mobile {
+		display: none;
+	}
+}
+
+.button {
+	color: lightgray;
+	display: block;
+	font-size: 14px;
+	font-weight: 600;
+	letter-spacing: 1px;
+	transition: color 0.1s ease-in;
+
+	&:hover {
+		color: white;
+		background-color: transparent;
+	}
+}
+
+.button__active {
+	position: relative;
+	color: white;
+}
+
+.button__active ::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 100%;
+	display: block;
+	height: 3px;
+	width: 100%;
+	background-color: constants.$primary;
+}
