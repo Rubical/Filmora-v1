@@ -1,6 +1,5 @@
 # Zenix Film
 
-### https://rubical.github.io/Zenix_Film/ - `if you have RU or BY IP - please use VPN!`
 
    * [About the app](#About-the-app)
    * [Preview](#Preview)
